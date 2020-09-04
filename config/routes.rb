@@ -4,4 +4,7 @@ Rails.application.routes.draw do
 
   root 'dashboard#show' # shortcut for the above
 
+  resources :projects do
+  end
+
 end

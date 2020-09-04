@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -25,6 +23,8 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem 'bootstrap_form', '~> 4.5'
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'cancan'
 gem 'carrierwave'
 gem 'delayed_job_active_record'

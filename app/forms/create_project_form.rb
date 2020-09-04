@@ -11,4 +11,8 @@ class CreateProjectForm < BaseForm
   def project
     @project ||= Project.new
   end
+
+  def _submit
+    project.save!
+  end
 end
