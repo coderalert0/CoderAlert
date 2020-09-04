@@ -1,6 +1,6 @@
 AllCops:
-  Rails:
-    Enabled: true
+  NewCops: enable
+
   Exclude:
     - 'bin/**/*'
     - 'config/**/*'
