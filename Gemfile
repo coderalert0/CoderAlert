@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-gem 'cancan'
+gem 'cancancan'
 gem 'carrierwave'
 gem 'delayed_job_active_record'
 gem 'devise'

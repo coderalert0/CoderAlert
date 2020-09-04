@@ -1,0 +1,8 @@
+<%= bootstrap_form_for @form, :url => project_tickets_path(Project.last) do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_field :priority %>
+  <%= f.text_field :status %>
+  <%= f.text_field :description %>
+
+  <%= submit_tag t(:submit) %>
+<% end %>
