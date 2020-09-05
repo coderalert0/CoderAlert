@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_171910) do
+ActiveRecord::Schema.define(version: 2020_09_04_232603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_projects_on_company_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -54,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_09_04_171910) do
     t.string "last_name", null: false
     t.string "work_phone"
     t.string "cell_phone"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

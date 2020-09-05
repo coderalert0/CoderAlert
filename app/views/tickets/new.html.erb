@@ -1,8 +1,10 @@
-<%= bootstrap_form_for @form, :url => project_tickets_path(Project.last) do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_field :priority %>
-  <%= f.text_field :status %>
-  <%= f.text_field :description %>
+<div class="col-md-4">
+  <%= bootstrap_form_for @form, :url => project_tickets_path(Project.last) do |f| %>
+    <%= f.text_field :title %>
+    <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => :priority) }), { :label => 'Priority' } %>
+    <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => :status) }), { :label => 'Status' } %>
+    <%= f.text_area :description %>
 
-  <%= submit_tag t(:submit) %>
-<% end %>
+    <%= submit_tag t(:submit) %>
+  <% end %>
+</div>

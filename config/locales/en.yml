@@ -32,3 +32,22 @@
 en:
   hello: "Hello world"
   submit: "Submit"
+
+  priority:
+    high: 'High'
+    highest: 'Highest'
+    low: 'Low'
+    lowest: 'Lowest'
+    medium: 'Medium'
+
+  status:
+    draft: 'Draft'
+    open: 'Open'
+    in_progress: 'In Progress'
+    code_review: 'Code Review'
+    qa: 'QA'
+    reopened: 'Reopened'
+    resolved: 'Resolved'
+    closed: 'Closed'
+    cancelled: 'Cancelled'
+

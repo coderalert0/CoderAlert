@@ -1,0 +1,3 @@
+<% @tickets.each do |ticket| %>
+  <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
+<% end %>
