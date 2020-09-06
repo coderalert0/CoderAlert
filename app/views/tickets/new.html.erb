@@ -1,5 +1,5 @@
 <div class="col-md-4">
-  <%= bootstrap_form_for @form, :url => project_tickets_path(Project.last) do |f| %>
+  <%= bootstrap_form_for @form, :url => project_tickets_path(@project) do |f| %>
     <%= f.text_field :title %>
     <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => :priority) }), { :label => 'Priority' } %>
     <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => :status) }), { :label => 'Status' } %>
