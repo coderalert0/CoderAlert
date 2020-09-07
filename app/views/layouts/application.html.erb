@@ -1,34 +1,247 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CoderAlert</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>CoderAlert</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
 
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+<!--    <p class="float-right">-->
+<%# if user_signed_in? %>
+<!--        Logged in as <strong><%#= current_user.email %></strong>.-->
+<!--        <%#= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |-->
+<%#= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+<%# else %>
+<!--        <%#= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |-->
+<%#= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<%# end %>
+<!--    </p>-->
 
-    <p class="float-right">
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
-    </p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dashboard</title>
+</head>
+  <body class="app is-collapsed">
 
-    <%= yield %>
+  <!-- @App Content -->
+  <!-- =================================================== -->
+  <div>
+    <!-- #Left Sidebar ==================== -->
+    <div class="sidebar">
+      <div class="sidebar-inner">
+        <!-- ### $Sidebar Header ### -->
+        <div class="sidebar-logo">
+          <div class="peers ai-c fxw-nw">
+            <div class="peer peer-greed">
+              <a class="sidebar-link td-n" href="index.html">
+                <div class="peers ai-c fxw-nw">
+                  <div class="peer">
+                    <div class="logo">
+                      <img src="assets/static/images/logo.png" alt="">
+                    </div>
+                  </div>
+                  <div class="peer peer-greed">
+                    <h5 class="lh-1 mB-0 logo-text">CoderAlert</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="peer">
+              <div class="mobile-toggle sidebar-toggle">
+                <a href="" class="td-n">
+                  <i class="ti-arrow-circle-left"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ### $Sidebar Menu ### -->
+        <ul class="sidebar-menu scrollable pos-r">
+          <li class="nav-item mT-30 actived">
+            <a class="sidebar-link" href="/">
+                  <span class="icon-holder">
+                    <i class="c-blue-500 ti-home"></i>
+                  </span>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to project_tickets_path(Project.last) do %>
+              <span class="icon-holder">
+                <i class="c-orange-500 ti-ticket"></i>
+              </span>
+              <span class="title">Tickets</span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to project_users_path(Project.last) do %>
+              <span class="icon-holder">
+                <i class="c-brown-500 ti-user"></i>
+              </span>
+              <span class="title">Team</span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to project_articles_path(Project.last) do %>
+              <span class="icon-holder">
+                <i class="c-green-500 ti-book"></i>
+              </span>
+              <span class="title">Knowledge Base</span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to project_articles_path(Project.last) do %>
+              <span class="icon-holder">
+                <i class="c-orange-500 ti-calendar"></i>
+              </span>
+              <span class="title">Schedule</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- #Main ============================ -->
+    <div class="page-container">
+      <!-- ### $Topbar ### -->
+      <div class="header navbar">
+        <div class="header-container">
+          <ul class="nav-left">
+            <li>
+              <a id='sidebar-toggle' class="sidebar-toggle" href="javascript:void(0);">
+                <i class="ti-menu"></i>
+              </a>
+            </li>
+            <li class="search-box">
+              <a class="search-toggle no-pdd-right" href="javascript:void(0);">
+                <i class="search-icon ti-search pdd-right-10"></i>
+                <i class="search-icon-close ti-close pdd-right-10"></i>
+              </a>
+            </li>
+            <li class="search-input">
+              <input class="form-control" type="text" placeholder="Search...">
+            </li>
+          </ul>
+          <ul class="nav-right">
+            <li class="notifications dropdown">
+              <span class="counter bgc-red">3</span>
+              <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
+                <i class="ti-bell"></i>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li class="pX-20 pY-15 bdB">
+                  <i class="ti-bell pR-10"></i>
+                  <span class="fsz-sm fw-600 c-grey-900">Notifications</span>
+                </li>
+
+                <li class="pX-20 pY-15 ta-c bdT">
+                      <span>
+                        <a href="" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a>
+                      </span>
+                </li>
+              </ul>
+            </li>
+            <li class="notifications dropdown">
+              <span class="counter bgc-blue">3</span>
+              <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
+                <i class="ti-email"></i>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li class="pX-20 pY-15 bdB">
+                  <i class="ti-email pR-10"></i>
+                  <span class="fsz-sm fw-600 c-grey-900">Emails</span>
+                </li>
+
+                <li class="pX-20 pY-15 ta-c bdT">
+                      <span>
+                        <a href="email.html" class="c-grey-600 cH-blue fsz-sm td-n">View All Email <i class="fs-xs ti-angle-right mL-10"></i></a>
+                      </span>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+                <div class="peer mR-10">
+                  <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
+                </div>
+                <div class="peer">
+                  <span class="title"><%= current_user.first_name %></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu fsz-sm">
+                <li>
+                  <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-settings mR-10"></i>
+                    <span>Setting</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-user mR-10"></i>
+                    <span>Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="email.html" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-email mR-10"></i>
+                    <span>Messages</span>
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-power-off mR-10"></i>
+                    <span>Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ### $App Screen Content ### -->
+      <main class='main-content bgc-grey-100'>
+        <div id='mainContent'>
+          <div class="row gap-20 masonry pos-r">
+            <div class="masonry-sizer col-md-6"></div>
+            <div class="masonry-item col-12">
+              <div class="bgc-white p-20 bd">
+                <% if notice %>
+                  <p class="alert alert-success"><%= notice %></p>
+                <% end %>
+                <% if alert %>
+                  <p class="alert alert-danger"><%= alert %></p>
+                <% end %>
+                  <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ### $App Screen Footer ### -->
+      <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+        <span>Copyright © 2020 CoderAlert. All rights reserved.</span>
+      </footer>
+    </div>
+  </div>
   </body>
+</html>
+</body>
 </html>

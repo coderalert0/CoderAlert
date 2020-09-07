@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tickets
     resources :articles
+    resources :users
   end
 
 end

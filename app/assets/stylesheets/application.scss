@@ -1,2 +1,8 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+
+@import 'spec/settings/index';
+@import 'spec/tools/index';
+@import 'spec/index';
+@import 'vendor/index';
+@import 'bootstrap-override';

@@ -1,6 +1,4 @@
-<div class="col-md-4">
-  <%= bootstrap_form_for @form, :url => projects_path do |f| %>
-    <%= f.text_field :name %>
-    <%= submit_tag t(:submit) %>
-  <% end %>
-</div>
+<%= bootstrap_form_for @form, :url => projects_path do |f| %>
+  <%= f.text_field :name %>
+  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+<% end %>

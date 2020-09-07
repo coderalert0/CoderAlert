@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 
   def create
     @form = CreateProjectForm.new form_params.merge(company: current_user.company)
-    redirect_to root_path if @form.submit
+    redirect_to projects_path if @form.submit
   end
 
   private

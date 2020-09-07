@@ -2,6 +2,10 @@ class TicketsController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource :ticket
 
+  def index
+    @tickets = @project.tickets
+  end
+
   def show; end
 
   def new
@@ -10,7 +14,7 @@ class TicketsController < ApplicationController
 
   def create
     @form = CreateTicketForm.new form_params.merge(user: current_user, project: @project)
-    redirect_to root_path if @form.submit
+    redirect_to project_tickets_path(@project) if @form.submit
   end
 
   private

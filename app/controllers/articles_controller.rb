@@ -2,6 +2,10 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource :article
 
+  def index
+    @articles = @project.articles
+  end
+
   def show; end
 
   def new
@@ -10,7 +14,7 @@ class ArticlesController < ApplicationController
 
   def create
     @form = CreateArticleForm.new form_params.merge(user: current_user, project: @project)
-    redirect_to root_path if @form.submit
+    redirect_to project_articles_path(@project) if @form.submit
   end
 
   private
