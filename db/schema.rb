@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_233024) do
+ActiveRecord::Schema.define(version: 2020_09_07_024144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,17 +20,32 @@ ActiveRecord::Schema.define(version: 2020_09_06_233024) do
     t.string "description", null: false
     t.bigint "project_id", null: false
     t.bigint "user_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["project_id"], name: "index_articles_on_project_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["project_id"], name: "index_project_users_on_project_id"
+    t.index ["user_id"], name: "index_project_users_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "company_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["company_id"], name: "index_projects_on_company_id"
   end
 
@@ -41,6 +56,8 @@ ActiveRecord::Schema.define(version: 2020_09_06_233024) do
     t.string "description", null: false
     t.bigint "user_id"
     t.bigint "project_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["project_id"], name: "index_tickets_on_project_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end

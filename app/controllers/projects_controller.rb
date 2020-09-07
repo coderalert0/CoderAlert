@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :project
 
   def index
-    # update this to only show projects for a particular company
     @projects = current_user.projects
   end
 
