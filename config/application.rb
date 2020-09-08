@@ -13,6 +13,7 @@ module CoderAlert
     config.load_defaults 5.2
 
     config.factory_bot.definition_file_paths = ["spec/factories"]
+
     config.assets.paths << Rails.root.join("assets", "fonts")
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 

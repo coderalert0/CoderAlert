@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   load_and_authorize_resource :ticket
 
   def index
-    @tickets = @project.tickets
+    @tickets = @project.tickets.decorate
   end
 
   def show; end
