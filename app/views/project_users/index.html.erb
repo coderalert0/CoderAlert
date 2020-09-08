@@ -26,22 +26,30 @@
   <table id="dataTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 149px;">Name</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 35px;">Email</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92px;">Work Phone</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 92px;">Cellphone</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 30%">Name</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 30%">Email</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 15%">Work Phone</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 15%">Cellphone</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%"></th>
     </tr>
     </thead>
     <tbody>
 
-    <% @users.each do |user| %>
+    <% @project_users.each do |project_user| %>
       <tr role="row" class="odd">
         <td class="sorting_1">
-          <%= user.full_name %>
+          <%= project_user.user.full_name %>
         </td>
-        <td><%= user.email %></td>
-        <td><%= user.work_phone %></td>
-        <td><%= user.cell_phone %></td>
+        <td><%= project_user.user.email %></td>
+        <td><%= project_user.user.work_phone %></td>
+        <td><%= project_user.user.cell_phone %></td>
+        <td>
+          <span class="icon-holder">
+            <%= link_to project_user_path(@project, project_user), :method => 'delete', data: {confirm: "Are you sure you want to remove #{project_user.user.full_name} from the #{project_user.project.name} project?"} do %>
+              <i class="ti-trash"></i>
+            <% end %>
+          </span>
+        </td>
       </tr>
     <% end %>
 

@@ -1,4 +1,4 @@
-<%= link_to 'Delete', project_article_path(@project, @article), class: 'btn btn-danger' %>
+<%= link_to 'Delete', project_article_path(@project, @article), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the article #{@article.title}?"} %>
 
 <h3><%= @article.title %></h3>
 <%= @article.description %>

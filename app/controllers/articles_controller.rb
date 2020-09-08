@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource :project
-  load_and_authorize_resource :article
+  load_and_authorize_resource
 
   def index
     @articles = @project.articles
@@ -15,6 +15,10 @@ class ArticlesController < ApplicationController
   def create
     @form = CreateArticleForm.new form_params.merge(user: current_user, project: @project)
     redirect_to project_articles_path(@project) if @form.submit
+  end
+
+  def destroy
+    redirect_to project_articles_path(@project) if @article.destroy
   end
 
   private

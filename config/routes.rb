@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tickets
     resources :articles
-    resources :users
+    resources :users, :controller => :project_users
   end
 
 end

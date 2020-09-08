@@ -16,4 +16,6 @@
 // = require popper
 //= require turbolinks
 //= require bootstrap
+//= require data-confirm-modal
+//= require confirm-modal
 //= require_tree .
