@@ -12,6 +12,7 @@ class Ability
     can :manage, Ticket
     can :manage, Article
     can :manage, ProjectUser
+    can :manage, Comment
 
     # The first argument to `can` is the action you are giving the user
     # permission to do.

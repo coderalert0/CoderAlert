@@ -2,3 +2,19 @@
 <%= @ticket.priority %></br>
 <%= @ticket.status %></br>
 <%= @ticket.description %>
+
+<br/><br/>
+<%= bootstrap_form_for @comment_form, :url => project_ticket_comments_path(@project, @ticket) do |f| %>
+  <%= f.text_area :content, :label => 'Comment' %>
+  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+<% end %>
+
+<% @ticket.comments.each do |comment| %>
+  <%= comment.content %>
+
+  <span class="icon-holder">
+    <%= link_to project_ticket_comment_path(@project, @ticket, comment), :method => 'delete', data: {confirm: "Are you sure you want to delete this comment?"} do %>
+      <i class="ti-trash"></i>
+    <% end %>
+  </span>
+<% end %>

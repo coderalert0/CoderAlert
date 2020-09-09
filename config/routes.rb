@@ -5,8 +5,14 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :projects do
-    resources :tickets
-    resources :articles
+    resources :tickets do
+      resources :comments
+    end
+
+    resources :articles do
+      resources :comments
+    end
+
     resources :users, :controller => :project_users
   end
 

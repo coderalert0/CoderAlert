@@ -1,10 +1,10 @@
 class CreateArticleForm < BaseForm
-  attr_accessor :title, :description, :user, :project
+  attr_accessor :title, :content, :user, :project
   attr_writer :article
 
-  nested_attributes :title, :description, :user, :project, to: :article
+  nested_attributes :title, :content, :user, :project, to: :article
 
-  accessible_attr :title, :description
+  accessible_attr :title, :content
 
   def article
     @article ||= Article.new

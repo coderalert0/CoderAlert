@@ -1,6 +1,7 @@
 class Ticket < ApplicationRecord
   belongs_to :project
   belongs_to :user
+  has_many :comments, as: :commentable
 
   validates_presence_of :title, :status, :priority, :description
 

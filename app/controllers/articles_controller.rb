@@ -6,7 +6,9 @@ class ArticlesController < ApplicationController
     @articles = @project.articles
   end
 
-  def show; end
+  def show
+    @comment_form = CreateCommentForm.new
+  end
 
   def new
     @form = CreateArticleForm.new

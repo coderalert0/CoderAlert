@@ -6,7 +6,9 @@ class TicketsController < ApplicationController
     @tickets = @project.tickets.decorate
   end
 
-  def show; end
+  def show
+    @comment_form = CreateCommentForm.new
+  end
 
   def new
     @form = CreateTicketForm.new
