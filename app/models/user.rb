@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :company
 
-  devise :database_authenticatable, :registerable, :trackable, :timeoutable,
+  devise :invitable, :database_authenticatable, :registerable, :trackable, :timeoutable,
          :recoverable, :rememberable, :validatable, :confirmable, :lockable,
          :validatable
 
