@@ -3,7 +3,7 @@ class Ticket < ApplicationRecord
 
   belongs_to :project
   belongs_to :user
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :title, :status, :priority, :description
 

@@ -19,6 +19,10 @@ class TicketsController < ApplicationController
     redirect_to project_tickets_path(@project) if @form.submit
   end
 
+  def destroy
+    redirect_to project_tickets_path(Project.last) if @ticket.destroy
+  end
+
   private
 
   def form_params
