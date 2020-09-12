@@ -1,5 +1,5 @@
 FROM ruby:2.7
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client vim
 RUN mkdir /coder_alert
 WORKDIR /coder_alert
 COPY Gemfile /coder_alert/Gemfile
