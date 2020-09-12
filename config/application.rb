@@ -17,7 +17,7 @@ module CoderAlert
     config.assets.paths << Rails.root.join("assets", "fonts")
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 
-    config.active_job.queue_adapter = :async
+    config.active_job.queue_adapter = :delayed_job
 
     config.to_prepare do
       Devise::InvitationsController.layout proc{ |controller| user_signed_in? ? 'application' : 'devise' }

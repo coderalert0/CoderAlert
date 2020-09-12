@@ -1,13 +1,18 @@
 class TicketMailer < ApplicationMailer
-  def ticket_updated
-    @user = params[:user]
-    @ticket = params[:ticket]
-    mail(to: @user.email, subject: "#{@ticket.title} was updated by #{@user.full_name}")
+  before_action :load_resources
+
+  def ticket_created
+    mail(to: @ticket.user.email, subject: "#{@ticket.title} was created by #{@ticket.user.full_name}")
   end
 
-  def ticket_destroyed
-    @user = params[:user]
-    @ticket = params[:ticket]
-    mail(to: @user.email, subject: "#{@ticket.title} was deleted by #{@user.full_name}")
+  def ticket_updated
+    mail(to: @ticket.user.email, subject: "#{@ticket.title} was updated by #{@ticket.user.full_name}")
+  end
+
+  private
+
+  def load_resources
+    @ticket = params[:ticket].decorate
+    @changes = params[:changes]
   end
 end

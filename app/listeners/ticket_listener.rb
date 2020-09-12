@@ -1,11 +1,9 @@
 class TicketListener
-  def on_ticket_created(ticket); end
-
-  def on_ticket_updated(ticket, _block)
-    TicketMailer.with(user: User.last.decorate, ticket: ticket).ticket_updated.deliver_now
+  def on_ticket_created(ticket)
+    TicketMailer.with(ticket: ticket, changes: ticket.changes.to_json).ticket_created.deliver_later
   end
 
-  def on_ticket_destroyed(ticket)
-    TicketMailer.with(user: User.last.decorate, ticket: ticket).ticket_destroyed.deliver_now
+  def on_ticket_updated(ticket, _block)
+    TicketMailer.with(ticket: ticket, changes: ticket.changes.to_json).ticket_updated.deliver_later
   end
 end
