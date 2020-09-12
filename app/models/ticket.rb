@@ -1,4 +1,6 @@
 class Ticket < ApplicationRecord
+  include DataEventPublishing
+
   belongs_to :project
   belongs_to :user
   has_many :comments, as: :commentable
@@ -7,4 +9,6 @@ class Ticket < ApplicationRecord
 
   PRIORITY = %i[lowest low medium high highest].freeze
   STATUS = %i[draft open in_progress code_review qa reopened resolved closed cancelled].freeze
+
+  publishes_lifecycle_events
 end

@@ -9,6 +9,7 @@ AllCops:
     - 'public/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
+    - 'app/models/concerns/data_event_publishing.rb'
 
 Documentation:
   Enabled: false
@@ -24,3 +25,4 @@ Metrics/MethodLength:
 
 Metrics/AbcSize:
   IgnoredMethods: ['add_validation']
+
