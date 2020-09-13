@@ -13,9 +13,13 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery
-// = require popper
+//= require popper
 //= require turbolinks
 //= require bootstrap
 //= require data-confirm-modal
 //= require confirm-modal
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+    $("[data-toggle='popover']").popover({trigger: 'hover'})
+})

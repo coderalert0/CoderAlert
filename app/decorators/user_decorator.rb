@@ -6,6 +6,11 @@ class UserDecorator < ApplicationDecorator
   end
 
   def confirmation_state
-    '(unconfirmed)' if confirmed_at.nil?
+    return unless confirmed_at.nil?
+
+    h.link_to '(unconfirmed)', '#',
+              { 'data-toggle' => 'popover',
+                'data-content' => h.t(:account_unconfirmed_content, scope: 'popover'),
+                'title' => h.t(:account_unconfirmed_title, scope: 'popover') }
   end
 end
