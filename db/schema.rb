@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_12_015358) do
+ActiveRecord::Schema.define(version: 2020_09_15_045224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2020_09_12_015358) do
     t.string "name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "value", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -110,8 +117,6 @@ ActiveRecord::Schema.define(version: 2020_09_12_015358) do
     t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "work_phone"
-    t.string "cell_phone"
     t.bigint "company_id", null: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
