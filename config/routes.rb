@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
 
     resources :users, :controller => :project_users
+
+    resources :schedules
   end
 
 end

@@ -51,6 +51,12 @@ en:
     closed: 'Closed'
     cancelled: 'Cancelled'
 
+  frequency:
+    daily: 'Daily'
+    weekly: 'Weekly'
+    biweekly: 'Bi-Weekly'
+    monthly: 'Monthly'
+
   popover:
     account_unconfirmed_title: 'Account unconfirmed'
     account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'

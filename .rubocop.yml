@@ -22,7 +22,10 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   ExcludedMethods: ['add_validation']
+  Max: 12
 
 Metrics/AbcSize:
   IgnoredMethods: ['add_validation']
+
+
 

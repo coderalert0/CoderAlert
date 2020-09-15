@@ -4,6 +4,7 @@ class CreateContacts < ActiveRecord::Migration[5.2]
       t.string :type, null: false
       t.string :value, null: false
       t.references :user, null: false
+      t.timestamps
     end
   end
 end
