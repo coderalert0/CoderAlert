@@ -1,5 +1,6 @@
 class Schedule < ApplicationRecord
   belongs_to :project
+  has_many :schedule_users
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }
 
