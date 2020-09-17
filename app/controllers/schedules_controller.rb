@@ -17,6 +17,10 @@ class SchedulesController < ApplicationController
     redirect_to project_schedules_path(@project) if @form.submit
   end
 
+  def destroy
+    redirect_to project_schedules_path(Project.last) if @schedule.destroy
+  end
+
   private
 
   def form_params

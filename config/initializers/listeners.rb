@@ -3,4 +3,5 @@ Rails.application.config.to_prepare do
 
   Ticket.subscribe TicketListener.new, :prefix => true
   Comment.subscribe CommentListener.new, :prefix => true
+  Schedule.subscribe ScheduleListener.new, :prefix => true
 end

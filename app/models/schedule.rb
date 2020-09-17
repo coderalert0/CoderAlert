@@ -1,12 +1,20 @@
 class Schedule < ApplicationRecord
+  include DataEventPublishing
+
   belongs_to :project
   has_many :schedule_users
   has_many :users, through: :schedule_users
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }
 
+  publishes_lifecycle_events
+
   def next_occurrence
     ice_cube_schedule.next_occurrence.start_time
+  end
+
+  def jobs
+    Delayed::Job.where('handler LIKE ?', "%Schedule/#{id}\%")
   end
 
   private
