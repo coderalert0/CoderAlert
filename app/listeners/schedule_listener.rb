@@ -3,7 +3,7 @@ class ScheduleListener
     ReprioritizeScheduleUsersJob.set(wait_until: schedule.next_occurrence).perform_later(schedule)
   end
 
-  def on_schedule_updated(schedule)
+  def on_schedule_updated(schedule, _block)
     schedule.jobs.destroy_all
     ReprioritizeScheduleUsersJob.set(wait_until: schedule.next_occurrence).perform_later(schedule)
   end

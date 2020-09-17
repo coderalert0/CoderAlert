@@ -2,7 +2,7 @@ class Schedule < ApplicationRecord
   include DataEventPublishing
 
   belongs_to :project
-  has_many :schedule_users
+  has_many :schedule_users, dependent: :destroy
   has_many :users, through: :schedule_users
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }
