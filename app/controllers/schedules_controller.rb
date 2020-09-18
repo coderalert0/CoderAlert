@@ -14,11 +14,17 @@ class SchedulesController < ApplicationController
 
   def create
     @form = CreateScheduleForm.new form_params.merge(project: @project)
-    redirect_to project_schedules_path(@project) if @form.submit
+    if @form.submit
+      flash.notice = 'The schedule was created successfully'
+      redirect_to project_schedules_path(@project)
+    end
   end
 
   def destroy
-    redirect_to project_schedules_path(Project.last) if @schedule.destroy
+    if @schedule.destroy
+      flash.notice = 'The schedule was deleted successfully'
+      redirect_to project_schedules_path(Project.last)
+    end
   end
 
   private

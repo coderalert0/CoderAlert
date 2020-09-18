@@ -8,7 +8,10 @@ module Users
 
     def create
       @form = InviteUserForm.new form_params.merge(company: current_user.company)
-      redirect_to project_users_path(Project.last) if @form.submit
+      if @form.submit
+        flash.notice = 'The user was invited to the project(s) successfully'
+        redirect_to project_users_path(Project.last)
+      end
     end
 
     private

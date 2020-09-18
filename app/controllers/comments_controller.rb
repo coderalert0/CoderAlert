@@ -10,7 +10,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    redirect_to create_redirect_path if @comment.destroy
+    if @comment.destroy
+      flash.notice = 'The comment was deleted successfully'
+      redirect_to create_redirect_path
+    end
   end
 
   private

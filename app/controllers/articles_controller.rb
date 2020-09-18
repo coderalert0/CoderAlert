@@ -16,11 +16,18 @@ class ArticlesController < ApplicationController
 
   def create
     @form = CreateArticleForm.new form_params.merge(user: current_user, project: @project)
-    redirect_to project_articles_path(@project) if @form.submit
+
+    if @form.submit
+      flash.notice = 'The article was created successfully'
+      redirect_to project_articles_path(@project)
+    end
   end
 
   def destroy
-    redirect_to project_articles_path(@project) if @article.destroy
+    if @article.destroy
+      flash.notice = 'The project was deleted successfully'
+      redirect_to project_articles_path(@project)
+    end
   end
 
   private

@@ -15,7 +15,10 @@ class ProjectsController < ApplicationController
 
   def create
     @form = CreateProjectForm.new form_params.merge(company: current_user.company)
-    redirect_to projects_path if @form.submit
+    if @form.submit
+      flash.notice = 'The project was created successfully'
+      redirect_to projects_path
+    end
   end
 
   private

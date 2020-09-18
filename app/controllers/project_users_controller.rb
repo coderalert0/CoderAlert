@@ -18,11 +18,17 @@ class ProjectUsersController < ApplicationController
 
   def create
     @form = PermissionUserForm.new form_params.merge(project: @project)
-    redirect_to project_users_path(@project) if @form.submit
+    if @form.submit
+      flash.notice = 'The user was permissioned to the project successfully'
+      redirect_to project_users_path(@project)
+    end
   end
 
   def destroy
-    redirect_to project_users_path(@project) if @project_user.destroy
+    if @project_user.destroy
+      flash.notice = 'The user was unpermissioned from the project successfully'
+      redirect_to project_users_path(@project)
+    end
   end
 
   private

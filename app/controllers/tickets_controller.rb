@@ -17,11 +17,17 @@ class TicketsController < ApplicationController
 
   def create
     @form = CreateTicketForm.new form_params.merge(created_by: current_user, project: @project)
-    redirect_to project_tickets_path(@project) if @form.submit
+    if @form.submit
+      flash.notice = 'The ticket was created successfully'
+      redirect_to project_tickets_path(@project)
+    end
   end
 
   def destroy
-    redirect_to project_tickets_path(Project.last) if @ticket.destroy
+    if @ticket.destroy
+      flash.notice = 'The ticket was deleted successfully'
+      redirect_to project_tickets_path(Project.last)
+    end
   end
 
   private
