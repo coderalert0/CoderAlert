@@ -2,26 +2,16 @@
   <div class="dataTables_length" id="dataTable_length">
     <%= link_to 'New', new_project_schedule_path(@project), class: 'btn btn-primary' %>
     <br/><br/>
-
-    <!--    <label>-->
-    <!--      Show-->
-    <!--      <select name="dataTable_length" aria-controls="dataTable" class="">-->
-    <!--        <option value="10">10</option>-->
-    <!--        <option value="25">25</option>-->
-    <!--        <option value="50">50</option>-->
-    <!--        <option value="100">100</option>-->
-    <!--      </select>-->
-    <!--      entries-->
-    <!--    </label>-->
   </div>
   <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="dataTable"></label></div>
   <table id="dataTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 36%;">Name</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 5%;">Frequency</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 25%;">Name</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 25%;">Currently Scheduled</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 10%;">Frequency</th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 20%;">Start</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;">End</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 20%;">End</th>
     </tr>
     </thead>
     <tbody>
@@ -31,7 +21,8 @@
         <td class="sorting_1">
           <%= link_to schedule.name, project_schedule_path(schedule.project, schedule) %>
         </td>
-        <td><%= schedule.frequency %></td>
+        <td><%= schedule.on_call_user.decorate.full_name %></td>
+        <td><%= t(schedule.frequency.to_sym, :scope => :frequency) %></td>
         <td><%= schedule.start.to_formatted_s(:custom_long_ordinal) %></td>
         <td><%= schedule.try(:end).try(:to_formatted_s, :custom_long_ordinal) %></td>
       </tr>

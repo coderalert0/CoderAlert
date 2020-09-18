@@ -2,7 +2,7 @@ class Schedule < ApplicationRecord
   include DataEventPublishing
 
   belongs_to :project
-  has_many :schedule_users, dependent: :destroy
+  has_many :schedule_users, -> { order priority: :desc }, dependent: :destroy
   has_many :users, through: :schedule_users
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }
@@ -15,6 +15,10 @@ class Schedule < ApplicationRecord
 
   def jobs
     Delayed::Job.where('handler LIKE ?', "%Schedule/#{id}\%")
+  end
+
+  def on_call_user
+    schedule_users.max_by(&:priority).user
   end
 
   private

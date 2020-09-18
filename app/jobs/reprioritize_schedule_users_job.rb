@@ -8,15 +8,11 @@ class ReprioritizeScheduleUsersJob < ApplicationJob
 
   def perform(schedule)
     ActiveRecord::Base.transaction do
-      schedule_users = schedule.schedule_users
-      active_schedule_user = schedule_users.max_by(&:priority)
+      schedule_users = schedule.schedule_users.reload
+      num_users = schedule_users.count
 
-      schedule_users.each do |schedule_user|
-        if schedule_user == active_schedule_user
-          schedule_user.update!(priority: 1)
-        else
-          schedule_user.increment!(:priority)
-        end
+      schedule.schedule_users.rotate.each_with_index do |schedule_user, index|
+        schedule_user.update(priority: num_users - index)
       end
     end
   end

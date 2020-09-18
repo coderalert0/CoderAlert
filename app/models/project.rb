@@ -8,4 +8,8 @@ class Project < ApplicationRecord
 
   validates_presence_of :name, :company
   validates_uniqueness_of :name, scope: :company
+
+  def on_call_user
+    schedules.first.on_call_user
+  end
 end

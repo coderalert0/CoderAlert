@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_09_16_204043) do
     t.string "type", null: false
     t.string "value", null: false
     t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
@@ -76,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_204043) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "company_id", null: false
+    t.bigint "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["company_id"], name: "index_projects_on_company_id"
@@ -110,12 +112,14 @@ ActiveRecord::Schema.define(version: 2020_09_16_204043) do
     t.string "status", null: false
     t.string "priority", null: false
     t.string "description", null: false
-    t.bigint "user_id"
+    t.bigint "created_by_id", null: false
+    t.bigint "assignee_id"
     t.bigint "project_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
+    t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
-    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -142,7 +146,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_204043) do
     t.string "last_name", null: false
     t.string "work_phone"
     t.string "cell_phone"
-    t.bigint "company_id", null: false
+    t.bigint "company_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"

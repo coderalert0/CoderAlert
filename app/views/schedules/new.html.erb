@@ -1,6 +1,6 @@
 <%= bootstrap_form_for @form, :url => project_schedules_path(@project) do |f| %>
   <%= f.text_field :name %>
-  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => :frequency), s ] }), { :label => 'Frequency' } %>
+  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => :frequency), s ] }) %>
   <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year] %>
   <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
 

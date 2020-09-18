@@ -12,10 +12,11 @@ class TicketsController < ApplicationController
 
   def new
     @form = CreateTicketForm.new
+    @project = @project.decorate
   end
 
   def create
-    @form = CreateTicketForm.new form_params.merge(user: current_user, project: @project)
+    @form = CreateTicketForm.new form_params.merge(created_by: current_user, project: @project)
     redirect_to project_tickets_path(@project) if @form.submit
   end
 
