@@ -20,6 +20,9 @@ class TicketsController < ApplicationController
     if @form.submit
       flash.notice = 'The ticket was created successfully'
       redirect_to project_tickets_path(@project)
+    else
+      flash.alert = @form.display_errors
+      render :new
     end
   end
 
@@ -27,6 +30,9 @@ class TicketsController < ApplicationController
     if @ticket.destroy
       flash.notice = 'The ticket was deleted successfully'
       redirect_to project_tickets_path(Project.last)
+    else
+      flash.alert = 'The ticket could not be deleted'
+      render :show
     end
   end
 

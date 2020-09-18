@@ -11,6 +11,9 @@ module Users
       if @form.submit
         flash.notice = 'The user was invited to the project(s) successfully'
         redirect_to project_users_path(Project.last)
+      else
+        @form.display_errors
+        render :new
       end
     end
 

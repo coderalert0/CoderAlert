@@ -21,6 +21,9 @@ class ProjectUsersController < ApplicationController
     if @form.submit
       flash.notice = 'The user was permissioned to the project successfully'
       redirect_to project_users_path(@project)
+    else
+      flash.alert = @form.display_errors
+      render :new
     end
   end
 
@@ -28,6 +31,9 @@ class ProjectUsersController < ApplicationController
     if @project_user.destroy
       flash.notice = 'The user was unpermissioned from the project successfully'
       redirect_to project_users_path(@project)
+    else
+      flash.alert = 'The user could not be unpermissioned from the project'
+      render :index
     end
   end
 

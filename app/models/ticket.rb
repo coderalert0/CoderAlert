@@ -7,7 +7,7 @@ class Ticket < ApplicationRecord
 
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates_presence_of :title, :status, :priority, :description
+  validates_presence_of :title, :status, :priority, :description, :created_by, :project
 
   PRIORITY = %i[lowest low medium high highest].freeze
   STATUS = %i[draft open in_progress code_review qa reopened resolved closed cancelled].freeze

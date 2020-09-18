@@ -18,6 +18,9 @@ class ProjectsController < ApplicationController
     if @form.submit
       flash.notice = 'The project was created successfully'
       redirect_to projects_path
+    else
+      flash.alert = @form.display_errors
+      render :new
     end
   end
 

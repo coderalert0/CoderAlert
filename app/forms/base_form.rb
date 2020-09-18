@@ -4,6 +4,10 @@ class BaseForm
   # include EmailSending
   # include ArgsKeyFirst
 
+  def display_errors
+    errors.full_messages.to_sentence
+  end
+
   def submit
     if valid?
       _submit

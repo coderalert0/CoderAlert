@@ -20,6 +20,9 @@ class ArticlesController < ApplicationController
     if @form.submit
       flash.notice = 'The article was created successfully'
       redirect_to project_articles_path(@project)
+    else
+      flash.alert = @form.display_errors
+      render :new
     end
   end
 
@@ -27,6 +30,9 @@ class ArticlesController < ApplicationController
     if @article.destroy
       flash.notice = 'The project was deleted successfully'
       redirect_to project_articles_path(@project)
+    else
+      flash.alert = 'The project could not be deleted'
+      render :show
     end
   end
 

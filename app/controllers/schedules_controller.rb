@@ -17,6 +17,9 @@ class SchedulesController < ApplicationController
     if @form.submit
       flash.notice = 'The schedule was created successfully'
       redirect_to project_schedules_path(@project)
+    else
+      flash.alert = @form.display_errors
+      render :new
     end
   end
 
@@ -24,6 +27,9 @@ class SchedulesController < ApplicationController
     if @schedule.destroy
       flash.notice = 'The schedule was deleted successfully'
       redirect_to project_schedules_path(Project.last)
+    else
+      flash.alert = 'The schedule could not be deleted'
+      render :show
     end
   end
 

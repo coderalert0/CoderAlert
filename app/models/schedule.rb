@@ -7,6 +7,8 @@ class Schedule < ApplicationRecord
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }
 
+  validates_presence_of :name, :start, :frequency, :project
+
   publishes_lifecycle_events
 
   def next_occurrence
