@@ -2,11 +2,11 @@ class TicketMailer < ApplicationMailer
   before_action :load_resources
 
   def ticket_created
-    mail(to: @ticket.user.email, subject: "#{@ticket.title} was created by #{@ticket.user.full_name}")
+    mail(to: @ticket.assignee.email, subject: "#{@ticket.title} was created by #{@ticket.assignee.first_name}")
   end
 
   def ticket_updated
-    mail(to: @ticket.user.email, subject: "#{@ticket.title} was updated by #{@ticket.user.full_name}")
+    mail(to: @ticket.assignee.email, subject: "#{@ticket.title} was updated by #{@ticket.assignee.first_name}")
   end
 
   private

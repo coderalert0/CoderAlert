@@ -37,7 +37,7 @@
             <%= link_to ticket.title, project_ticket_path(ticket.project, ticket) %>
           </td>
           <td><%= ticket.status %></td>
-          <td><%= ticket.assignee.first_name %></td>
+          <td><%= ticket.assignee.full_name %> <%= ticket.viewed_by_assignee_icon %></td>
           <td><%= ticket.created_at.to_formatted_s(:custom_long_ordinal) %></td>
           <td><%= ticket.updated_at.to_formatted_s(:custom_long_ordinal) %></td>
         </tr>

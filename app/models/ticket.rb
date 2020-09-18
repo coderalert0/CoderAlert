@@ -6,6 +6,7 @@ class Ticket < ApplicationRecord
   belongs_to :assignee, class_name: 'User', foreign_key: :assignee_id
 
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :ticket_views
 
   validates_presence_of :title, :status, :priority, :description, :created_by, :project
 

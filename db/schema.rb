@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_184642) do
+ActiveRecord::Schema.define(version: 2020_09_19_013307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(version: 2020_09_18_184642) do
     t.index ["project_id"], name: "index_schedules_on_project_id"
   end
 
+  create_table "ticket_views", force: :cascade do |t|
+    t.integer "count", default: 0
+    t.bigint "ticket_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_views_on_ticket_id"
+    t.index ["user_id"], name: "index_ticket_views_on_user_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.string "title", null: false
     t.string "status", null: false
@@ -117,6 +127,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_184642) do
     t.bigint "project_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "viewed_by_assignee"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"

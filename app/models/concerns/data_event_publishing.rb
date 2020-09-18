@@ -27,24 +27,12 @@ module DataEventPublishing
       @@publishing_enabled = true
     end
 
-    def publish_on_updated_attribute(attribute, params = {})
-      params[:when] ||= :after
-      message = "#{attribute}_changed"
-
-      case params[:when].to_sym
-      when :after
-        publish_on_updated_attribute_after attribute, message
-      else
-        publish_on_updated_attribute_around message
-      end
-    end
-
     def publishes_creation
       class_eval { after_create { |model| _publish model, 'created' } }
     end
 
     def publishes_updates
-      class_eval { around_update { |model, block| _publish model, 'updated', block } }
+      class_eval { after_update { |model| _publish model, 'updated' } }
     end
 
     def publishes_destruction
@@ -55,20 +43,6 @@ module DataEventPublishing
       publishes_creation
       publishes_updates
       publishes_destruction
-    end
-
-    def publish_on_updated_attribute_around(message)
-      class_eval { around_update { |model, block| _publish model, message, block } }
-    end
-
-    def publish_on_updated_attribute_after(attribute, message)
-      class_eval do
-        around_update do |model, block|
-          changed = attribute_changed? attribute
-          block.call
-          _publish model, message if changed
-        end
-      end
     end
   end
 
