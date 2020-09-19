@@ -12,8 +12,8 @@ module Users
         flash.notice = 'The user was invited to the project(s) successfully'
         redirect_to project_users_path(Project.last)
       else
-        @form.display_errors
-        render :new
+        flash.alert = @form.display_errors
+        redirect_to action: :new
       end
     end
 

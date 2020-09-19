@@ -3,6 +3,8 @@ class InviteUserForm < BaseForm
 
   accessible_attr :first_name, :last_name, :email, project_ids: []
 
+  validates_presence_of :first_name, :last_name, :email
+
   def _submit
     ActiveRecord::Base.transaction do
       user = User.invite!(first_name: first_name, last_name: last_name, email: email, company: company)
