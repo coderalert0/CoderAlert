@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :company
-  has_many :tickets, dependent: :destroy
+  has_many :tickets, -> { order created_at: :desc }, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :schedules, dependent: :destroy
   has_many :project_users, dependent: :destroy
