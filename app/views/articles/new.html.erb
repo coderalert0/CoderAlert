@@ -2,5 +2,7 @@
   <%= f.text_field :title, :label_class => 'required' %>
   <%= f.text_area :content, :label_class => 'required' %>
 
+  <%= f.file_field :attachments, multiple: true %>
+
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
 <% end %>

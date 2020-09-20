@@ -5,5 +5,7 @@
   <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => :status) }), :label_class => 'required' %>
   <%= f.text_area :description, :label_class => 'required' %>
 
+  <%= f.file_field :attachments, multiple: true %>
+
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
 <% end %>

@@ -3,6 +3,13 @@
 <h3><%= @article.title %></h3>
 <%= @article.content %>
 
+<br/>
+<br/>
+
+<% @article.attachments.each do |attachment| %>
+  <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
+<% end %>
+
 <br/><br/>
 <%= bootstrap_form_for @comment_form, :url => project_article_comments_path(@project, @article) do |f| %>
   <%= f.text_area :content, :label => 'Comment' %>

@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @articles = @project.articles
+    @articles = @project.articles.decorate
   end
 
   def show

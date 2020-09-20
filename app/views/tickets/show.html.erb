@@ -5,6 +5,13 @@
 <%= @ticket.status %></br>
 <%= @ticket.description %>
 
+<br/>
+<br/>
+
+<% @ticket.attachments.each do |attachment| %>
+  <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
+<% end %>
+
 <br/><br/>
 <%= bootstrap_form_for @comment_form, :url => project_ticket_comments_path(@project, @ticket) do |f| %>
   <%= f.text_area :content, :label => 'Comment' %>
