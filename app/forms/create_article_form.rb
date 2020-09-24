@@ -13,4 +13,10 @@ class CreateArticleForm < BaseForm
   def _submit
     article.save!
   end
+
+  private
+
+  def initialize(args = {})
+    super args_key_first args, :article
+  end
 end

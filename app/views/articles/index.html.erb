@@ -32,7 +32,7 @@
     <% @articles.each do |article| %>
       <tr role="row" class="odd">
         <td class="sorting_1">
-          <%= link_to article.title, project_article_path(article.project, article) %>
+          <%= link_to article.title, edit_project_article_path(article.project, article) %>
         </td>
         <td><%= article.user.full_name %></td>
         <td><%= article.created_at.to_formatted_s(:custom_long_ordinal) %></td>

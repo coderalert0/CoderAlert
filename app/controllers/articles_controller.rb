@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @form = CreateArticleForm.new form_params.merge(user: current_user, project: @project)
+    @form = create_form
 
     if @form.submit
       flash.notice = 'The article was created successfully'
@@ -23,6 +23,22 @@ class ArticlesController < ApplicationController
     else
       flash.alert = @form.display_errors
       render :new
+    end
+  end
+
+  def edit
+    @form = EditArticleForm.new article: @article
+  end
+
+  def update
+    @form = edit_form
+
+    if @form.submit
+      flash.notice = 'The article was edited successfully'
+      redirect_to project_articles_path(@project)
+    else
+      flash.alert = @form.display_errors
+      render :edit
     end
   end
 
@@ -38,7 +54,15 @@ class ArticlesController < ApplicationController
 
   private
 
-  def form_params
-    params.require(:create_article_form).permit(CreateArticleForm.accessible_attributes)
+  def form_params(clazz)
+    params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
+  end
+
+  def create_form
+    CreateArticleForm.new form_params(CreateArticleForm).merge(user: current_user, project: @project)
+  end
+
+  def edit_form
+    EditArticleForm.new form_params(EditArticleForm).merge(user: current_user, project: @project, article: @article)
   end
 end

@@ -1,0 +1,2 @@
+class EditArticleForm < CreateArticleForm
+end

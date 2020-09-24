@@ -2,7 +2,7 @@ class BaseForm
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
   # include EmailSending
-  # include ArgsKeyFirst
+  include ArgsKeyFirst
 
   def display_errors
     errors.full_messages.to_sentence
