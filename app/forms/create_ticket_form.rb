@@ -14,4 +14,10 @@ class CreateTicketForm < BaseForm
   def _submit
     ticket.save!
   end
+
+  private
+
+  def initialize(args = {})
+    super args_key_first args, :ticket
+  end
 end

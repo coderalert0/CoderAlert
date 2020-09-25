@@ -1,0 +1,2 @@
+class EditTicketForm < CreateTicketForm
+end

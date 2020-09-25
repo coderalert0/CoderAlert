@@ -34,7 +34,7 @@
         <tr role="row" class="odd">
           <td><%= ticket.priority %></td>
           <td class="sorting_1">
-            <%= link_to ticket.title, project_ticket_path(ticket.project, ticket) %>
+            <%= link_to ticket.title, edit_project_ticket_path(ticket.project, ticket) %>
           </td>
           <td><%= ticket.status %></td>
           <td><%= ticket.assignee.full_name %> <%= ticket.viewed_by_assignee_icon %></td>
