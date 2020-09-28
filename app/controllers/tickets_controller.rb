@@ -5,7 +5,13 @@ class TicketsController < ApplicationController
   before_action :decorate_project, only: %i[index show new edit]
 
   def index
-    @tickets = @project.tickets.decorate
+    query = params[:search_tickets].try(:[], :query)
+
+    @tickets = if query
+                 Ticket.search(query).records.decorate
+               else
+                 @project.tickets.decorate
+               end
   end
 
   def show
