@@ -3,7 +3,15 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @articles = @project.articles.decorate
+    query = params[:search_articles].try(:[], :query)
+
+    @articles = if query
+                  Article.search("*#{query}*").records
+                else
+                  @project.articles
+                end
+
+    @articles = @articles.decorate
   end
 
   def show

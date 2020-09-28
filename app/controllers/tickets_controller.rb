@@ -8,10 +8,12 @@ class TicketsController < ApplicationController
     query = params[:search_tickets].try(:[], :query)
 
     @tickets = if query
-                 Ticket.search(query).records.decorate
+                 Ticket.search("*#{query}*").records
                else
-                 @project.tickets.decorate
+                 @project.tickets
                end
+
+    @tickets = @tickets.decorate
   end
 
   def show
