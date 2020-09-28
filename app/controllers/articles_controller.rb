@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  load_and_authorize_resource :project
+  before_action :load_and_authorize_project
   load_and_authorize_resource
 
   def index
@@ -72,5 +72,10 @@ class ArticlesController < ApplicationController
 
   def edit_form
     EditArticleForm.new form_params(EditArticleForm).merge(user: current_user, project: @project, article: @article)
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:project_id])
   end
 end

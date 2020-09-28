@@ -1,4 +1,6 @@
 class Ticket < ApplicationRecord
+  extend FriendlyId
+
   include DataEventPublishing
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -10,6 +12,10 @@ class Ticket < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ticket_views
   has_many_attached :attachments
+
+  scope :for_project, ->(project) { Ticket.where(project: project) }
+
+  friendly_id :generate_ticket_id, use: :scoped, scope: :project
 
   settings do
     mappings dynamic: false do
@@ -43,5 +49,9 @@ class Ticket < ApplicationRecord
         include: { assignee: { only: %i[first_name last_name] } }
       )
     )
+  end
+
+  def generate_ticket_id
+    "#{project.name.split.map(&:first).join.upcase}-#{Ticket.for_project(project).count + 1}"
   end
 end

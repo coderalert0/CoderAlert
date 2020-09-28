@@ -167,6 +167,8 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
+    friendly_id (5.4.0)
+      activerecord (>= 4.0.0)
     fuubar (2.5.0)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -385,6 +387,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   factory_bot_rails
+  friendly_id
   fuubar
   ice_cube
   jbuilder (~> 2.5)

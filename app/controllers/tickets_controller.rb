@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
-  load_and_authorize_resource :project
-  load_and_authorize_resource :ticket
+  before_action :load_and_authorize_project
+  before_action :load_and_authorize_ticket, only: %i[show edit destroy]
 
   before_action :decorate_project, only: %i[index show new edit]
 
@@ -87,5 +87,15 @@ class TicketsController < ApplicationController
   def populate_ticket_view
     ticket_view = TicketView.find_or_create_by(ticket: @ticket, user: current_user)
     ticket_view.update(count: ticket_view.count + 1)
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:project_id])
+  end
+
+  def load_and_authorize_ticket
+    # need to authorize
+    @ticket = Project.friendly.find(params[:project_id]).tickets.friendly.find(params[:id])
   end
 end

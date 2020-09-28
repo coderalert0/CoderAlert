@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  load_and_authorize_resource :project
+  before_action :load_and_authorize_project
   load_and_authorize_resource
 
   def index
@@ -37,5 +37,10 @@ class SchedulesController < ApplicationController
 
   def form_params
     params.require(:create_schedule_form).permit(CreateScheduleForm.accessible_attributes)
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:project_id])
   end
 end

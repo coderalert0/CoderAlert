@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource :project
+  before_action :load_and_authorize_project, only: %i[show edit destroy]
 
   def index
     @projects = current_user.projects
@@ -28,5 +28,10 @@ class ProjectsController < ApplicationController
 
   def form_params
     params.require(:create_project_form).permit(CreateProjectForm.accessible_attributes)
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:id])
   end
 end

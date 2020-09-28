@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   root 'dashboard#show'
 
   resources :projects do
-    resources :tickets do
+    resources :articles do
       resources :comments
     end
 
-    resources :articles do
+    resources :tickets do
       resources :comments
     end
 

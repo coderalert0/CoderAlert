@@ -1,6 +1,6 @@
 class ProjectUsersController < ApplicationController
   load_and_authorize_resource
-  load_and_authorize_resource :project
+  before_action :load_and_authorize_project
 
   def index
     @project_users = ProjectUser.where(project: @project).decorate
@@ -41,5 +41,10 @@ class ProjectUsersController < ApplicationController
 
   def form_params
     params.require(:permission_user_form).permit(PermissionUserForm.accessible_attributes)
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:project_id])
   end
 end
