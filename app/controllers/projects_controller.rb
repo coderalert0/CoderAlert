@@ -14,13 +14,23 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @form = CreateProjectForm.new form_params.merge(company: current_user.company)
+    @form = CreateProjectForm.new form_params.merge(user: current_user)
     if @form.submit
       flash.notice = 'The project was created successfully'
       redirect_to projects_path
     else
       flash.alert = @form.display_errors
       render :new
+    end
+  end
+
+  def destroy
+    if @project.destroy
+      flash.notice = 'The project was deleted successfully'
+      redirect_to projects_path
+    else
+      flash.alert = 'The project could not be deleted'
+      render :show
     end
   end
 

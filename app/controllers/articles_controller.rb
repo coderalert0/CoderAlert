@@ -52,10 +52,10 @@ class ArticlesController < ApplicationController
 
   def destroy
     if @article.destroy
-      flash.notice = 'The project was deleted successfully'
+      flash.notice = 'The article was deleted successfully'
       redirect_to project_articles_path(@project)
     else
-      flash.alert = 'The project could not be deleted'
+      flash.alert = 'The article could not be deleted'
       render :show
     end
   end
