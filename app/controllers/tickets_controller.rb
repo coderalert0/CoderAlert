@@ -1,8 +1,6 @@
 class TicketsController < ApplicationController
   before_action :load_and_authorize_project
-  before_action :load_and_authorize_ticket, only: %i[show edit destroy]
-
-  before_action :decorate_project, only: %i[index show new edit]
+  before_action :load_and_authorize_ticket, only: %i[show edit update destroy]
 
   def index
     query = params[:search_tickets].try(:[], :query)
@@ -12,8 +10,6 @@ class TicketsController < ApplicationController
                else
                  @project.tickets
                end
-
-    @tickets = @tickets.decorate
   end
 
   def show
@@ -68,10 +64,6 @@ class TicketsController < ApplicationController
 
   private
 
-  def decorate_project
-    @project = @project.decorate
-  end
-
   def form_params(clazz)
     params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
   end
@@ -91,7 +83,7 @@ class TicketsController < ApplicationController
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(params[:project_id]).decorate
   end
 
   def load_and_authorize_ticket

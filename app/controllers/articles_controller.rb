@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :load_and_authorize_project
-  before_action :load_and_authorize_article, only: %i[show edit destroy]
+  before_action :load_and_authorize_article, only: %i[show edit update destroy]
 
   def index
     query = params[:search_articles].try(:[], :query)

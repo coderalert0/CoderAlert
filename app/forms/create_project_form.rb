@@ -7,7 +7,7 @@ class CreateProjectForm < BaseForm
   accessible_attr :name, :key
 
   def key=(value)
-    project.key = value.present? ?  value.upcase : project.name.split.map(&:first).join.upcase
+    project.key = value.present? ? value.upcase : project.name.split.map(&:first).join.upcase
   end
 
   def project

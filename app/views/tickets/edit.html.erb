@@ -1,4 +1,4 @@
-<%= link_to 'Delete', project_ticket_path(@project, @ticket), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the ticket #{@ticket.title}?"} %>
+<%#= link_to 'Delete', project_ticket_path(@project, @ticket), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the ticket #{@ticket.title}?"} %>
 
 <%= bootstrap_form_for @form, :url => project_ticket_path(@project), :method => :put do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
