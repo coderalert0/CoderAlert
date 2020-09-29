@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
     @form = CreateScheduleForm.new form_params.merge(project: @project)
     if @form.submit
       flash.notice = 'The schedule was created successfully'
-      redirect_to project_schedules_path(@project)
+      redirect_to schedules_path
     else
       flash.alert = @form.display_errors
       render :new
@@ -26,7 +26,7 @@ class SchedulesController < ApplicationController
   def destroy
     if @schedule.destroy
       flash.notice = 'The schedule was deleted successfully'
-      redirect_to project_schedules_path(Project.last)
+      redirect_to schedules_path
     else
       flash.alert = 'The schedule could not be deleted'
       render :show
@@ -41,6 +41,6 @@ class SchedulesController < ApplicationController
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(session[:project_id])
   end
 end

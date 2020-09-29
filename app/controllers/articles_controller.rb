@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
 
     if @form.submit
       flash.notice = 'The article was created successfully'
-      redirect_to project_articles_path(@project)
+      redirect_to articles_path
     else
       flash.alert = @form.display_errors
       render :new
@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
 
     if @form.submit
       flash.notice = 'The article was edited successfully'
-      redirect_to project_articles_path(@project)
+      redirect_to articles_path
     else
       flash.alert = @form.display_errors
       render :edit
@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
   def destroy
     if @article.destroy
       flash.notice = 'The article was deleted successfully'
-      redirect_to project_articles_path(@project)
+      redirect_to articles_path
     else
       flash.alert = 'The article could not be deleted'
       render :show
@@ -76,11 +76,11 @@ class ArticlesController < ApplicationController
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(session[:project_id])
   end
 
   def load_and_authorize_article
     # need to authorize
-    @article = Project.friendly.find(params[:project_id]).articles.friendly.find(params[:id])
+    @article = Project.friendly.find(session[:project_id]).articles.friendly.find(params[:id])
   end
 end

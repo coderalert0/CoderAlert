@@ -1,7 +1,7 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
 
-    <%= link_to 'Permission User', new_project_user_path(@project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
+    <%= link_to 'Permission User', new_project_user_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
     <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content"></div>
@@ -46,7 +46,7 @@
         <td><%= project_user.user.cell_phone %></td>
         <td>
           <span class="icon-holder">
-            <%= link_to project_user_path(@project, project_user), :method => 'delete', data: {confirm: "Are you sure you want to remove #{project_user.user.full_name} from the #{project_user.project.name} project?"} do %>
+            <%= link_to project_user_path(project_user), :method => 'delete', data: {confirm: "Are you sure you want to remove #{project_user.user.full_name} from the #{project_user.project.name} project?"} do %>
               <i class="ti-trash"></i>
             <% end %>
           </span>

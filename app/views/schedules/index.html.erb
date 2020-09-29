@@ -1,6 +1,6 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_project_schedule_path(@project), class: 'btn btn-primary' %>
+    <%= link_to 'New', new_schedule_path, class: 'btn btn-primary' %>
     <br/><br/>
   </div>
   <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="dataTable"></label></div>
@@ -19,7 +19,7 @@
     <% @schedules.each do |schedule| %>
       <tr role="row" class="odd">
         <td class="sorting_1">
-          <%= link_to schedule.name, project_schedule_path(schedule.project, schedule) %>
+          <%= link_to schedule.name, schedule_path(schedule) %>
         </td>
         <td><%= schedule.on_call_user.decorate.full_name %></td>
         <td><%= t(schedule.frequency.to_sym, :scope => :frequency) %></td>

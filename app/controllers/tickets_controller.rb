@@ -6,7 +6,8 @@ class TicketsController < ApplicationController
     query = params[:search_tickets].try(:[], :query)
 
     @tickets = if query
-                 Ticket.search("*#{query}*").records
+                 # scope this to the project or company
+                 Ticket.search("*#{query}*").records.decorate
                else
                  @project.tickets
                end
@@ -29,7 +30,7 @@ class TicketsController < ApplicationController
       flash.notice = 'The ticket was created successfully'
       populate_ticket_view
 
-      redirect_to project_tickets_path(@project)
+      redirect_to tickets_path
     else
       flash.alert = @form.display_errors
       redirect_to action: :new
@@ -45,7 +46,7 @@ class TicketsController < ApplicationController
 
     if @form.submit
       flash.notice = 'The ticket was edited successfully'
-      redirect_to project_tickets_path(@project)
+      redirect_to tickets_path
     else
       flash.alert = @form.display_errors
       render :edit
@@ -55,7 +56,7 @@ class TicketsController < ApplicationController
   def destroy
     if @ticket.destroy
       flash.notice = 'The ticket was deleted successfully'
-      redirect_to project_tickets_path(Project.last)
+      redirect_to tickets_path
     else
       flash.alert = 'The ticket could not be deleted'
       render :show
@@ -83,11 +84,11 @@ class TicketsController < ApplicationController
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id]).decorate
+    @project = Project.friendly.find(session[:project_id]).decorate
   end
 
   def load_and_authorize_ticket
     # need to authorize
-    @ticket = Project.friendly.find(params[:project_id]).tickets.friendly.find(params[:id])
+    @ticket = Project.friendly.find(session[:project_id]).tickets.friendly.find(params[:id])
   end
 end

@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       redirect_to create_redirect_path
     else
       flash.alert = form.display_errors
-      redirect_to project_article_path(@project, @article)
+      redirect_to article_path(@article)
     end
   end
 
@@ -40,15 +40,15 @@ class CommentsController < ApplicationController
   def create_redirect_path
     case owner
     when Ticket
-      project_ticket_path(@project, @ticket)
+      ticket_path(@ticket)
     when Article
-      project_article_path(@project, @article)
+      article_path(@article)
     end
   end
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(session[:project_id])
   end
 
   def load_and_authorize_owner

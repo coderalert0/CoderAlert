@@ -46,7 +46,7 @@ class Ticket < ApplicationRecord
   def as_indexed_json(options = {})
     as_json(
       options.merge(
-        only: %i[title description status priority],
+        only: %i[title description status priority slug],
         include: { assignee: { only: %i[first_name last_name] } }
       )
     )

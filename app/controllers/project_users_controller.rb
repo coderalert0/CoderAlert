@@ -45,6 +45,6 @@ class ProjectUsersController < ApplicationController
 
   def load_and_authorize_project
     # need to authorize
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(session[:project_id])
   end
 end
