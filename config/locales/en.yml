@@ -57,6 +57,9 @@ en:
     biweekly: 'Bi-Weekly'
     monthly: 'Monthly'
 
+  contact:
+    phone: 'Phone'
+
   popover:
     account_unconfirmed_title: 'Account unconfirmed'
     account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'

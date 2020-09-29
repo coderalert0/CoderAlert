@@ -1,0 +1,2 @@
+class EditContactForm < CreateContactForm
+end

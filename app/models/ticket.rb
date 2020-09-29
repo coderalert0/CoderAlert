@@ -25,7 +25,7 @@ class Ticket < ApplicationRecord
       indexes :description, type: :text
       indexes :status, type: :text
       indexes :priority, type: :text
-      indexes :slug, type: :text
+      indexes :slug, type: :keyword
       indexes :assignee, type: :object do
         indexes :first_name, type: :text
         indexes :last_name, type: :text

@@ -14,6 +14,7 @@ class Ability
     can :manage, ProjectUser
     can :manage, Comment
     can :manage, Schedule
+    can :manage, Contact
 
     # The first argument to `can` is the action you are giving the user
     # permission to do.

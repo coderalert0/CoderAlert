@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   has_many :schedule_users, dependent: :destroy
+  has_many :contacts, dependent: :destroy
 
   accepts_nested_attributes_for :company
 

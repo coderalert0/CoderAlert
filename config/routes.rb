@@ -16,8 +16,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :project_users, path: 'u'
+  resources :project_users, path: 'pu'
 
   resources :schedules, path: 's'
+
+  resources :contacts, path: 'c'
 
 end

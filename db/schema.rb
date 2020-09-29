@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_011954) do
     t.bigint "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "slug", null: false
+    t.string "slug"
     t.index ["project_id"], name: "index_articles_on_project_id"
     t.index ["slug", "project_id"], name: "index_articles_on_slug_and_project_id", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_011954) do
   create_table "contacts", force: :cascade do |t|
     t.string "type", null: false
     t.string "value", null: false
+    t.boolean "alerts", default: false, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -116,7 +117,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_011954) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "slug"
-    t.string "key", null: false
+    t.string "key"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["key", "company_id"], name: "index_projects_on_key_and_company_id", unique: true
   end
@@ -165,7 +166,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_011954) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "viewed_by_assignee"
-    t.string "slug", null: false
+    t.string "slug"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
