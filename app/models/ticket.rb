@@ -14,6 +14,8 @@ class Ticket < ApplicationRecord
   has_many_attached :attachments
 
   scope :for_project, ->(project) { Ticket.where(project: project) }
+  scope :unresolved, -> { Ticket.where.not(status: 'Resolved') }
+  scope :in_progress, -> { Ticket.where(status: 'In Progress') }
 
   friendly_id :generate_ticket_id, use: :scoped, scope: :project
 

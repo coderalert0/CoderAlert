@@ -21,6 +21,7 @@ module CoderAlert
 
     config.to_prepare do
       Devise::InvitationsController.layout proc{ |controller| user_signed_in? ? 'application' : 'devise' }
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? 'application' : 'devise' }
     end
 
     # Settings in config/environments/* take precedence over those specified here.
