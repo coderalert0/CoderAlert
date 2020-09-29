@@ -1,5 +1,4 @@
 class CreateCommentForm < BaseForm
-  attr_accessor :content, :user, :commentable
   attr_writer :comment
 
   nested_attributes :content, :user, :commentable, to: :comment

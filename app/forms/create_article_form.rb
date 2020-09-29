@@ -1,5 +1,4 @@
 class CreateArticleForm < BaseForm
-  attr_accessor :title, :content, :user, :project, :attachments
   attr_writer :article
 
   nested_attributes :title, :content, :user, :project, :attachments, to: :article

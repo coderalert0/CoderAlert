@@ -28,6 +28,7 @@
     <thead>
     <tr role="row">
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 5%;">Priority</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 5%;">ID</th>
       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 36%;">Title</th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 5%;">Status</th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 20%;">Assignee</th>
@@ -40,6 +41,9 @@
       <% @tickets.each do |ticket| %>
         <tr role="row" class="odd">
           <td><%= ticket.priority %></td>
+          <td class="sorting_1">
+            <%= link_to ticket.slug, edit_project_ticket_path(ticket.project, ticket) %>
+          </td>
           <td class="sorting_1">
             <%= link_to ticket.title, edit_project_ticket_path(ticket.project, ticket) %>
           </td>

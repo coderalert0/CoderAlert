@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource :article
-  load_and_authorize_resource :project
-  load_and_authorize_resource :ticket
+  before_action :load_and_authorize_project
+  before_action :load_and_authorize_owner
   load_and_authorize_resource :comment, through: %i[article ticket]
 
   def create
@@ -44,6 +43,21 @@ class CommentsController < ApplicationController
       project_ticket_path(@project, @ticket)
     when Article
       project_article_path(@project, @article)
+    end
+  end
+
+  def load_and_authorize_project
+    # need to authorize
+    @project = Project.friendly.find(params[:project_id])
+  end
+
+  def load_and_authorize_owner
+    # need to authorize
+
+    if params[:article_id]
+      @article = @project.articles.friendly.find(params[:article_id])
+    elsif params[:ticket_id]
+      @ticket = @project.tickets.friendly.find(params[:ticket_id])
     end
   end
 end

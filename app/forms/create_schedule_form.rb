@@ -1,7 +1,8 @@
 class CreateScheduleForm < BaseForm
   include ActiveRecord::AttributeAssignment
 
-  attr_accessor :name, :frequency, :start, :end, :users, :user, :project
+  attr_accessor :users
+
   attr_writer :schedule
 
   nested_attributes :name, :frequency, :start, :end, :user, :project, to: :schedule

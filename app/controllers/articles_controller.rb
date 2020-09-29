@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :load_and_authorize_project
-  load_and_authorize_resource
+  before_action :load_and_authorize_article, only: %i[show edit destroy]
 
   def index
     query = params[:search_articles].try(:[], :query)
@@ -77,5 +77,10 @@ class ArticlesController < ApplicationController
   def load_and_authorize_project
     # need to authorize
     @project = Project.friendly.find(params[:project_id])
+  end
+
+  def load_and_authorize_article
+    # need to authorize
+    @article = Project.friendly.find(params[:project_id]).articles.friendly.find(params[:id])
   end
 end

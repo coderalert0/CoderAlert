@@ -1,10 +1,14 @@
 class CreateProjectForm < BaseForm
-  attr_accessor :name, :user
+  attr_accessor :user
   attr_writer :project
 
-  nested_attributes :name, :company, to: :project
+  nested_attributes :name, :company, :key, to: :project
 
-  accessible_attr :name
+  accessible_attr :name, :key
+
+  def key=(value)
+    project.key = value.present? ?  value.upcase : project.name.split.map(&:first).join.upcase
+  end
 
   def project
     @project ||= Project.new

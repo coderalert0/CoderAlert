@@ -23,6 +23,7 @@ class Ticket < ApplicationRecord
       indexes :description, type: :text
       indexes :status, type: :text
       indexes :priority, type: :text
+      indexes :slug, type: :text
       indexes :assignee, type: :object do
         indexes :first_name, type: :text
         indexes :last_name, type: :text
@@ -52,6 +53,7 @@ class Ticket < ApplicationRecord
   end
 
   def generate_ticket_id
-    "#{project.name.split.map(&:first).join.upcase}-#{Ticket.for_project(project).count + 1}"
+    # will cause issues if we allow deleting tickets
+    "#{project.key}-#{Ticket.for_project(project).count + 1}"
   end
 end

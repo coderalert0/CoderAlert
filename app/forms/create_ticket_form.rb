@@ -1,5 +1,4 @@
 class CreateTicketForm < BaseForm
-  attr_accessor :title, :status, :priority, :description, :assignee_id, :created_by, :project, :attachments
   attr_writer :ticket
 
   nested_attributes :title, :status, :priority, :description, :assignee_id,

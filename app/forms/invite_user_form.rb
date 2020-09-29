@@ -1,5 +1,5 @@
 class InviteUserForm < BaseForm
-  attr_accessor :first_name, :last_name, :email, :project_ids, :company
+  attr_accessor :company
 
   accessible_attr :first_name, :last_name, :email, project_ids: []
 

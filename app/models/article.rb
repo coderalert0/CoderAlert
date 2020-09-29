@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  extend FriendlyId
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
@@ -6,6 +8,8 @@ class Article < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
   has_many_attached :attachments
+
+  friendly_id :title, use: :scoped, scope: :project
 
   settings do
     mappings dynamic: false do
