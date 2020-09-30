@@ -34,12 +34,12 @@ services:
     ports:
       - "9200:9200"
 
-  delayed_job:
-    build: .
-    command: bash -c "bundle exec rake jobs:work"
-    volumes:
-      - .:/coder_alert
-    depends_on:
-      - db
-    tty: true
-    stdin_open: true
+#  delayed_job:
+#    build: .
+#    command: bash -c "bundle exec rake jobs:work"
+#    volumes:
+#      - .:/coder_alert
+#    depends_on:
+#      - db
+#    tty: true
+#    stdin_open: true

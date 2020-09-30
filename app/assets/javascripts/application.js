@@ -12,7 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require jquery
+//= require jquery3
 //= require popper
 //= require turbolinks
 //= require bootstrap
@@ -22,4 +22,4 @@
 
 $(document).on('turbolinks:load', function () {
     $("[data-toggle='popover']").popover({trigger: 'hover'})
-})
+});

@@ -95,7 +95,8 @@
     .dropdown-menu {
       display: block;
       margin: 0;
-      transform-origin: top right;
+      padding-left: 15px;
+      transform-origin: top center;
       transform: scale(0, 0);
       transition: transform 0.15s ease-out;
 
@@ -115,6 +116,7 @@
     .show {
       .dropdown-menu {
         transform: scale(1, 1);
+        min-width: 200px;
       }
     }
 
@@ -136,7 +138,7 @@
           > a {
             line-height: 1.5;
             min-height: auto;
-            padding: 10px 15px;
+            padding: 10px 0px;
           }
         }
       }

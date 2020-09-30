@@ -11,7 +11,7 @@ class TicketDecorator < ApplicationDecorator
       'Highest' => 'btn-danger'
     }
 
-    h.content_tag(:button, object.priority, class: ['btn', btn_class[object.priority], 'btn-xs'])
+    h.content_tag(:button, object.priority, class: ['btn', btn_class[object.priority], 'btn-sm'])
   end
 
   def viewed_by_assignee_icon
