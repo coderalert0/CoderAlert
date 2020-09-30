@@ -43,6 +43,7 @@ gem 'ice_cube'
 gem 'jquery-rails'
 gem 'paper_trail'
 gem 'popper_js'
+gem 'time_difference'
 gem 'wicked'
 gem 'wisper'
 
