@@ -1,7 +1,7 @@
 class CreateArticleForm < BaseForm
   attr_writer :article
 
-  nested_attributes :title, :content, :user, :project, :attachments, to: :article
+  nested_attributes :title, :content, :attachments, to: :article
 
   accessible_attr :title, :content, attachments: []
 

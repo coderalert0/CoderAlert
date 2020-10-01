@@ -11,4 +11,14 @@ class ApplicationController < ActionController::Base
     @current_project = Project.find(session[:project_id])
     @projects = current_user.projects
   end
+
+  private
+
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.json { render nothing: true, status: :not_found }
+      format.html { redirect_back fallback_location: root_path, alert: exception.message }
+      format.js   { render nothing: true, status: :not_found }
+    end
+  end
 end

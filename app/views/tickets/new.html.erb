@@ -3,7 +3,7 @@
   <%= f.select :assignee_id, options_for_select(@project.users.map { |u| [ u.ticket_assignee_select_value(@project), u.id ] }, :selected => @project.on_call_user.id), {:include_blank => true} %>
   <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => :priority) }), :label_class => 'required' %>
   <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => :status) }), :label_class => 'required' %>
-  <%= f.text_area :description, :label_class => 'required' %>
+  <%= f.text_area :description, :rows => 7, :label_class => 'required' %>
 
   <%= f.file_field :attachments, multiple: true %>
 

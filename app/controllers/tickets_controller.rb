@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
-  before_action :load_and_authorize_project
-  before_action :load_and_authorize_ticket, only: %i[show edit update destroy]
+  before_action :load_project
+  before_action :load_ticket, only: %i[show edit update destroy]
+  before_action :initialize_and_authorize_ticket, only: %i[new create]
 
   def index
     query = params[:search_tickets].try(:[], :query)
@@ -14,6 +15,8 @@ class TicketsController < ApplicationController
   end
 
   def show
+    authorize! :read, @ticket
+
     @comment_form = CreateCommentForm.new
     populate_ticket_view
   end
@@ -38,10 +41,14 @@ class TicketsController < ApplicationController
   end
 
   def edit
+    authorize! :update, @ticket
+
     @form = EditTicketForm.new ticket: @ticket
   end
 
   def update
+    authorize! :update, @ticket
+
     @form = edit_form
 
     if @form.submit
@@ -54,6 +61,8 @@ class TicketsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @ticket
+
     if @ticket.destroy
       flash.notice = 'The ticket was deleted successfully'
       redirect_to tickets_path
@@ -70,11 +79,11 @@ class TicketsController < ApplicationController
   end
 
   def create_form
-    CreateTicketForm.new form_params(CreateTicketForm).merge(created_by: current_user, project: @project)
+    CreateTicketForm.new form_params(CreateTicketForm).merge(ticket: @ticket)
   end
 
   def edit_form
-    EditTicketForm.new form_params(EditTicketForm).merge(created_by: current_user, project: @project, ticket: @ticket)
+    EditTicketForm.new form_params(EditTicketForm).merge(ticket: @ticket)
   end
 
   def populate_ticket_view
@@ -82,13 +91,16 @@ class TicketsController < ApplicationController
     ticket_view.update(count: ticket_view.count + 1)
   end
 
-  def load_and_authorize_project
-    # need to authorize
+  def load_project
     @project = Project.friendly.find(session[:project_id]).decorate
   end
 
-  def load_and_authorize_ticket
-    # need to authorize
+  def load_ticket
     @ticket = Project.friendly.find(session[:project_id]).tickets.friendly.find(params[:id])
+  end
+
+  def initialize_and_authorize_ticket
+    @ticket = Ticket.new(created_by: current_user, project: @project)
+    authorize! :create, @ticket
   end
 end

@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   load_and_authorize_resource
 
+  def index; end
+
   def new
     @form = CreateContactForm.new
 
@@ -39,10 +41,6 @@ class ContactsController < ApplicationController
     else
       flash.alert = @form.display_errors
     end
-  end
-
-  def index
-    @contacts = current_user.contacts
   end
 
   def destroy

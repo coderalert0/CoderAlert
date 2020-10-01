@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :load_and_authorize_project, only: %i[show edit destroy]
+  before_action :load_project, only: %i[show edit destroy]
+  load_and_authorize_resource only: %i[index new create]
 
-  def index
-    @projects = current_user.projects
-  end
+  def index; end
 
   def show
+    authorize! :read, @project
+
     @tickets = @project.tickets
   end
 
@@ -15,6 +16,7 @@ class ProjectsController < ApplicationController
 
   def create
     @form = CreateProjectForm.new form_params.merge(user: current_user)
+
     if @form.submit
       flash.notice = 'The project was created successfully'
       redirect_to projects_path
@@ -25,6 +27,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @project
+
     if @project.destroy
       flash.notice = 'The project was deleted successfully'
       redirect_to projects_path
@@ -40,8 +44,7 @@ class ProjectsController < ApplicationController
     params.require(:create_project_form).permit(CreateProjectForm.accessible_attributes)
   end
 
-  def load_and_authorize_project
-    # need to authorize
+  def load_project
     @project = Project.friendly.find(params[:id])
   end
 end
