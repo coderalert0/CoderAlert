@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   belongs_to :company
+  belongs_to :last_accessed_project, class_name: 'Project', optional: true
+
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   has_many :schedule_users, dependent: :destroy
@@ -18,4 +20,8 @@ class User < ApplicationRecord
                    .joins("LEFT JOIN project_users pu ON users.id = pu.user_id AND pu.project_id = #{project.id}")
                    .where(pu: { project_id: nil })
   }
+
+  def current_project
+    last_accessed_project || projects.last
+  end
 end
