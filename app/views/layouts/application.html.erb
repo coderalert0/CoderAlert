@@ -123,16 +123,25 @@
             <li class="dropdown">
               <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                 <div class="peer">
-                  <i class="ti-ruler-pencil"></i>
+                  <i class="ti-ruler-pencil c-blue-500"></i>
                   <span class="title">Projects (<%= @current_project.name %>)</span>
                 </div>
               </a>
               <ul class="dropdown-menu fsz-sm">
-                <li>
-                  <% @projects.each do |p| %>
-                    <%= link_to edit_user_registration_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                <% @projects.each do |p| %>
+                  <li>
+                    <%= link_to active_project_path(:id => p.id), :method => :put, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
                       <span><%= p.name %></span>
                     <% end %>
+                  </li>
+                <% end %>
+
+                <li role="separator" class="divider"></li>
+
+                <li>
+                  <%= link_to new_project_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                    <i class="ti-plus mR-10"></i>
+                    <span>New Project</span>
                   <% end %>
                 </li>
               </ul>

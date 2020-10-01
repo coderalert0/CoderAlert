@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
   resources :contacts, path: 'c'
 
+  resource :active_project, :controller => 'active_project', path: 'ap'
+
 end

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def load_projects
     return if current_user.nil? || session[:project_id].nil?
+
     @current_project = Project.find(session[:project_id])
     @projects = current_user.projects
   end
