@@ -13,16 +13,12 @@ class Ticket < ApplicationRecord
   has_many :ticket_views
   has_many_attached :attachments
 
-  scope :for_project, ->(project) { Ticket.where(project: project) }
-  scope :unresolved, -> { Ticket.where.not(status: 'Resolved') }
-  scope :in_progress, -> { Ticket.where(status: 'In Progress') }
-
   friendly_id :generate_ticket_id, use: :scoped, scope: :project
 
   settings do
     mappings dynamic: false do
       indexes :title, type: :text
-      indexes :description, type: :text
+      indexes :content, type: :text
       indexes :status, type: :text
       indexes :priority, type: :text
       indexes :slug, type: :keyword
@@ -33,12 +29,18 @@ class Ticket < ApplicationRecord
     end
   end
 
-  validates_presence_of :title, :status, :priority, :description, :created_by, :project
+  validates_presence_of :title, :status, :priority, :content, :created_by, :project
   validates :attachments,
             content_type: ['image/bmp', 'text/csv', 'application/msword', 'image/gif',
                            'image/jpeg', 'image/jpg', 'image/png', 'application/pdf',
                            'application/rtf', 'image/tiff', 'text/plain', 'application/vnd.ms-excel'],
             size: { less_than: 5.megabytes, message: 'file size limit is 5MB each' }
+
+  has_rich_text :content
+
+  scope :for_project, ->(project) { Ticket.where(project: project) }
+  scope :unresolved, -> { Ticket.where.not(status: 'Resolved') }
+  scope :in_progress, -> { Ticket.where(status: 'In Progress') }
 
   PRIORITY = %i[lowest low medium high highest].freeze
   STATUS = %i[draft open in_progress code_review qa reopened resolved closed cancelled].freeze
@@ -48,7 +50,7 @@ class Ticket < ApplicationRecord
   def as_indexed_json(options = {})
     as_json(
       options.merge(
-        only: %i[title description status priority slug],
+        only: %i[title content status priority slug],
         include: { assignee: { only: %i[first_name last_name] } }
       )
     )

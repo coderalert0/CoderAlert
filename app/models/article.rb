@@ -29,6 +29,8 @@ class Article < ApplicationRecord
                            'application/rtf', 'image/tiff', 'text/plain', 'application/vnd.ms-excel'],
             size: { less_than: 5.megabytes, message: 'file size limit is 5MB each' }
 
+  has_rich_text :content
+
   def as_indexed_json(options = {})
     as_json(
       options.merge(

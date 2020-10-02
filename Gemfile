@@ -23,6 +23,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem 'actiontext', github: 'kobaltz/actiontext', branch: 'archive', require: 'action_text'
 gem 'active_storage_validations'
 gem 'amazing_print'
 gem 'aws-sdk-s3', require: false
@@ -40,10 +41,12 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'friendly_id'
 gem 'ice_cube'
+gem 'image_processing'
 gem 'jquery-rails'
 gem 'paper_trail'
 gem 'popper_js'
 gem 'time_difference'
+gem 'webpacker'
 gem 'wicked'
 gem 'wisper'
 

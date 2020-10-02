@@ -4,7 +4,7 @@
 <h3><%= @ticket.title %></h3>
 <%= @ticket.priority %></br>
 <%= @ticket.status %></br>
-<%= @ticket.description %>
+<%= @ticket.content %>
 
 <br/>
 <br/>
@@ -14,7 +14,7 @@
 <% end %>
 
 <br/><br/>
-<%= bootstrap_form_for @comment_form, :url => ticket_comments_path(@ticket) do |f| %>
+<%= bootstrap_form_for @comment_form, :url => ticket_comments_path(@ticket), :layout => :vertical do |f| %>
   <%= f.text_area :content, :label => 'Comment' %>
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
 <% end %>

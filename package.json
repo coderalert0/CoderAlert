@@ -1,5 +1,11 @@
 {
   "name": "coder_alert",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "5.2.1",
+    "actiontext": "https://github.com/kobaltz/actiontext"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
 }

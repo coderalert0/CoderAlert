@@ -12,8 +12,6 @@ class ApplicationController < ActionController::Base
     @projects = current_user.projects
   end
 
-  private
-
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { render nothing: true, status: :not_found }

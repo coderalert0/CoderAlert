@@ -2,7 +2,15 @@
 
 <%= bootstrap_form_for @form, :url => article_path, :method => :put do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
-  <%= f.text_area :content, :label_class => 'required' %>
+
+  <div class="form-group row">
+    <%= f.label :content, :class => 'col-sm-2 required' %>
+    <div class='col-sm-7'>
+      <%= f.rich_text_area :content %>
+    </div>
+  </div>
+
+  <br/>
 
   <%= f.file_field :attachments, multiple: true %>
 

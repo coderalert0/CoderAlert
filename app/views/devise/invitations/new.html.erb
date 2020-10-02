@@ -19,7 +19,7 @@
 
   <h4>Projects</h4>
 
-  <%= f.collection_check_boxes :project_ids, @projects, :id, :name, :label_class => 'required' %>
+  <%= f.collection_check_boxes :project_ids, @projects, :id, :name, :label_class => 'required', custom: true %>
 
   <div class="actions">
     <%= f.submit t("devise.invitations.new.submit_button"), :class => 'btn btn-success' %>

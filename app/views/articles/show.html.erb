@@ -12,7 +12,7 @@
 <% end %>
 
 <br/><br/>
-<%= bootstrap_form_for @comment_form, :url => article_comments_path(@article) do |f| %>
+<%= bootstrap_form_for @comment_form, :url => article_comments_path(@article), :layout => :vertical do |f| %>
   <%= f.text_area :content, :label => 'Comment' %>
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
 <% end %>

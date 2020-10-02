@@ -8,7 +8,7 @@
     <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required', :include_blank => true %>
     <%= f.text_field :value, :label_class => 'required' %>
     <%= f.form_group :alerts do %>
-      <%= f.check_box :alerts, {}, 'true', 'false' %>
+      <%= f.check_box :alerts, { custom: true }, 'true', 'false' %>
     <% end %>  </div>
 
   <div class="modal-footer">

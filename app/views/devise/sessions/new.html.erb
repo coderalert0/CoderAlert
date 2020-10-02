@@ -1,6 +1,6 @@
 <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
 
-<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :vertical) do |f| %>
   <div class="form-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -13,7 +13,7 @@
     <div class="peers ai-c jc-sb fxw-nw">
       <div class="peer">
         <div class="checkbox checkbox-circle checkbox-info peers ai-c">
-          <%= f.check_box :remember_me %>
+          <%= f.check_box :remember_me, custom: true %>
         </div>
       </div>
       <div class="peer">

@@ -1,9 +1,9 @@
 class CreateTicketForm < BaseForm
   attr_writer :ticket
 
-  nested_attributes :title, :status, :priority, :description, :assignee_id, :attachments, to: :ticket
+  nested_attributes :title, :status, :priority, :content, :assignee_id, :attachments, to: :ticket
 
-  accessible_attr :title, :status, :priority, :description, :assignee_id, attachments: []
+  accessible_attr :title, :status, :priority, :content, :assignee_id, attachments: []
 
   def ticket
     @ticket ||= Ticket.new
