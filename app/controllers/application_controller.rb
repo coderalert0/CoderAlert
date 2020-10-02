@@ -3,10 +3,12 @@ class ApplicationController < ActionController::Base
 
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
-  before_action :load_projects
+  before_action :load_context
 
-  def load_projects
-    return if current_user.nil? || session[:project_id].nil?
+  private
+
+  def load_context
+    return if current_user.nil?
 
     @current_project = Project.find(session[:project_id])
     @projects = current_user.projects

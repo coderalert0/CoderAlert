@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
   resource :active_project, :controller => 'active_project', path: 'ap'
 
+  resources :after_signup, path: 'welcome'
+
 end

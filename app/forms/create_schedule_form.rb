@@ -5,7 +5,7 @@ class CreateScheduleForm < BaseForm
 
   attr_writer :schedule
 
-  nested_attributes :name, :frequency, :start, :end, :user, :project, to: :schedule
+  nested_attributes :name, :frequency, :start, :end, :project, to: :schedule
 
   accessible_attr :name, :frequency, :start, :end, users: {}
 
@@ -21,5 +21,12 @@ class CreateScheduleForm < BaseForm
         ScheduleUser.create(user_id: user_id, schedule: schedule, priority: priority)
       end
     end
+  end
+  alias save submit
+
+  private
+
+  def initialize(args = {})
+    super args_key_first args, :schedule
   end
 end

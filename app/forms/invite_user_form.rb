@@ -16,4 +16,6 @@ class InviteUserForm < BaseForm
       end
     end
   end
+
+  alias save submit
 end

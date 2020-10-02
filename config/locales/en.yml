@@ -33,6 +33,9 @@ en:
   hello: "Hello world"
   submit: "Submit"
 
+  welcome_wizard:
+    next: Next
+
   priority:
     high: 'High'
     highest: 'Highest'

@@ -1,4 +1,4 @@
-<%= bootstrap_form_for @form, :url => schedules_path do |f| %>
+<%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
   <%= f.text_field :name, :label_class => 'required' %>
   <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => :frequency), s ] }), :label_class => 'required' %>
   <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
@@ -10,4 +10,7 @@
   <% end %>
 
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+
+  <%= link_to 'skip', previous_wizard_path %>
+
 <% end %>

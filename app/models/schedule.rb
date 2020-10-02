@@ -2,6 +2,8 @@ class Schedule < ApplicationRecord
   include DataEventPublishing
 
   belongs_to :project
+  belongs_to :user
+
   has_many :schedule_users, -> { order priority: :desc }, dependent: :destroy
   has_many :users, through: :schedule_users
 

@@ -6,8 +6,6 @@ class ProjectsController < ApplicationController
 
   def show
     authorize! :read, @project
-
-    @tickets = @project.tickets
   end
 
   def new

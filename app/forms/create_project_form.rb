@@ -22,6 +22,8 @@ class CreateProjectForm < BaseForm
     end
   end
 
+  alias save submit
+
   private
 
   def initialize(args = {})

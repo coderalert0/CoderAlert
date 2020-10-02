@@ -1,9 +1,9 @@
 class SchedulesController < ApplicationController
-  before_action :load_and_authorize_project
-  load_and_authorize_resource
+  load_and_authorize_resource only: %i[show edit update destroy]
+  before_action :initialize_and_authorize, only: %i[new create]
 
   def index
-    @schedules = @project.schedules
+    @schedules = @current_project.schedules
   end
 
   def show; end
@@ -13,7 +13,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @form = CreateScheduleForm.new form_params.merge(project: @project)
+    @form = create_form
+
     if @form.submit
       flash.notice = 'The schedule was created successfully'
       redirect_to schedules_path
@@ -39,8 +40,16 @@ class SchedulesController < ApplicationController
     params.require(:create_schedule_form).permit(CreateScheduleForm.accessible_attributes)
   end
 
-  def load_and_authorize_project
-    # need to authorize
-    @project = Project.friendly.find(session[:project_id])
+  def create_form
+    CreateScheduleForm.new form_params.merge(schedule: @schedule)
+  end
+
+  def edit_form
+    EditScheduleForm.new form_params.merge(schedule: @schedule)
+  end
+
+  def initialize_and_authorize
+    @schedule = Schedule.new(user: current_user, project: @current_project)
+    authorize! :create, @schedule
   end
 end
