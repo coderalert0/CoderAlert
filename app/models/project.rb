@@ -2,6 +2,8 @@ class Project < ApplicationRecord
   extend FriendlyId
 
   belongs_to :company
+  belongs_to :user
+
   has_many :tickets, -> { order created_at: :desc }, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :schedules, dependent: :destroy

@@ -1,20 +1,15 @@
 module Users
   class SessionsController < Devise::SessionsController
-    skip_before_action :load_context
+    private
 
-    def create
-      super do |user|
-        # need to update logic for user without any projects,
-        # should happen in the case a user is the first signup in the company
+    def after_sign_in_path_for(user)
+      session[:project_id] = if user.last_accessed_project.present?
+                               user.last_accessed_project.id
+                             elsif user.projects.present?
+                               user.projects.last.id
+                             end
 
-        if user.persisted?
-          session[:project_id] = if user.last_accessed_project.nil?
-                                   user.projects.last.id
-                                 else
-                                   user.last_accessed_project.id
-                                 end
-        end
-      end
+      session[:project_id].present? ? root_path : after_signup_path(:create_project)
     end
   end
 end

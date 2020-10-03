@@ -1,5 +1,7 @@
 module Users
   class InvitationsController < Devise::InvitationsController
+    include InviteUsersConcern
+
     def new
       @form = InviteUserForm.new
       @projects = current_user.company.projects
@@ -7,10 +9,10 @@ module Users
     end
 
     def create
-      @form = InviteUserForm.new form_params.merge(company: current_user.company)
+      @form = invite_users_create_form
       if @form.submit
         flash.notice = 'The user was invited to the project(s) successfully'
-        redirect_to project_users_path(Project.last)
+        redirect_to project_users_path
       else
         flash.alert = @form.display_errors
         redirect_to action: :new
@@ -19,10 +21,14 @@ module Users
 
     private
 
-    def form_params
-      form_params = params.require(:invite_user_form).permit(InviteUserForm.accessible_attributes)
-      form_params[:project_ids].reject! { |project_id| project_id if project_id == '' }
-      form_params
+    def after_accept_path_for(user)
+      session[:project_id] = if user.last_accessed_project.present?
+                               user.last_accessed_project.id
+                             elsif user.projects.present?
+                               user.projects.last.id
+                             end
+
+      session[:project_id].present? ? root_path : after_signup_path(:create_project)
     end
   end
 end

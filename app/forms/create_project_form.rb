@@ -1,5 +1,4 @@
 class CreateProjectForm < BaseForm
-  attr_accessor :user
   attr_writer :project
 
   nested_attributes :name, :company, :key, to: :project
@@ -17,7 +16,7 @@ class CreateProjectForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       project.save!
-      project_user = project.project_users.build(user: @user)
+      project_user = project.project_users.build(user: project.user)
       project_user.save!
     end
   end
@@ -27,7 +26,6 @@ class CreateProjectForm < BaseForm
   private
 
   def initialize(args = {})
-    self.company = args[:user].company if args[:user]
-    super
+    super args_key_first args, :project
   end
 end
