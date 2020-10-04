@@ -9,6 +9,6 @@ class ActiveProjectController < ApplicationController
     current_user.update(last_accessed_project_id: id)
 
     flash.notice = 'Project switched successfully'
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path
   end
 end

@@ -11,6 +11,7 @@ module Users
 
     def create
       @form = invite_users_create_form
+
       if @form.submit
         flash.notice = 'The user was invited to the project(s) successfully'
         redirect_to project_users_path

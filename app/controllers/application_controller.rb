@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   private
 
   def load_context
-    return if current_user.nil? || session[:project_id].nil?
+    return if current_user.nil?
+    redirect_to after_signup_path(:project) and return if session[:project_id].nil?
 
     @current_project = Project.find(session[:project_id])
     @projects = current_user.projects

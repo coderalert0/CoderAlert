@@ -1,5 +1,7 @@
 module Users
   class SessionsController < Devise::SessionsController
+    skip_before_action :load_context
+
     include DeviseConcern
 
     def create

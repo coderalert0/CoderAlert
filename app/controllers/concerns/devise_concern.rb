@@ -11,6 +11,6 @@ module DeviseConcern
       session[:project_id] = last_project_permissioned_to.id
     end
 
-    session[:project_id].present? ? root_path : after_signup_path(:create_project)
+    session[:project_id].present? ? root_path : after_signup_path(:project)
   end
 end

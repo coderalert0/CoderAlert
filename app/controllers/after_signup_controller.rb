@@ -1,4 +1,6 @@
 class AfterSignupController < ApplicationController
+  skip_before_action :load_context
+
   layout 'welcome_wizard'
 
   include Wicked::Wizard
@@ -22,6 +24,8 @@ class AfterSignupController < ApplicationController
 
     when :schedule
       @form = schedule_in_session? ? EditScheduleForm.new(schedule: schedule) : CreateScheduleForm.new
+      @current_project = project
+      flash[:notice] = 'Congratulations! You have completed the setup process'
     end
 
     render_wizard
@@ -38,6 +42,7 @@ class AfterSignupController < ApplicationController
       @form = invite_users_create_form
 
     when :schedule
+      @current_project = project
       @form = schedule_in_session? ? schedule_edit_form(schedule) : schedule_create_form
       session[:schedule_id] = @form.schedule.id if @form.save
     end
