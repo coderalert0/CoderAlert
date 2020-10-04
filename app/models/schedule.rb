@@ -22,7 +22,7 @@ class Schedule < ApplicationRecord
   end
 
   def on_call_user
-    schedule_users.max_by(&:priority).user
+    schedule_users.max_by(&:priority).user if users.present?
   end
 
   private

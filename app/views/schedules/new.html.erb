@@ -4,8 +4,8 @@
   <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
   <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
 
-  <% @current_project.users.confirmed.each do |user| %>
-    <%= label_tag "#{user.first_name}" %>
+  <% @current_project.users.object.confirmed.each do |user| %>
+    <%= label_tag "#{user.decorate.full_name}" %>
     <%= text_field_tag "create_schedule_form[users][#{user.id}]" %><br/>
   <% end %>
 

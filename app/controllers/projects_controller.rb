@@ -1,11 +1,24 @@
 class ProjectsController < ApplicationController
-  before_action :load_project, only: %i[show destroy]
-  load_and_authorize_resource only: %i[index new]
+  load_and_authorize_resource
 
   def index; end
 
-  def show
-    authorize! :read, @project
+  def show; end
+
+  def edit
+    @form = EditProjectForm.new project: @project
+  end
+
+  def update
+    @form = edit_form
+
+    if @form.submit
+      flash.notice = 'The project was edited successfully'
+      redirect_to projects_path
+    else
+      flash.alert = @form.display_errors
+      render :edit
+    end
   end
 
   def new
@@ -25,8 +38,6 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @project
-
     if @project.destroy
       flash.notice = 'The project was deleted successfully'
       redirect_to projects_path
@@ -38,17 +49,13 @@ class ProjectsController < ApplicationController
 
   private
 
-  def load_project
-    @project = Project.friendly.find(params[:id])
-  end
-
   def create_form
-    @project = Project.new(user: current_user, company: current_user.company)
-    authorize! :create, @project
-    CreateProjectForm.new form_params.merge(project: @project)
+    CreateProjectForm.new form_params(CreateProjectForm)
+      .merge(project: @project, company: current_user.company)
   end
 
-  def form_params
-    params.require(:create_project_form).permit(CreateProjectForm.accessible_attributes)
+  def edit_form
+    EditProjectForm.new form_params(EditProjectForm)
+      .merge(project: @project, company: current_user.company)
   end
 end

@@ -1,0 +1,5 @@
+<%= bootstrap_form_for @form, :url => project_path(@project), :method => :put do |f| %>
+  <%= f.text_field :name, :label_class => 'required' %>
+  <%= f.text_field :key, :class => 'col-sm-3' %>
+  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+<% end %>

@@ -14,7 +14,7 @@
   <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
 
   <% @current_project.users.confirmed.each do |user| %>
-    <%= label_tag "#{user.first_name}" %>
+    <%= label_tag "#{user.decorate.full_name}" %>
     <%= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]" %><br/>
   <% end %>
 

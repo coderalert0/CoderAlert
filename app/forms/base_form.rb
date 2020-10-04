@@ -1,7 +1,6 @@
 class BaseForm
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
-  # include EmailSending
   include ArgsKeyFirst
 
   def display_errors
@@ -22,9 +21,5 @@ class BaseForm
 
   def _handle_invalid_form
     false
-  end
-
-  def filter_blank(item)
-    item.blank? ? nil : item
   end
 end

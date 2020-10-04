@@ -37,6 +37,7 @@ class AfterSignupController < ApplicationController
   def populate_update
     @wizard_step.post_params = params
     @form = @wizard_step.update_form
+    @current_project = Project.find(session[:project_id]) if session[:project_id]
   end
 
   def initialize_step
