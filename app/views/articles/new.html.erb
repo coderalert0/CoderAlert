@@ -1,4 +1,4 @@
-<%= bootstrap_form_for @form, :url => articles_path do |f| %>
+<%= bootstrap_form_for @form, :url => project_articles_path(@project) do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
 
   <div class="form-group row">

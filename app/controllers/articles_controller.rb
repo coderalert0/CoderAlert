@@ -1,7 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :load_project
-  before_action :load_article, only: %i[show edit update destroy]
-  before_action :initialize_and_authorize_article, only: %i[new create]
+  load_and_authorize_resource :project
+  load_and_authorize_resource through: :project, find_by: :slug
 
   def index
     query = params[:search_articles].try(:[], :query)
@@ -16,8 +15,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    authorize! :read, @article
-
     @comment_form = CreateCommentForm.new
   end
 
@@ -30,7 +27,7 @@ class ArticlesController < ApplicationController
 
     if @form.submit
       flash.notice = 'The article was created successfully'
-      redirect_to articles_path
+      redirect_to project_articles_path(@project)
     else
       flash.alert = @form.display_errors
       render :new
@@ -38,19 +35,15 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    authorize! :update, @article
-
     @form = EditArticleForm.new article: @article
   end
 
   def update
-    authorize! :update, @article
-
     @form = edit_form
 
     if @form.submit
       flash.notice = 'The article was edited successfully'
-      redirect_to articles_path
+      redirect_to project_articles_path(@project)
     else
       flash.alert = @form.display_errors
       render :edit
@@ -58,11 +51,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @article
-
     if @article.destroy
       flash.notice = 'The article was deleted successfully'
-      redirect_to articles_path
+      redirect_to project_articles_path(@project)
     else
       flash.alert = 'The article could not be deleted'
       render :show
@@ -77,19 +68,5 @@ class ArticlesController < ApplicationController
 
   def edit_form
     EditArticleForm.new form_params(EditArticleForm).merge(article: @article)
-  end
-
-  def load_project
-    # need to authorize
-    @project = Project.friendly.find(session[:project_id])
-  end
-
-  def load_article
-    @article = Project.friendly.find(session[:project_id]).articles.friendly.find(params[:id])
-  end
-
-  def initialize_and_authorize_article
-    @article = Article.new(user: current_user, project: @project)
-    authorize! :create, @article
   end
 end

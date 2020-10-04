@@ -1,5 +1,5 @@
-<%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-primary' %>
-<%= link_to 'Delete', article_path(@article), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the article #{@article.title}?"} %>
+<%= link_to 'Edit', edit_project_article_path(@current_project, @article), class: 'btn btn-primary' %>
+<%= link_to 'Delete', project_article_path(@current_project, @article), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the article #{@article.title}?"} %>
 
 <h3><%= @article.title %></h3>
 <%= @article.content %>
@@ -12,7 +12,7 @@
 <% end %>
 
 <br/><br/>
-<%= bootstrap_form_for @comment_form, :url => article_comments_path(@article), :layout => :vertical do |f| %>
+<%= bootstrap_form_for @comment_form, :url => project_article_comments_path(@project, @article), :layout => :vertical do |f| %>
   <%= f.text_area :content, :label => 'Comment' %>
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>
 <% end %>

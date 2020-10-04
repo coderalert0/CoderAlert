@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   resources :projects, path: 'p' do
     resources :schedules, path: 's'
-  end
 
-  resources :articles, path: 'kb' do
-    resources :comments
+    resources :articles, path: 'kb' do
+      resources :comments
+    end
   end
 
   resources :tickets, path: 't' do

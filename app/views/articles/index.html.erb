@@ -2,7 +2,7 @@
 
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_article_path, class: 'btn btn-primary' %>
+    <%= link_to 'New', new_project_article_path, class: 'btn btn-primary' %>
     <br/><br/>
 
 <!--    <label>-->
@@ -19,7 +19,7 @@
   </div>
 
   <div id="dataTable_filter" class="dataTables_filter">
-    <%= bootstrap_form_for :search_articles, url: articles_path, method: :get do |f| %>
+    <%= bootstrap_form_for :search_articles, url: project_articles_path(@current_project), method: :get do |f| %>
       <%= f.text_field :query, label: 'Search' %>
     <% end %>
   </div>
@@ -39,7 +39,7 @@
     <% @articles.each do |article| %>
       <tr role="row" class="odd">
         <td class="sorting_1">
-          <%= link_to article.title, article_path(article) %>
+          <%= link_to article.title, project_article_path(@current_project, article) %>
         </td>
         <td><%= article.user.full_name %></td>
         <td><%= article.created_at.to_formatted_s(:custom_long_ordinal) %></td>
