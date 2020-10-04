@@ -8,20 +8,20 @@ class AfterSignupController < ApplicationController
 
   before_action :initialize_progress, only: [:show]
 
-  steps :create_project, :invite_users, :create_schedule
+  steps :project, :users, :schedule
 
   def show
     case step
 
-    when :create_project
-      @form = CreateProjectForm.new
+    when :project
+      @form = project_in_session? ? EditProjectForm.new(project: project) : CreateProjectForm.new
 
-    when :invite_users
+    when :users
       @form = InviteUserForm.new
       @projects = current_user.company.projects
 
-    when :create_schedule
-      @form = CreateScheduleForm.new
+    when :schedule
+      @form = schedule_in_session? ? EditScheduleForm.new(schedule: schedule) : CreateScheduleForm.new
     end
 
     render_wizard
@@ -30,29 +30,45 @@ class AfterSignupController < ApplicationController
   def update
     case step
 
-    when :create_project
-      @form = project_create_form
+    when :project
+      @form = project_in_session? ? project_edit_form(project) : project_create_form
       session[:project_id] = @form.project.id if @form.save
-      render_wizard @form.project
 
-    when :invite_users
+    when :users
       @form = invite_users_create_form
-      render_wizard @form
 
-    when :create_schedule
-      @form = schedule_create_form
-      render_wizard @form
+    when :schedule
+      @form = schedule_in_session? ? schedule_edit_form(schedule) : schedule_create_form
+      session[:schedule_id] = @form.schedule.id if @form.save
     end
+
+    render_wizard @form
   end
 
   private
 
   def initialize_progress
-    return unless wizard_steps.any? && wizard_steps.index(step).present?
+    return unless wizard_steps.index(step).present?
 
     current_step = wizard_steps.index(step) + 1
     total_steps = wizard_steps.count
 
     @progress = Progress.new(current_step: current_step, total_steps: total_steps).decorate
+  end
+
+  def project_in_session?
+    session[:project_id].present?
+  end
+
+  def schedule_in_session?
+    session[:schedule_id].present?
+  end
+
+  def project
+    Project.find(session[:project_id])
+  end
+
+  def schedule
+    Schedule.find(session[:schedule_id])
   end
 end

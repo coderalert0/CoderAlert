@@ -11,8 +11,7 @@ class InviteUserForm < BaseForm
       projects = Project.find(project_ids)
 
       projects.each do |project|
-        user.project_users.build(project: project)
-        user.save!
+        ProjectUser.find_or_create_by(user: user, project: project)
       end
     end
   end

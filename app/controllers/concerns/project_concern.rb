@@ -3,7 +3,11 @@ module ProjectConcern
 
   def project_create_form
     initialize_and_authorize_project
-    CreateProjectForm.new project_form_params.merge(project: @project)
+    CreateProjectForm.new create_project_form_params.merge(project: @project)
+  end
+
+  def project_edit_form(project)
+    EditProjectForm.new edit_project_form_params.merge(project: project)
   end
 
   private
@@ -13,7 +17,11 @@ module ProjectConcern
     authorize! :create, @project
   end
 
-  def project_form_params
+  def create_project_form_params
     params.require(:create_project_form).permit(CreateProjectForm.accessible_attributes)
+  end
+
+  def edit_project_form_params
+    params.require(:edit_project_form).permit(EditProjectForm.accessible_attributes)
   end
 end

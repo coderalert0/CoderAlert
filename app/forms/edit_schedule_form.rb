@@ -1,0 +1,2 @@
+class EditScheduleForm < CreateScheduleForm
+end

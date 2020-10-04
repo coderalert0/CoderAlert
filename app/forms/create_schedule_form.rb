@@ -16,6 +16,7 @@ class CreateScheduleForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       schedule.save!
+      schedule.schedule_users.reload.destroy_all
 
       users.each do |user_id, priority|
         ScheduleUser.create(user_id: user_id, schedule: schedule, priority: priority)

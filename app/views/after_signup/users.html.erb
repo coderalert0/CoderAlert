@@ -1,8 +1,8 @@
 <h2>Invite a Team Member</h2>
 
 <div class="alert alert-info">
-  Please invite a team member by entering information about them below.
-  <br/>They will be sent a link to confirm their account.
+  Please invite a team member by entering their information below.
+  <br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder
   <br/><br/>This purpose of entering this information is to help familiarize you with adding team members.
   <br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion
 </div>
@@ -29,9 +29,9 @@
   <%= f.collection_check_boxes :project_ids, @projects, :id, :name, { :label_class => 'required', custom: true } %>
 
   <div class="actions">
+    <%= link_to 'Back', previous_wizard_path, :class => 'btn btn-outline-dark' %>
     <%= f.submit t(:next, :scope => :welcome_wizard), :class => 'btn btn-success' %>
   </div>
 
-  <%= link_to 'Back', previous_wizard_path %>
 
 <% end %>

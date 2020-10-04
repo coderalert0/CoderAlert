@@ -3,7 +3,11 @@ module ScheduleConcern
 
   def schedule_create_form
     initialize_and_authorize_schedule
-    CreateScheduleForm.new schedule_form_params.merge(schedule: @schedule)
+    CreateScheduleForm.new create_schedule_form_params.merge(schedule: @schedule)
+  end
+
+  def schedule_edit_form(schedule)
+    EditScheduleForm.new edit_schedule_form_params.merge(schedule: schedule)
   end
 
   private
@@ -13,7 +17,11 @@ module ScheduleConcern
     authorize! :create, @schedule
   end
 
-  def schedule_form_params
+  def create_schedule_form_params
     params.require(:create_schedule_form).permit(CreateScheduleForm.accessible_attributes)
+  end
+
+  def edit_schedule_form_params
+    params.require(:edit_schedule_form).permit(EditScheduleForm.accessible_attributes)
   end
 end

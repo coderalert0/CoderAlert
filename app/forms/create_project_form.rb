@@ -16,8 +16,7 @@ class CreateProjectForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       project.save!
-      project_user = project.project_users.build(user: project.user)
-      project_user.save!
+      ProjectUser.find_or_create_by(user: project.user, project: project)
     end
   end
 
