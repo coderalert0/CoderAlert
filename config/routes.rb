@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   root 'dashboard#show'
 
-  resources :projects, path: 'p'
+  resources :projects, path: 'p' do
+    resources :schedules, path: 's'
+  end
 
   resources :articles, path: 'kb' do
     resources :comments
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :project_users, path: 'pu'
 
-  resources :schedules, path: 's'
+
 
   resources :contacts, path: 'c'
 

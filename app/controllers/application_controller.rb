@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     @projects = current_user.projects
   end
 
+  def form_params(clazz)
+    params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { render nothing: true, status: :not_found }

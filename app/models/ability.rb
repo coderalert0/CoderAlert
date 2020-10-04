@@ -22,8 +22,8 @@ class Ability
     # might not working when viewing others comments
     can :crud, Comment, user_id: user.id
 
-    can :read, Schedule, project_id: user_project_ids
-    can :crud, Schedule, user_id: user.id, project_id: user_project_ids
+    can :read, Schedule, project: { id: user_project_ids }
+    can :crud, Schedule, user_id: user.id, project: { id: user_project_ids }
 
     can :crud, Contact, user_id: user.id
   end

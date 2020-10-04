@@ -1,6 +1,6 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_schedule_path, class: 'btn btn-primary' %>
+    <%= link_to 'New', new_project_schedule_path(@project), class: 'btn btn-primary' %>
     <br/><br/>
   </div>
   <table id="dataTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -18,7 +18,7 @@
     <% @schedules.each do |schedule| %>
       <tr role="row" class="odd">
         <td class="sorting_1">
-          <%= link_to schedule.name, schedule_path(schedule) %>
+          <%= link_to schedule.name, project_schedule_path(@current_project, schedule) %>
         </td>
         <td><%= schedule.on_call_user.decorate.full_name %></td>
         <td><%= t(schedule.frequency.to_sym, :scope => :frequency) %></td>

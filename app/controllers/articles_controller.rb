@@ -71,10 +71,6 @@ class ArticlesController < ApplicationController
 
   private
 
-  def form_params(clazz)
-    params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
-  end
-
   def create_form
     CreateArticleForm.new form_params(CreateArticleForm).merge(article: @article)
   end

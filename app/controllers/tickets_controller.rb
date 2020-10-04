@@ -74,10 +74,6 @@ class TicketsController < ApplicationController
 
   private
 
-  def form_params(clazz)
-    params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
-  end
-
   def create_form
     CreateTicketForm.new form_params(CreateTicketForm).merge(ticket: @ticket)
   end
