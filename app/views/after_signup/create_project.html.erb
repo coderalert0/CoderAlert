@@ -1,8 +1,15 @@
 <h2>Create a Project</h2>
 
+<div class="alert alert-info">
+  Welcome to the CoderAlert! Please enter information about your project below
+  <br/><br/>In case you're wondering, abbreviation is a prefix for your ticket numbers
+  <br/>An abbreviation of PROJ will result in your tickets looking like PROJ-1234
+</div>
+
+
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
   <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.text_field :key, :class => 'col-sm-3' %>
+  <%= f.text_field :key, :label => 'Abbreviation', :class => 'col-sm-3' %>
   <%= submit_tag t(:next, :scope => :welcome_wizard), :class => 'btn btn-success' %>
 
 <% end %>

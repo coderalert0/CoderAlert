@@ -1,4 +1,13 @@
-<h2>Invite Team Members</h2>
+<h2>Invite a Team Member</h2>
+
+<div class="alert alert-info">
+  Please invite a team member by entering information about them below.
+  <br/>They will be sent a link to confirm their account.
+  <br/><br/>This purpose of entering this information is to help familiarize you with adding team members.
+  <br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion
+</div>
+
+
 
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
   <%= render "devise/shared/error_messages", resource: @form %>

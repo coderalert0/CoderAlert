@@ -1,6 +1,8 @@
 <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
 
 <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :vertical) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
   <div class="form-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
