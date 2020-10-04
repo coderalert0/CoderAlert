@@ -1,6 +1,6 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_ticket_path, class: 'btn btn-primary' %>
+    <%= link_to 'New', new_project_ticket_path(@current_project), class: 'btn btn-primary' %>
     <br/><br/>
 
 <!--    <label>-->
@@ -16,7 +16,7 @@
   </div>
 
   <div id="dataTable_filter" class="dataTables_filter">
-  <%= bootstrap_form_for :search_tickets, url: tickets_path, method: :get do |f| %>
+  <%= bootstrap_form_for :search_tickets, url: project_tickets_path(@project), method: :get do |f| %>
     <%= f.text_field :query, label: 'Search' %>
   <% end %>
   </div>
@@ -40,10 +40,10 @@
         <tr role="row" class="odd">
           <td><%= ticket.priority %></td>
           <td class="sorting_1">
-            <%= link_to ticket.slug, ticket_path(ticket) %>
+            <%= link_to ticket.slug, project_ticket_path(@current_project, ticket) %>
           </td>
           <td class="sorting_1">
-            <%= link_to ticket.title, ticket_path(ticket) %>
+            <%= link_to ticket.title, project_ticket_path(@current_project, ticket) %>
           </td>
           <td><%= ticket.status %></td>
           <td><%= ticket.assignee.full_name %> <%= ticket.viewed_by_assignee_icon %></td>

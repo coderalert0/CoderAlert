@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     return if current_user.nil?
     redirect_to after_signup_path(:project) and return if session[:project_id].nil?
 
-    @current_project = Project.find(session[:project_id])
-    @projects = current_user.projects
+    @current_project = Project.find(session[:project_id]).decorate
+    @projects = current_user.projects.decorate
   end
 
   def form_params(clazz)

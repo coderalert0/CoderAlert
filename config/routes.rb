@@ -12,15 +12,13 @@ Rails.application.routes.draw do
     resources :articles, path: 'kb' do
       resources :comments
     end
-  end
 
-  resources :tickets, path: 't' do
-    resources :comments
+    resources :tickets, path: 't' do
+      resources :comments
+    end
   end
 
   resources :project_users, path: 'pu'
-
-
 
   resources :contacts, path: 'c'
 
