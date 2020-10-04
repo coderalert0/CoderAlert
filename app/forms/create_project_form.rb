@@ -19,7 +19,6 @@ class CreateProjectForm < BaseForm
       ProjectUser.find_or_create_by(user: project.user, project: project)
     end
   end
-
   alias save submit
 
   private

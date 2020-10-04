@@ -4,11 +4,17 @@ class ActiveProjectController < ApplicationController
 
     return if id.blank? && current_user.projects.map { |p| p.id.to_s }.exclude?(id)
 
-    id = id.to_i
-    session[:project_id] = id
-    current_user.update(last_accessed_project_id: id)
+    switch_active_project(id)
 
     flash.notice = 'Project switched successfully'
     redirect_to root_path
+  end
+
+  private
+
+  def switch_active_project(id)
+    id = id.to_i
+    session[:project_id] = id
+    current_user.update(last_accessed_project_id: id)
   end
 end

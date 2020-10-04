@@ -1,6 +1,4 @@
 class ProjectsController < ApplicationController
-  include ProjectConcern
-
   before_action :load_project, only: %i[show destroy]
   load_and_authorize_resource only: %i[index new]
 
@@ -15,7 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @form = project_create_form
+    @form = create_form
 
     if @form.submit
       flash.notice = 'The project was created successfully'
@@ -42,5 +40,15 @@ class ProjectsController < ApplicationController
 
   def load_project
     @project = Project.friendly.find(params[:id])
+  end
+
+  def create_form
+    @project = Project.new(user: current_user, company: current_user.company)
+    authorize! :create, @project
+    CreateProjectForm.new form_params.merge(project: @project)
+  end
+
+  def form_params
+    params.require(:create_project_form).permit(CreateProjectForm.accessible_attributes)
   end
 end
