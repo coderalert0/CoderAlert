@@ -18,6 +18,8 @@
     <%= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]" %><br/>
   <% end %>
 
-  <%= link_to 'Back', previous_wizard_path, :class => 'btn btn-outline-dark' %>
-  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  <div class="text-right">
+    <%= link_to 'Back', previous_wizard_path, :class => 'btn btn-outline-dark' %>
+    <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  </div>
 <% end %>

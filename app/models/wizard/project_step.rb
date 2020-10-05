@@ -1,5 +1,7 @@
 module Wizard
   class ProjectStep < BaseStep
+    validates_model :project
+
     attr_accessor :project
 
     def show_form
@@ -14,6 +16,11 @@ module Wizard
 
     def complete
       self.project = update_form.project
+      super
+    end
+
+    def save
+      project_validation
       super
     end
   end

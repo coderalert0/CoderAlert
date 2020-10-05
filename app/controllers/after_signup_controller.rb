@@ -1,11 +1,6 @@
 class AfterSignupController < ApplicationController
   include Wicked::Wizard
 
-  rescue_from Wicked::Wizard::InvalidStepError do
-    flash[:alert] = 'An invalid step was accessed'
-    redirect_to wizard_path :project
-  end
-
   skip_before_action :load_context
 
   layout 'welcome_wizard'

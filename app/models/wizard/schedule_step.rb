@@ -1,5 +1,7 @@
 module Wizard
   class ScheduleStep < BaseStep
+    validates_model :schedule
+
     attr_accessor :schedule
 
     def show_form
@@ -14,6 +16,11 @@ module Wizard
 
     def complete
       self.schedule = update_form.schedule
+      super
+    end
+
+    def save
+      schedule_validation
       super
     end
   end

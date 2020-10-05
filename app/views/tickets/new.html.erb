@@ -1,3 +1,5 @@
+<h2>Create a Ticket</h2>
+
 <%= bootstrap_form_for @form, :url => project_tickets_path(@current_project) do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
   <%= f.select :assignee_id, options_for_select(@current_project.users.map { |u| [ u.ticket_assignee_select_value(@project), u.id ] }, :selected => @project.on_call_user.id), {:include_blank => true} %>

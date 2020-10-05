@@ -1,13 +1,17 @@
 module Wizard
   class BaseStep
     include ActiveModel::Model
+    include ActiveModel::Validations::Callbacks
 
     attr_accessor :user, :post_params, :completed
 
-    def save_data
+    def save
       update_form.submit ? complete : false
     end
-    alias save save_data
+
+    def display_errors
+      errors.full_messages.to_sentence
+    end
 
     private
 

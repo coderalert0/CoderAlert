@@ -1,3 +1,5 @@
+<h2>Edit Schedule</h2>
+
 <%= bootstrap_form_for @form, :url => project_schedule_path(@project, @schedule), :method => :put do |f| %>
   <%= f.text_field :name, :label_class => 'required' %>
   <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => :frequency), s ] }), :label_class => 'required' %>
