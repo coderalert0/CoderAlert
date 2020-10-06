@@ -21,14 +21,13 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @form = CreateTicketForm.new
+    @form = CreateTicketForm.new(ticket: @ticket)
   end
 
   def create
     @form = create_form
 
     if @form.submit
-      @ticket = @form.ticket
       flash.notice = 'The ticket was created successfully'
       populate_ticket_view
 

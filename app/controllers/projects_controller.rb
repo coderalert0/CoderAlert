@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     @form = create_form
 
     if @form.submit
-      flash.notice = 'The project was created successfully'
+      flash.notice = 'The project was created successfully. You can switch projects by clicking the dropdown above'
       redirect_to projects_path
     else
       flash.alert = @form.display_errors
