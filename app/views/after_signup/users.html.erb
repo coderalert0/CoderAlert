@@ -10,7 +10,6 @@
 
 
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
-  <%= render "devise/shared/error_messages", resource: @form %>
 
   <div class="field">
     <%= f.text_field :first_name, :label_class => 'required' %>

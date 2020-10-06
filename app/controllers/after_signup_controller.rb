@@ -6,9 +6,9 @@ class AfterSignupController < ApplicationController
   layout 'welcome_wizard'
 
   before_action :initialize_progress, only: [:show]
+  before_action :load_project
   before_action :initialize_step
 
-  before_action :load_project
   after_action :after_success_step, only: :update
 
   steps :project, :users, :schedule
@@ -44,8 +44,6 @@ class AfterSignupController < ApplicationController
                   { step.to_s => send(step.to_s) }
                 end
 
-    step_args = step_args.merge(user: current_user)
-
     @wizard_step = "Wizard::#{step.to_s.camelize}Step".constantize.new(step_args)
   end
 
@@ -62,23 +60,19 @@ class AfterSignupController < ApplicationController
   end
 
   def project
-    load_project_from_session || Project.new(user: current_user, company: current_user.company)
+    @current_project || Project.new(user: current_user, company: current_user.company)
   end
 
   def schedule
-    load_schedule_from_session || Schedule.new(user: current_user, project: project)
-  end
-
-  def load_project_from_session
-    Project.find(session['project_id']) if session['project_id']
-  end
-
-  def load_schedule_from_session
-    Schedule.find(session['schedule_id']) if session['schedule_id']
+    if session['schedule_id']
+      Schedule.find(session['schedule_id'])
+    else
+      Schedule.new(user: current_user, project: project)
+    end
   end
 
   def load_project
-    @current_project = load_project_from_session if schedule_step?
+    @current_project = Project.find(session['project_id'])
   end
 
   def after_success_step

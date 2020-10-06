@@ -28,6 +28,7 @@ module Users
                  :email,
                  :password,
                  :current_password,
+                 :profile_image,
                  company_attributes: :name)
       end
     end
