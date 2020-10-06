@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   has_many :users_accessed, class_name: 'User', foreign_key: :last_accessed_project_id, dependent: :nullify
+  has_many :authorizations
 
   # this is a workaround to facilitate scoping tickets to a project
   friendly_id :id, use: :slugged
