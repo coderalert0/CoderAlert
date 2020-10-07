@@ -2,6 +2,7 @@ class CreateAuthorizations < ActiveRecord::Migration[5.2]
   def change
     create_table :authorizations do |t|
       t.string :type, null: false
+      t.integer :auth_id
       t.string :access_token, null: false
       t.string :webhook_url
       t.string :name

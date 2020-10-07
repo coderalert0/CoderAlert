@@ -1,0 +1,2 @@
+class SlackAuthorization < Authorization
+end

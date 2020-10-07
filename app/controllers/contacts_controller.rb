@@ -1,7 +1,10 @@
 class ContactsController < ApplicationController
   load_and_authorize_resource
 
-  def index; end
+  def index
+    # need to change this to generalize decorator type
+    @authorizations = SlackAuthorizationDecorator.decorate_collection(Authorization.where(user: current_user))
+  end
 
   def new
     @form = CreateContactForm.new

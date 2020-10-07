@@ -26,4 +26,6 @@ Rails.application.routes.draw do
 
   resources :after_signup, path: 'welcome'
 
+  get '/slack_auth/callback', to: 'slack_authorization#callback'
+
 end

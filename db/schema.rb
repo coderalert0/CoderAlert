@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_231001) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string "type", null: false
+    t.integer "auth_id"
     t.string "access_token", null: false
     t.string "webhook_url"
     t.string "name"
