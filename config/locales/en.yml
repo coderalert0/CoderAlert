@@ -35,6 +35,7 @@ en:
 
   welcome_wizard:
     next: Next
+    finish: Finish
 
   priority:
     high: 'High'

@@ -11,7 +11,7 @@ class AfterSignupController < ApplicationController
 
   after_action :after_success_step, only: :update
 
-  steps :project, :users, :schedule
+  steps :project, :users, :schedule, :slack
 
   def show
     populate_show unless finish_step?
@@ -40,7 +40,7 @@ class AfterSignupController < ApplicationController
 
     step_args = if users_step?
                   { company: current_user.company, project: project }
-                else
+                elsif project_step? || schedule_step?
                   { step.to_s => send(step.to_s) }
                 end
 
@@ -49,6 +49,10 @@ class AfterSignupController < ApplicationController
 
   def users_step?
     step == :users
+  end
+
+  def project_step?
+    step == :project
   end
 
   def schedule_step?
