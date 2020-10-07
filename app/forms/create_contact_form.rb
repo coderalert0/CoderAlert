@@ -10,7 +10,15 @@ class CreateContactForm < BaseForm
   end
 
   def _submit
-    contact.save!
+    ActiveRecord::Base.transaction do
+      contact.save!
+
+      user.projects.each do |project|
+        AlertSetting.find_or_create_by(alertable: contact, user: user, project: project) do |alert_setting|
+          alert_setting.alert = true if alert_setting.alert.nil?
+        end
+      end
+    end
   end
 
   private

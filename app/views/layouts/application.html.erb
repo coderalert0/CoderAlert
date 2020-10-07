@@ -167,16 +167,17 @@
                   <li>
                     <%= link_to contacts_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
                       <i class="ti-email mR-10"></i>
-                      <span>Contact Information</span>
+                      <span>Contact Info</span>
                     <% end %>
                   </li>
 
                   <li>
-                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
-                      <i class="ti-user mR-10"></i>
-                      <span>Profile</span>
-                    </a>
+                    <%= link_to project_alert_settings_path(@current_project), class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                      <i class="ti-bell mR-10"></i>
+                      <span>Alert Settings</span>
+                    <% end %>
                   </li>
+
                   <li role="separator" class="divider"></li>
                   <li>
                     <%= link_to destroy_user_session_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700', method: :delete do %>

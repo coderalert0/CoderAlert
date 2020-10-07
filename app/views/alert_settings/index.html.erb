@@ -1,8 +1,12 @@
-<h2>My Contact Information</h2>
+<h2>My Alert Settings for <%= @project.name %></h2>
+
+<div class="alert alert-info">
+  Your alert settings are set per project. To change your alert settings for other projects switch the project first
+</div>
 
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
+
     <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content"></div>
@@ -15,25 +19,29 @@
     <thead>
     <tr role="row">
       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50%;">Type</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Value</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%"></th>
-
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Workspace</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Alerts On</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Actions</th>
     </tr>
     </thead>
     <tbody>
-      <% @contacts.each do |contact| %>
-        <tr role="row" class="odd">
-          <td><%= link_to contact.type, edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
-          <td><%= contact.value %></td>
-          <td>
-            <span class="icon-holder">
-              <%= link_to contact_path(contact), :method => 'delete', data: {confirm: "Are you sure you want to delete this contact information?"} do %>
-                <i class="ti-trash"></i>
-              <% end %>
-            </span>
-          </td>
-        </tr>
-      <% end %>
+    <% @alert_settings.each do |alert_setting| %>
+      <tr role="row" class="odd">
+        <% if alert_setting.alertable.is_a? Authorization %>
+          <td><%= alert_setting.alertable.type %></td>
+          <td><%= alert_setting.alertable.name %></td>
+          <td><%= alert_setting.alert_display %></td>
+
+        <% elsif alert_setting.alertable.is_a? Contact %>
+          <td><%= alert_setting.alertable.type %></td>
+          <td></td>
+          <td><%= alert_setting.alert_display %></td>
+        <% end %>
+
+        <td><%= link_to 'Edit', edit_project_alert_setting_path(@project, alert_setting),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
+
+      </tr>
+    <% end %>
     </tbody>
   </table>
   <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>

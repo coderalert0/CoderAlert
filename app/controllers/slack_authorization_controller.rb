@@ -3,23 +3,30 @@ class SlackAuthorizationController < ApplicationController
     @project = Project.find(params[:project_id])
 
     begin
-      response = Slack::Web::Client.new.oauth_v2_access(oauth_params)
+      ActiveRecord::Base.transaction do
+        response = Slack::Web::Client.new.oauth_v2_access(oauth_params)
 
-      Rails.logger.info response.inspect
+        Rails.logger.info response.inspect
 
-      @authorization = SlackAuthorization.find_or_create_by(auth_id: response.team.id)
+        @authorization = SlackAuthorization.find_or_create_by(auth_id: response.team.id)
 
-      if @authorization.update(authorization_params(response))
-        flash.notice = 'Slack successfully connected'
-      else
-        flash.alert = 'Slack authorization could not be saved'
+        if @authorization.update(authorization_params(response))
+          flash.notice = 'Slack successfully connected'
+        else
+          flash.alert = 'Slack authorization could not be saved'
+        end
+
+        @project.users.each do |user|
+          AlertSetting.find_or_create_by(alertable: @authorization, user: user, project: @project) do |alert_setting|
+            alert_setting.alert = true if alert_setting.alert.nil?
+          end
+        end
       end
     rescue StandardError
-      binding.pry
       flash.alert = 'Slack could not be connected'
     end
 
-    redirect_to contacts_path
+    redirect_to project_alert_settings_path(@project)
   end
 
   private
@@ -38,6 +45,6 @@ class SlackAuthorizationController < ApplicationController
     { client_id: Rails.application.credentials.dig(:slack, :client_id),
       client_secret: Rails.application.credentials.dig(:slack, :client_secret),
       code: params[:code],
-      redirect_uri: slack_auth_callback_url(:project_id => @project.id) }
+      redirect_uri: slack_auth_callback_url(project_id: @project.id) }
   end
 end
