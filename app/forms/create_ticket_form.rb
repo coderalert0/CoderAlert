@@ -14,8 +14,7 @@ class CreateTicketForm < BaseForm
   def assignee_help_text
     return if ticket.project.schedules.present?
 
-    "You can create a <a target='_blank' href=#{new_project_schedule_path(ticket.project)}>Schedule</a>".html_safe\
-      ' to automatically assign team members. i.e. rotate every sprint'
+    "You can create a <a target='_blank' href=#{new_project_schedule_path(ticket.project)}>Schedule</a> to automatically assign team members. i.e. rotate every sprint".html_safe
   end
 
   def _submit

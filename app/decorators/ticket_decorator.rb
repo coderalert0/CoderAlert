@@ -1,6 +1,6 @@
 class TicketDecorator < ApplicationDecorator
   delegate_all
-  decorates_association :assignee
+  decorates_associations :assignee, :created_by
 
   def priority
     btn_class = {
@@ -24,5 +24,15 @@ class TicketDecorator < ApplicationDecorator
                                       time_elapsed: ticket_view.first.time_elapsed,
                                       scope: 'popover'),
                 'title' => h.t(:ticket_viewed_by_assignee_title, scope: 'popover') }
+  end
+
+  def slack_created_message
+    "*[#{object.priority}] #{title}*\n"\
+    "#{content.to_plain_text}\n\n"\
+    "Ticket created by #{created_by.full_name} and assigned to #{assignee_full_name}"
+  end
+
+  def assignee_full_name
+    assignee.nil? ? 'no one' : assignee.full_name
   end
 end
