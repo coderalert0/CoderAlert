@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates_presence_of :email, :first_name, :last_name
 
   scope :confirmed, -> { User.where.not(confirmed_at: nil) }
+  scope :with_slack_user_id, -> { User.where.not(slack_user_id: nil) }
 
   scope :unpermissioned_to_project, lambda { |project|
     joins(:company).where(companies: { id: project.company_id })

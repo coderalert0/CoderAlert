@@ -8,7 +8,7 @@ class SlackAuthorizationController < ApplicationController
         Rails.logger.info @response.inspect
 
         create_authorization
-        create_project_user_alert_settings
+        find_or_create_user_data
       end
     rescue StandardError
       flash.alert = 'Slack could not be connected'
@@ -53,12 +53,24 @@ class SlackAuthorizationController < ApplicationController
     params[:welcome]
   end
 
-  def create_project_user_alert_settings
+  def find_or_create_user_data
     @project.users.each do |user|
-      AlertSetting.find_or_create_by(alertable: @authorization, user: user, project: @project) do |alert_setting|
-        alert_setting.alert = true unless alert_setting.alert
-      end
+      populate_slack_user_id(user)
+      create_user_alert_settings(user)
     end
+  end
+
+  def create_user_alert_settings(user)
+    AlertSetting.find_or_create_by(alertable: @authorization, user: user, project: @project) do |alert_setting|
+      alert_setting.alert = true unless alert_setting.alert
+    end
+  end
+
+  def populate_slack_user_id(user)
+    response = client.users_lookupByEmail(email: user.email)
+    user.update(slack_user_id: response.user.id)
+  rescue StandardError => e
+    Rails.logger.info e
   end
 
   def create_authorization
@@ -74,5 +86,9 @@ class SlackAuthorizationController < ApplicationController
 
   def retrieve_access_token
     Slack::Web::Client.new.oauth_v2_access(oauth_params)
+  end
+
+  def client
+    Slack::Web::Client.new(token: @project.slack_authorization.access_token)
   end
 end

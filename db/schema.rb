@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_175749) do
+ActiveRecord::Schema.define(version: 2020_10_08_033003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_175749) do
     t.datetime "updated_at"
     t.boolean "viewed_by_assignee"
     t.string "slug"
+    t.string "slack_channel_id"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
@@ -246,6 +247,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_175749) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.bigint "last_accessed_project_id"
+    t.string "slack_user_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
