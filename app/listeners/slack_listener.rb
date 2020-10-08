@@ -1,4 +1,14 @@
 class SlackListener
+
+  def on_user_create
+    # update_slack_user_id
+  end
+
+  def on_slack_authorization_created(authorization)
+    # update_slack_user_id
+    # create access settings
+  end
+
   def on_ticket_created(ticket)
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
 
@@ -17,6 +27,8 @@ class SlackListener
   def on_ticket_updated(ticket); end
 
   private
+
+  def update_slack_user_id ;end
 
   def user_list
     ticket.project.users.with_slack_user_id.pluck(:slack_user_id).join(',')
