@@ -1,4 +1,8 @@
 class Authorization < ApplicationRecord
+  include DataEventPublishing
+
+  publishes_lifecycle_events
+
   belongs_to :project
   belongs_to :user
 
