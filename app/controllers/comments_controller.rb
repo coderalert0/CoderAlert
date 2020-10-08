@@ -40,9 +40,9 @@ class CommentsController < ApplicationController
   def create_redirect_path
     case owner
     when Ticket
-      ticket_path(@ticket)
+      project_ticket_path(@project, @ticket)
     when Article
-      article_path(@article)
+      project_article_path(@project, @article)
     end
   end
 

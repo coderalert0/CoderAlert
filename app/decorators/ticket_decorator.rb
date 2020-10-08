@@ -29,7 +29,11 @@ class TicketDecorator < ApplicationDecorator
   def slack_created_message
     "*[#{object.priority}] #{title}*\n"\
     "#{content.to_plain_text}\n\n"\
-    "Ticket created by #{created_by.full_name} and assigned to #{assignee_full_name}"
+    "Ticket created by #{created_by.full_name} and assigned to #{assignee_full_name}\n"
+  end
+
+  def slack_updated_message
+    "Ticket updated\n"
   end
 
   def assignee_full_name

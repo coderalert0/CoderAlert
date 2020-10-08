@@ -4,6 +4,8 @@ Rails.application.config.to_prepare do
   Ticket.subscribe TicketListener.new, :prefix => true
   Comment.subscribe CommentListener.new, :prefix => true
   Schedule.subscribe ScheduleListener.new, :prefix => true
-  Ticket.subscribe SlackListener.new, :prefix => true
-  SlackAuthorization.subscribe SlackListener.new, :prefix => true
+
+  Ticket.subscribe SlackTicketListener.new, :prefix => true
+  SlackAuthorization.subscribe SlackAuthorizationListener.new, :prefix => true
+  Comment.subscribe SlackCommentListener.new, :prefix => true
 end
