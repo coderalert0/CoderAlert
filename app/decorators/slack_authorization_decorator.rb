@@ -1,7 +1,7 @@
 class SlackAuthorizationDecorator < ApplicationDecorator
   delegate_all
 
-  def display_name
+  def name_display
     'Slack'
   end
 end

@@ -26,13 +26,14 @@ class SlackTicketListener
 
   def send_ticket_created_message(client, channel_id, ticket)
     client.conversations_invite(channel: channel_id, users: user_list(ticket))
-    client.chat_postMessage(channel: channel_id, text: ticket.decorate.slack_created_message)
+    client.chat_postMessage(channel: channel_id, text: SlackDecorator.decorate(ticket).ticket_created_message)
   rescue StandardError => e
     Rails.logger.info e
   end
 
   def send_ticket_updated_message(client, ticket)
-    client.chat_postMessage(channel: ticket.slack_channel_id, text: ticket.decorate.slack_updated_message)
+    client.chat_postMessage(channel: ticket.slack_channel_id,
+                            text: SlackDecorator.decorate(ticket).ticket_updated_message)
   rescue StandardError => e
     Rails.logger.info e
   end

@@ -5,7 +5,7 @@ class CreateAlertSettings < ActiveRecord::Migration[5.2]
       t.references :alertable, polymorphic: true, null: false
       t.references :user, null: false
       t.string :slack_user_id
-      t.string :slack_name, :string
+      t.string :slack_email
       t.references :project, null: false
       t.timestamps
     end

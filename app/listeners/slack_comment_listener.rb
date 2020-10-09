@@ -9,7 +9,8 @@ class SlackCommentListener
   def send_comment_added_message(client, comment)
     return unless comment.commentable.is_a? Ticket
 
-    client.chat_postMessage(channel: comment.commentable.slack_channel_id, text: comment.decorate.slack_comment_added)
+    client.chat_postMessage(channel: comment.commentable.slack_channel_id,
+                            text: SlackDecorator.decorate(comment).comment_added)
   rescue StandardError => e
     Rails.logger.info e
   end

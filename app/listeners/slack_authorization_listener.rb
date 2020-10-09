@@ -10,8 +10,8 @@ class SlackAuthorizationListener
     client = Slack::Web::Client.new(token: authorization.access_token)
 
     authorization.alert_settings.each do |alert_setting|
-      response = client.users_lookupByEmail(email: alert_setting.user.email)
-      alert_setting.update(slack_user_id: response.user.id, slack_name: response.user.name)
+      response = client.users_lookupByEmail(email: 'abc@gmail.com')
+      alert_setting.update(slack_user_id: response.user.id, slack_email: response.user.profile.email)
     end
   rescue StandardError => e
     Rails.logger.info e

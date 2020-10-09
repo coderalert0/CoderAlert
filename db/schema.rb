@@ -52,8 +52,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.bigint "alertable_id", null: false
     t.bigint "user_id", null: false
     t.string "slack_user_id"
-    t.string "slack_name"
-    t.string "string"
+    t.string "slack_email"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -18,23 +18,26 @@
   <table id="dataTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50%;">Type</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Workspace</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Alerts On</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Actions</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 20%;">Type</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;">Workspace</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;">Value</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;">Alerts On</th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;">Actions</th>
     </tr>
     </thead>
     <tbody>
     <% @alert_settings.each do |alert_setting| %>
       <tr role="row" class="odd">
         <% if alert_setting.alertable.is_a? Authorization %>
-          <td><%= alert_setting.alertable.type %></td>
+          <td><%= alert_setting.alertable.decorate.name_display %></td>
           <td><%= alert_setting.alertable.name %></td>
+          <td><%= alert_setting.slack_email %></td>
           <td><%= alert_setting.alert_display %></td>
 
         <% elsif alert_setting.alertable.is_a? Contact %>
           <td><%= alert_setting.alertable.type %></td>
           <td></td>
+          <td><%= alert_setting.alertable.value %></td>
           <td><%= alert_setting.alert_display %></td>
         <% end %>
 
