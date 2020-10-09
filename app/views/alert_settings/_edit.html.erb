@@ -5,6 +5,7 @@
   </div>
 
   <div class="modal-body">
+    <%= f.text_field :slack_email if @alert_setting.alertable.is_a? SlackAuthorization %>
     <%= f.select :alert, [['Yes', true], ['No', false]], :label_class => 'required' %>
   </div>
 

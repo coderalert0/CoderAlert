@@ -15,7 +15,9 @@ class SlackDecorator < ApplicationDecorator
   end
 
   def ticket_updated_message
-    "_Ticket updated by #{name(created_by, project)}_\n"
+    return unless saved_changes.present?
+
+    "```#{ticket_changes}```\n\n_Ticket updated by #{name(created_by, project)}_\n"
   end
 
   def assignee_name
@@ -35,5 +37,17 @@ class SlackDecorator < ApplicationDecorator
   # might be worth moving to a common class
   def hostname
     Rails.env.development? ? h.root_url(port: 3000).chomp!('/') : 'http://coderalert.com'
+  end
+
+  def ticket_changes
+    formatted_changes = ''
+    saved_changes.each do |attribute|
+      next if attribute[0] == 'updated_at'
+
+      formatted_changes << "#{attribute[0].to_s.capitalize}: "\
+                                    "Changed from #{attribute[1][0]}"\
+                                    " to #{attribute[1][1]}\n"
+    end
+    formatted_changes
   end
 end

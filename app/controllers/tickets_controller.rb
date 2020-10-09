@@ -9,7 +9,7 @@ class TicketsController < ApplicationController
                  # scope this to the project or company
                  Ticket.search("*#{query}*").records
                else
-                 @project.tickets
+                 @project.tickets.includes(:ticket_views)
                end
 
     @tickets = @tickets.decorate

@@ -15,13 +15,13 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def viewed_by_assignee_icon
-    ticket_view = TicketView.viewed_by(ticket, assignee)
-    return unless ticket_view.exists?
+    assignee_ticket_views = ticket_views.viewed_by(ticket, assignee)
+    return unless assignee_ticket_views.exists?
 
     h.link_to h.content_tag(:i, '', class: 'ti-eye'), '#',
               { 'data-toggle' => 'popover',
                 'data-content' => h.t(:ticket_viewed_by_assignee_content,
-                                      time_elapsed: ticket_view.first.time_elapsed,
+                                      time_elapsed: assignee_ticket_views.first.time_elapsed,
                                       scope: 'popover'),
                 'title' => h.t(:ticket_viewed_by_assignee_title, scope: 'popover') }
   end

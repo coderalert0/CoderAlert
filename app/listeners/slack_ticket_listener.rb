@@ -1,12 +1,14 @@
 class SlackTicketListener
   def on_ticket_created(ticket)
+    return if ticket.project.slack_authorization.nil?
+
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
     channel_id = create_channel(client, ticket)
     send_ticket_created_message(client, channel_id, ticket)
   end
 
   def on_ticket_updated(ticket)
-    return if ticket.slack_channel_id.nil?
+    return if ticket.project.slack_authorization.nil? || ticket.slack_channel_id.nil?
 
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
     send_ticket_updated_message(client, ticket)
@@ -39,6 +41,9 @@ class SlackTicketListener
   end
 
   def user_list(ticket)
-    ticket.project.slack_authorization.alert_settings.with_slack_user_id.pluck(:slack_user_id).join(',')
+    ticket.project.slack_authorization
+          .alert_settings
+          .with_slack_alerts_on
+          .pluck(:slack_user_id).join(',')
   end
 end
