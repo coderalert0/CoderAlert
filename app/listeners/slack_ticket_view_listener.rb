@@ -7,6 +7,7 @@ class SlackTicketViewListener
     return unless (ticket_view.user == ticket.assignee) && ticket.slack_channel_id.present?
 
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
+
     send_ticket_viewed_message(client, ticket_view)
   end
 

@@ -33,7 +33,10 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def slack_created_by
-    created_by.slack_user_id ? "<@#{created_by.slack_user_id}>" : created_by.full_name
+    alert_setting = AlertSetting.where(project: project, user: created_by, alertable: project.slack_authorization).first
+    return unless alert_setting.present?
+
+    alert_setting.slack_user_id ? "<@#{alert_setting.slack_user_id}>" : created_by.full_name
   end
 
   def slack_updated_message
@@ -41,17 +44,16 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def slack_assignee_name
-    if assignee.nil?
-      'no one'
-    elsif assignee.slack_user_id
-      "<@#{assignee.slack_user_id}>"
-    else
-      assignee.full_name
-    end
+    return 'no one' if assignee.nil?
+
+    alert_setting = AlertSetting.where(project: project, user: assignee, alertable: project.slack_authorization).first
+    return unless alert_setting.present?
+
+    alert_setting.slack_user_id ? "<@#{alert_setting.slack_user_id}>" : assignee.full_name
   end
 
   # might be worth moving to a common class
   def hostname
-    Rails.env.development? ? h.root_url(:port => 3000).chomp!("/") : 'http://coderalert.com'
+    Rails.env.development? ? h.root_url(port: 3000).chomp!('/') : 'http://coderalert.com'
   end
 end

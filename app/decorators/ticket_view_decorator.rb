@@ -9,6 +9,12 @@ class TicketViewDecorator < ApplicationDecorator
   private
 
   def slack_user_name
-    ticket.assignee.slack_user_id ? "<@#{ticket.assignee.slack_user_id}>" : ticket.assignee.full_name
+    alert_setting = AlertSetting.where(project: ticket.project,
+                                       user: ticket.created_by,
+                                       alertable: ticket.project.slack_authorization).first
+
+    return unless alert_setting.present?
+
+    alert_setting.slack_user_id ? "<@#{alert_setting.slack_user_id}>" : ticket.assignee.full_name
   end
 end

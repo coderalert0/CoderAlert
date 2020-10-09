@@ -1,9 +1,8 @@
 class SlackTicketListener
   def on_ticket_created(ticket)
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
-
     channel_id = create_channel(client, ticket)
-    send_ticket_created_message(client, channel_id, user_list(ticket.project), ticket)
+    send_ticket_created_message(client, channel_id, ticket)
   end
 
   def on_ticket_updated(ticket)
@@ -25,8 +24,8 @@ class SlackTicketListener
     Rails.logger.info e
   end
 
-  def send_ticket_created_message(client, channel_id, user_list, ticket)
-    client.conversations_invite(channel: channel_id, users: user_list)
+  def send_ticket_created_message(client, channel_id, ticket)
+    client.conversations_invite(channel: channel_id, users: user_list(ticket))
     client.chat_postMessage(channel: channel_id, text: ticket.decorate.slack_created_message)
   rescue StandardError => e
     Rails.logger.info e
@@ -38,7 +37,7 @@ class SlackTicketListener
     Rails.logger.info e
   end
 
-  def user_list(project)
-    project.users.with_slack_user_id.pluck(:slack_user_id).join(',')
+  def user_list(ticket)
+    ticket.project.slack_authorization.alert_settings.with_slack_user_id.pluck(:slack_user_id).join(',')
   end
 end

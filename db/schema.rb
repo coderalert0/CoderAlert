@@ -51,6 +51,9 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.string "alertable_type", null: false
     t.bigint "alertable_id", null: false
     t.bigint "user_id", null: false
+    t.string "slack_user_id"
+    t.string "slack_name"
+    t.string "string"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -247,8 +250,6 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.bigint "last_accessed_project_id"
-    t.string "slack_user_id"
-    t.string "slack_name"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

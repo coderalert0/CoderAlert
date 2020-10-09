@@ -1,7 +1,7 @@
 class SlackAuthorizationListener
   def on_slack_authorization_created(authorization)
-    populate_slack_user_ids(authorization)
     create_user_alert_settings(authorization)
+    populate_slack_user_ids(authorization)
   end
 
   private
@@ -9,9 +9,9 @@ class SlackAuthorizationListener
   def populate_slack_user_ids(authorization)
     client = Slack::Web::Client.new(token: authorization.access_token)
 
-    authorization.project.users.each do |user|
-      response = client.users_lookupByEmail(email: user.email)
-      user.update(slack_user_id: response.user.id, slack_name: response.user.name)
+    authorization.alert_settings.each do |alert_setting|
+      response = client.users_lookupByEmail(email: alert_setting.user.email)
+      alert_setting.update(slack_user_id: response.user.id, slack_name: response.user.name)
     end
   rescue StandardError => e
     Rails.logger.info e
