@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.integer "invitations_count", default: 0
     t.bigint "last_accessed_project_id"
     t.string "slack_user_id"
+    t.string "slack_name"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

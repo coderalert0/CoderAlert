@@ -28,15 +28,25 @@ class TicketDecorator < ApplicationDecorator
 
   def slack_created_message
     "*[#{object.priority}] #{title}*\n"\
-    "#{content.to_plain_text}\n\n"\
-    "Ticket created by #{created_by.full_name} and assigned to #{assignee_full_name}\n"
+    "```#{content.to_plain_text}```\n\n"\
+    "_Ticket created by #{slack_created_by} and assigned to #{slack_assignee_name}_\n"
+  end
+
+  def slack_created_by
+    created_by.slack_user_id ? "<@#{created_by.slack_user_id}>" : created_by.full_name
   end
 
   def slack_updated_message
-    "Ticket updated\n"
+    "_Ticket updated_\n"
   end
 
-  def assignee_full_name
-    assignee.nil? ? 'no one' : assignee.full_name
+  def slack_assignee_name
+    if assignee.nil?
+      'no one'
+    elsif assignee.slack_user_id
+      "<@#{assignee.slack_user_id}>"
+    else
+      assignee.full_name
+    end
   end
 end

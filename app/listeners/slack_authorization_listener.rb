@@ -11,7 +11,7 @@ class SlackAuthorizationListener
 
     authorization.project.users.each do |user|
       response = client.users_lookupByEmail(email: user.email)
-      user.update(slack_user_id: response.user.id)
+      user.update(slack_user_id: response.user.id, slack_name: response.user.name)
     end
   rescue StandardError => e
     Rails.logger.info e
