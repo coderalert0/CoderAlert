@@ -27,7 +27,7 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def slack_created_message
-    "*[#{object.priority}] #{title}*\n"\
+    "<#{hostname}#{h.project_ticket_path(project, self)}|*[#{object.priority}] #{title}*>\n"\
     "```#{content.to_plain_text}```\n\n"\
     "_Ticket created by #{slack_created_by} and assigned to #{slack_assignee_name}_\n"
   end
@@ -48,5 +48,10 @@ class TicketDecorator < ApplicationDecorator
     else
       assignee.full_name
     end
+  end
+
+  # might be worth moving to a common class
+  def hostname
+    Rails.env.development? ? h.root_url(:port => 3000).chomp!("/") : 'http://coderalert.com'
   end
 end

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include DataEventPublishing
+
   belongs_to :company
   belongs_to :last_accessed_project, class_name: 'Project', optional: true
 
@@ -26,4 +28,6 @@ class User < ApplicationRecord
                    .joins("LEFT JOIN project_users pu ON users.id = pu.user_id AND pu.project_id = #{project.id}")
                    .where(pu: { project_id: nil })
   }
+
+  publishes_lifecycle_events
 end
