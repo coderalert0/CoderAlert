@@ -19,7 +19,7 @@ class AlertSettingsController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The alert setting was edited successfully'
+      flash.notice = 'The notification setting was edited successfully'
       redirect_to project_alert_settings_path
     else
       flash.alert = @form.display_errors
