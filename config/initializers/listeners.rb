@@ -9,4 +9,6 @@ Rails.application.config.to_prepare do
   Comment.subscribe SlackCommentListener.new, :prefix => true
   TicketView.subscribe SlackTicketViewListener.new, :prefix => true
   AlertSetting.subscribe SlackAlertSettingListener.new, :prefix => true
+
+  Ticket.subscribe SMSTicketListener.new, :prefix => true
 end

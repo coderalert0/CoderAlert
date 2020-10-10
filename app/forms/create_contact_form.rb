@@ -15,7 +15,7 @@ class CreateContactForm < BaseForm
 
       user.projects.each do |project|
         AlertSetting.find_or_create_by(alertable: contact, user: user, project: project) do |alert_setting|
-          alert_setting.alert = true if alert_setting.alert.nil?
+          alert_setting.alert = alerts
         end
       end
     end

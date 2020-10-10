@@ -43,7 +43,7 @@ class SlackTicketListener
   def user_list(ticket)
     ticket.project.slack_authorization
           .alert_settings
-          .with_slack_alerts_on
+          .slack_alerts_on
           .pluck(:slack_user_id).join(',')
   end
 end
