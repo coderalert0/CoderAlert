@@ -7,7 +7,7 @@
   <div class="modal-body">
     <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required', :include_blank => true %>
     <%= f.text_field :value, :label_class => 'required' %>
-    <%= f.form_group :alerts do %>
+    <%= f.form_group :alerts, help: "This setting will apply to all projects, you can override individual projects from 'Notification Settings'" do %>
       <%= f.check_box :alerts, { custom: true }, 'true', 'false' %>
     <% end %>
   </div>

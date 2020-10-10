@@ -27,9 +27,7 @@
           <td><%= contact.value %></td>
           <td>
             <span class="icon-holder">
-              <%= link_to contact_path(contact), :method => 'delete', data: {confirm: "Are you sure you want to delete this contact information?"} do %>
-                <i class="ti-trash"></i>
-              <% end %>
+              <%= link_to 'Edit', edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %>
             </span>
           </td>
         </tr>

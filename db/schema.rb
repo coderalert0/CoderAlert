@@ -76,7 +76,9 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
   create_table "authorizations", force: :cascade do |t|
     t.string "type", null: false
     t.integer "auth_id"
-    t.string "access_token", null: false
+    t.string "encrypted_access_token"
+    t.string "string"
+    t.string "encrypted_access_token_iv"
     t.string "webhook_url"
     t.string "name"
     t.string "channel"
@@ -183,7 +185,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end

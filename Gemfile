@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'actiontext', github: 'kobaltz/actiontext', branch: 'archive', require: 'action_text'
 gem 'active_storage_validations'
 gem 'amazing_print'
+gem 'attr_encrypted'
 gem 'aws-sdk-s3', require: false
 gem 'aws-ses'
 gem 'bootstrap'

@@ -8,7 +8,10 @@ class SlackDecorator < ApplicationDecorator
   end
 
   def name(user, project)
-    alert_setting = AlertSetting.where(project: project, user: user, alertable: project.slack_authorization).first
+    alert_setting = AlertSetting.where(project: project,
+                                       user: user,
+                                       alertable: project.slack_authorization).first
+
     return unless alert_setting.present?
 
     alert_setting.slack_user_id ? "<@#{alert_setting.slack_user_id}>" : user.full_name

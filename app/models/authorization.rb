@@ -8,5 +8,7 @@ class Authorization < ApplicationRecord
 
   validates_presence_of :type, :access_token, :project, :user
 
+  attr_encrypted :access_token, key: Rails.application.credentials.key
+
   publishes_lifecycle_events
 end
