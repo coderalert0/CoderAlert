@@ -14,9 +14,8 @@ class CreateContactForm < BaseForm
       contact.save!
 
       user.projects.each do |project|
-        AlertSetting.find_or_create_by(alertable: contact, user: user, project: project) do |alert_setting|
-          alert_setting.alert = alerts
-        end
+        alert_setting = AlertSetting.find_or_create_by(alertable: contact, user: user, project: project)
+        alert_setting.update(alert: alerts)
       end
     end
   end

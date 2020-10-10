@@ -1,16 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :load_and_authorize_project
-  before_action :load_and_authorize_owner
+  load_and_authorize_resource :project
+  load_and_authorize_resource :ticket, find_by: :slug
+  load_and_authorize_resource :article, find_by: :slug
   load_and_authorize_resource :comment, through: %i[article ticket]
 
   def create
-    if form.submit
-      flash.notice = 'The comment was added successfully'
-      redirect_to create_redirect_path
-    else
-      flash.alert = form.display_errors
-      redirect_to article_path(@article)
-    end
+    form.submit ? flash.notice = 'The comment was added successfully' : flash.alert = form.display_errors
+    redirect_to create_redirect_path
   end
 
   def destroy
@@ -43,21 +39,6 @@ class CommentsController < ApplicationController
       project_ticket_path(@project, @ticket)
     when Article
       project_article_path(@project, @article)
-    end
-  end
-
-  def load_and_authorize_project
-    # need to authorize
-    @project = Project.friendly.find(session[:project_id])
-  end
-
-  def load_and_authorize_owner
-    # need to authorize
-
-    if params[:article_id]
-      @article = @project.articles.friendly.find(params[:article_id])
-    elsif params[:ticket_id]
-      @ticket = @project.tickets.friendly.find(params[:ticket_id])
     end
   end
 end

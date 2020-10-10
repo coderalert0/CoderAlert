@@ -5,7 +5,7 @@ class SlackAuthorizationController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @response = retrieve_access_token
-        Rails.logger.info @response.inspect
+        logger.info @response.inspect
 
         create_authorization
         create_user_alert_settings(@authorization)
