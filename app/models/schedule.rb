@@ -5,6 +5,7 @@ class Schedule < ApplicationRecord
   belongs_to :user
 
   has_many :schedule_users, -> { order priority: :desc }, dependent: :destroy
+  has_many :project_users, through: :project
   has_many :users, through: :schedule_users
 
   enum frequency: { daily: 0, weekly: 1, biweekly: 2, monthly: 3 }

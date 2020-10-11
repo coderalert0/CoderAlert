@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_08_033003) do
+ActiveRecord::Schema.define(version: 2020_10_11_215354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.bigint "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "admin", default: false
     t.index ["project_id"], name: "index_project_users_on_project_id"
     t.index ["user_id"], name: "index_project_users_on_user_id"
   end
@@ -251,6 +252,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_033003) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.bigint "last_accessed_project_id"
+    t.boolean "global_admin", default: false
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

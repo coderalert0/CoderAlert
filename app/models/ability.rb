@@ -8,8 +8,13 @@ class Ability
 
     @user = user
 
+    # need to restrict to company
+    if user.global_admin?
+      can :manage, :all
+    end
+
     can :read, Project, id: user_project_ids
-    can :crud, Project, user_id: user.id
+    can [:update, :destroy], Project, project_users: { user_id: user.id, admin: true }
 
     can :read, Ticket, project_id: user_project_ids
     can :crud, Ticket, created_by_id: user.id, project_id: user_project_ids
@@ -17,13 +22,14 @@ class Ability
     can :read, Article, project_id: user_project_ids
     can :crud, Article, user_id: user.id, project_id: user_project_ids
 
+    # may need to update to only allow project admins to create
     can :manage, ProjectUser, project: { id: user_project_ids }
 
     # might not working when viewing others comments
     can :crud, Comment, user_id: user.id
 
     can :read, Schedule, project: { id: user_project_ids }
-    can :crud, Schedule, user_id: user.id, project: { id: user_project_ids }
+    can :crud, Schedule, project_users: { user_id: user.id, admin: true }
 
     can :crud, Contact, user_id: user.id
 
