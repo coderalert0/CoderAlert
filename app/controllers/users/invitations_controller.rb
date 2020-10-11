@@ -39,9 +39,10 @@ module Users
     def submit_redirect_path
       button_clicked = params[:commit]
 
-      if button_clicked == 'Submit'
+      case button_clicked
+      when 'Submit'
         project_project_users_path(@current_project)
-      elsif button_clicked == "Submit & Invite More"
+      when 'Submit & Invite More'
         new_user_invitation_path
       end
     end

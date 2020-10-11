@@ -2,6 +2,7 @@ class Ticket < ApplicationRecord
   extend FriendlyId
 
   include DataEventPublishing
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
@@ -14,6 +15,9 @@ class Ticket < ApplicationRecord
   has_many_attached :attachments
 
   friendly_id :generate_ticket_id, use: :scoped, scope: :project
+
+  after_update :publish_ticket_closed, if: :closed?
+  after_update :publish_ticket_cancelled, if: :cancelled?
 
   settings do
     mappings dynamic: false do
@@ -59,5 +63,21 @@ class Ticket < ApplicationRecord
   def generate_ticket_id
     # will cause issues if we allow deleting tickets
     "#{project.key}-#{Ticket.for_project(project).count + 1}"
+  end
+
+  def cancelled?
+    status == I18n.t(:cancelled, scope: %i[ticket status])
+  end
+
+  def closed?
+    status == I18n.t(:closed, scope: %i[ticket status])
+  end
+
+  def publish_ticket_cancelled
+    _publish self, :cancelled
+  end
+
+  def publish_ticket_closed
+    _publish self, :closed
   end
 end

@@ -4,7 +4,7 @@
   <%= f.text_field :title, :label_class => 'required' %>
   <%= f.select :assignee_id, options_for_select(@current_project.users.map { |u| [ u.ticket_assignee_select_value(@project), u.id ] }, :selected => @project.on_call_user.try(:id)), {help: @form.assignee_help_text, :include_blank => true} %>
   <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => :priority) }), :label_class => 'required' %>
-  <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => :status) }), :label_class => 'required' %>
+  <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => [:ticket, :status]) }), :label_class => 'required' %>
 
   <div class="form-group row">
     <%= f.label :description, :class => 'col-sm-2 required' %>

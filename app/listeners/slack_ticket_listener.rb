@@ -14,6 +14,14 @@ class SlackTicketListener
     send_ticket_updated_message(client, ticket)
   end
 
+  def on_ticket_closed(ticket)
+    return if ticket.project.slack_authorization.nil? || ticket.slack_channel_id.nil?
+
+    client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
+    archive_channel(client, ticket)
+  end
+  alias_method :on_ticket_cancelled, :on_ticket_closed
+
   private
 
   def create_channel(client, ticket)
@@ -24,6 +32,14 @@ class SlackTicketListener
     channel_id
   rescue StandardError => e
     Rails.logger.info e
+  end
+
+  def archive_channel(client, ticket)
+    begin
+      client.conversations_archive(channel: ticket.slack_channel_id)
+    rescue StandardError => e
+      Rails.logger.info e
+    end
   end
 
   def send_ticket_created_message(client, channel_id, ticket)

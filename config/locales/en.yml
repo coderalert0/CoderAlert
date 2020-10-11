@@ -44,16 +44,17 @@ en:
     lowest: 'Lowest'
     medium: 'Medium'
 
-  status:
-    draft: 'Draft'
-    open: 'Open'
-    in_progress: 'In Progress'
-    code_review: 'Code Review'
-    qa: 'QA'
-    reopened: 'Reopened'
-    resolved: 'Resolved'
-    closed: 'Closed'
-    cancelled: 'Cancelled'
+  ticket:
+    status:
+      draft: 'Draft'
+      open: 'Open'
+      in_progress: 'In Progress'
+      code_review: 'Code Review'
+      qa: 'QA'
+      reopened: 'Reopened'
+      resolved: 'Resolved'
+      closed: 'Closed'
+      cancelled: 'Cancelled'
 
   frequency:
     daily: 'Daily'

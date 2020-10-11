@@ -46,12 +46,6 @@ module DataEventPublishing
     end
   end
 
-  # TODO: refactor to use _publish and get rid of Publisher module
-  def publish_state(transition)
-    Rails.logger.debug { "publish #{_publish_model_name}_on_#{transition.to}" }
-    publish "#{_publish_model_name}_on_#{transition.to}".to_sym, self
-  end
-
   private
 
   def _publish_model_name
