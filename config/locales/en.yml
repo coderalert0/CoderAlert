@@ -37,12 +37,13 @@ en:
     next: Next
     finish: Finish
 
-  priority:
-    high: 'High'
-    highest: 'Highest'
-    low: 'Low'
-    lowest: 'Lowest'
-    medium: 'Medium'
+  sidebar:
+    dashboard: 'Dashboard'
+    tickets: 'Tickets'
+    team: 'Team'
+    knowledge_base: 'Knowledge Base'
+    schedule: 'Schedule'
+
 
   ticket:
     status:
@@ -56,11 +57,19 @@ en:
       closed: 'Closed'
       cancelled: 'Cancelled'
 
-  frequency:
-    daily: 'Daily'
-    weekly: 'Weekly'
-    biweekly: 'Bi-Weekly'
-    monthly: 'Monthly'
+    priority:
+      high: 'High'
+      highest: 'Highest'
+      low: 'Low'
+      lowest: 'Lowest'
+      medium: 'Medium'
+
+  schedule:
+    frequency:
+      daily: 'Daily'
+      weekly: 'Weekly'
+      biweekly: 'Bi-Weekly'
+      monthly: 'Monthly'
 
   contact:
     phone: 'Phone'

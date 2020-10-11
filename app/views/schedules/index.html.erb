@@ -21,7 +21,7 @@
           <%= link_to schedule.name, project_schedule_path(@current_project, schedule) %>
         </td>
         <td><%= schedule.on_call_user.decorate.full_name %></td>
-        <td><%= t(schedule.frequency.to_sym, :scope => :frequency) %></td>
+        <td><%= t(schedule.frequency.to_sym, :scope => [:schedule, :frequency]) %></td>
         <td><%= schedule.start.to_formatted_s(:custom_long_ordinal) %></td>
         <td><%= schedule.try(:end).try(:to_formatted_s, :custom_long_ordinal) %></td>
       </tr>
