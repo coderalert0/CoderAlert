@@ -74,3 +74,8 @@ en:
     errors:
       messages:
         content_type: is not a valid file format
+
+  activemodel:
+    attributes:
+      invite_user_form:
+        project_ids: Project

@@ -21,8 +21,10 @@
     <div class="col-sm-4">
       <% if @user.profile_image.attached? %>
         <%= image_tag resource.profile_image.variant(resize: '300x300>'), :class => 'mx-auto d-block' %>
-    <% end %>
-      <%= f.file_field :profile_image %>
+      <% end %>
+
+      <br/>
+      <%= f.file_field :profile_image, hide_label: true %>
     </div>
   </div>
 

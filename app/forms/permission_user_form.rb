@@ -19,6 +19,7 @@ class PermissionUserForm < BaseForm
     super
   end
 
+  # method repeated, try to DRY it
   def create_slack_alert_settings
     AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: true)
   end

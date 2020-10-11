@@ -12,8 +12,8 @@ module Users
       @form = create_form
 
       if @form.submit
-        flash.notice = 'The user was invited to the project(s) successfully'
-        redirect_to project_project_users_path(@project)
+        flash.notice = "#{@form.first_name} #{@form.last_name} was invited to the project(s) successfully"
+        redirect_to submit_redirect_path
       else
         flash.alert = @form.display_errors
         redirect_to action: :new
@@ -34,6 +34,16 @@ module Users
       form_params = params.require(:invite_user_form).permit(InviteUserForm.accessible_attributes)
       form_params[:project_ids].reject! { |project_id| project_id if project_id == '' }
       form_params
+    end
+
+    def submit_redirect_path
+      button_clicked = params[:commit]
+
+      if button_clicked == 'Submit'
+        project_project_users_path(@current_project)
+      elsif button_clicked == "Submit & Invite More"
+        new_user_invitation_path
+      end
     end
   end
 end

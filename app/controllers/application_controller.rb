@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user_tag
-    logger.tagged("USER_ID: #{current_user.id}") do
+    logger.tagged("USER_ID: #{current_user.try(:id)}") do
       yield
     end
   end

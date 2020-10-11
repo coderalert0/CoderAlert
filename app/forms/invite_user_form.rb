@@ -3,7 +3,7 @@ class InviteUserForm < BaseForm
 
   accessible_attr :first_name, :last_name, :email, project_ids: []
 
-  validates_presence_of :first_name, :last_name, :email
+  validates_presence_of :first_name, :last_name, :email, :project_ids
 
   def _submit
     ActiveRecord::Base.transaction do
@@ -12,9 +12,17 @@ class InviteUserForm < BaseForm
 
       projects.each do |project|
         ProjectUser.find_or_create_by(user: user, project: project)
+        create_slack_alert_settings(project, user) if project.slack_authorization.present?
       end
     end
   end
 
   alias save submit
+
+  private
+
+  # method repeated, try to DRY it
+  def create_slack_alert_settings(project, user)
+    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: true)
+  end
 end

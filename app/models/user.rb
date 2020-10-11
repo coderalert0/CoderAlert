@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :projects, through: :project_users
   has_many :schedule_users, dependent: :destroy
   has_many :contacts, dependent: :destroy
-  has_many :tickets, foreign_key: :created_by_id, dependent: :nullify
+  has_many :created_tickets, class_name: 'Ticket', foreign_key: :created_by_id, dependent: :nullify
+  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: :assignee_id, dependent: :nullify
   has_many :alert_settings
   has_one_attached :profile_image
 
