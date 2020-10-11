@@ -13,7 +13,7 @@ module Users
 
       if @form.submit
         flash.notice = 'The user was invited to the project(s) successfully'
-        redirect_to project_users_path
+        redirect_to project_project_users_path(@project)
       else
         flash.alert = @form.display_errors
         redirect_to action: :new

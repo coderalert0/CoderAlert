@@ -17,9 +17,9 @@ Rails.application.routes.draw do
     resources :tickets, path: 't' do
       resources :comments
     end
-  end
 
-  resources :project_users, path: 'pu'
+    resources :project_users, path: 'pu'
+  end
 
   resources :contacts, path: 'c'
 

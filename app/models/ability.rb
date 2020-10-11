@@ -17,7 +17,7 @@ class Ability
     can :read, Article, project_id: user_project_ids
     can :crud, Article, user_id: user.id, project_id: user_project_ids
 
-    can :manage, ProjectUser
+    can :manage, ProjectUser, project: { id: user_project_ids }
 
     # might not working when viewing others comments
     can :crud, Comment, user_id: user.id

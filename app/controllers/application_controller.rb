@@ -1,11 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  around_action :current_user_tag
+
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
   before_action :load_context
 
   private
+
+  def current_user_tag
+    logger.tagged("USER_ID: #{current_user.id}") do
+      yield
+    end
+  end
 
   def load_context
     return if current_user.nil?
