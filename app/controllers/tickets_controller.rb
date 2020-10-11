@@ -46,8 +46,10 @@ class TicketsController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = "The ticket was edited successfully."
-      flash.notice << "<br/>Do you want to <a href=#{new_project_article_path}>create an Article</a> describing how the issue was resolved? (it may help others in the future!)" if @form.ticket.saved_change_to_status?(to: 'Closed')
+      flash.notice = 'The ticket was edited successfully.'
+      if @form.ticket.saved_change_to_status?(to: 'Closed')
+        flash.notice << "<br/>Do you want to <a href=#{new_project_article_path}>create an Article</a> describing how the issue was resolved? (it may help others in the future!)"
+      end
 
       redirect_to project_tickets_path(@current_project)
     else

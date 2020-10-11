@@ -6,6 +6,8 @@
 
   <div class="modal-body">
     <%= f.select :user_id, options_for_select(@users.map { |u| [ u.full_name, u.id ] }), :label_class => 'required' %>
+    <%= f.check_box :admin, { custom: true }, 'true', 'false' %>
+    <br/>
     <%= link_to 'Invite a team member', new_user_invitation_path %>
   </div>
 

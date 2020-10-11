@@ -9,10 +9,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_user_tag
-    logger.tagged("USER_ID: #{current_user.try(:id)}") do
-      yield
-    end
+  def current_user_tag(&block)
+    logger.tagged("USER_ID: #{current_user.try(:id)}", &block)
   end
 
   def load_context

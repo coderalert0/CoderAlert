@@ -9,12 +9,10 @@ class Ability
     @user = user
 
     # need to restrict to company
-    if user.global_admin?
-      can :manage, :all
-    end
+    can :manage, :all if user.global_admin?
 
     can :read, Project, id: user_project_ids
-    can [:update, :destroy], Project, project_users: { user_id: user.id, admin: true }
+    can %i[update destroy], Project, project_users: { user_id: user.id, admin: true }
 
     can :read, Ticket, project_id: user_project_ids
     can :crud, Ticket, created_by_id: user.id, project_id: user_project_ids

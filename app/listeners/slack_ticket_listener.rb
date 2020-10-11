@@ -20,7 +20,7 @@ class SlackTicketListener
     client = Slack::Web::Client.new(token: ticket.project.slack_authorization.access_token)
     archive_channel(client, ticket)
   end
-  alias_method :on_ticket_cancelled, :on_ticket_closed
+  alias on_ticket_cancelled on_ticket_closed
 
   private
 
@@ -35,11 +35,9 @@ class SlackTicketListener
   end
 
   def archive_channel(client, ticket)
-    begin
-      client.conversations_archive(channel: ticket.slack_channel_id)
-    rescue StandardError => e
-      Rails.logger.info e
-    end
+    client.conversations_archive(channel: ticket.slack_channel_id)
+  rescue StandardError => e
+    Rails.logger.info e
   end
 
   def send_ticket_created_message(client, channel_id, ticket)
