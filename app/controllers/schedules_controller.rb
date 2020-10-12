@@ -53,7 +53,7 @@ class SchedulesController < ApplicationController
   private
 
   def create_form
-    CreateScheduleForm.new form_params(CreateScheduleForm).merge(schedule: @schedule)
+    CreateScheduleForm.new form_params(CreateScheduleForm).merge(schedule: @schedule, user: current_user)
   end
 
   def edit_form

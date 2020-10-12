@@ -33,7 +33,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @form = CreateContactForm.new form_params.merge(user: current_user)
+    @form = create_form
 
     if @form.submit
       flash.notice = 'The contact information was created successfully'
@@ -57,6 +57,10 @@ class ContactsController < ApplicationController
 
   def form_params
     params.require(:create_contact_form).permit(CreateContactForm.accessible_attributes)
+  end
+
+  def create_form
+    CreateContactForm.new form_params.merge(user: current_user)
   end
 
   def edit_form

@@ -26,6 +26,10 @@ class Schedule < ApplicationRecord
     schedule_users.max_by(&:priority).user if users.present?
   end
 
+  def priority(user)
+    schedule_users.where(user: user).first.try(:priority)
+  end
+
   private
 
   def ice_cube_schedule

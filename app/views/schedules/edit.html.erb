@@ -8,7 +8,7 @@
 
   <% @current_project.users.object.confirmed.each do |user| %>
     <%= label_tag "#{user.decorate.full_name}" %>
-    <%= text_field_tag "edit_schedule_form[users][#{user.id}]" %><br/>
+    <%= text_field_tag "edit_schedule_form[users][#{user.id}]", @schedule.priority(user) %><br/>
   <% end %>
 
   <%= submit_tag t(:submit), :class => 'btn btn-success' %>

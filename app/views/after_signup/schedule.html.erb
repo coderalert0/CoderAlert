@@ -15,7 +15,7 @@
 
   <% @current_project.users.confirmed.each do |user| %>
     <%= label_tag "#{user.decorate.full_name}" %>
-    <%= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]" %><br/>
+    <%= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]", @form.schedule.priority(user) %><br/>
   <% end %>
 
   <div class="actions text-right">

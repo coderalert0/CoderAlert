@@ -5,7 +5,7 @@ class CreateScheduleForm < BaseForm
 
   attr_writer :schedule
 
-  nested_attributes :name, :frequency, :start, :end, :project, to: :schedule
+  nested_attributes :name, :frequency, :start, :end, :project, :user, to: :schedule
 
   accessible_attr :name, :frequency, :start, :end, users: {}
 

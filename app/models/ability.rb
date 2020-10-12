@@ -27,7 +27,7 @@ class Ability
     can :crud, Comment, user_id: user.id
 
     can :read, Schedule, project: { id: user_project_ids }
-    can :crud, Schedule, project_users: { user_id: user.id, admin: true }
+    can :crud, Schedule#, project_users: { user_id: user.id, admin: true }
 
     can :crud, Contact, user_id: user.id
 
