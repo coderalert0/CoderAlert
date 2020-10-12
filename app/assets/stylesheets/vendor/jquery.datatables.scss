@@ -99,19 +99,9 @@ table {
         }
       }
 
-      &:hover {
-        color: #fff !important;
-        background: $default-primary;
-      }
-
       &.current {
         color: #fff !important;
-        background: $default-primary;
-
-        &:hover {
-          color: $default-white !important;
-          background: $default-primary;
-        }
+        background: $grey-500;
       }
     }
   }

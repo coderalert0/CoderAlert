@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
                   @project.articles
                 end
 
-    @articles = @articles.decorate
+    @articles = @articles.page(params[:page]).decorate
   end
 
   def show

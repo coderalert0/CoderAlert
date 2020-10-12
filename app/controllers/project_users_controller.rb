@@ -3,7 +3,7 @@ class ProjectUsersController < ApplicationController
   load_and_authorize_resource through: :project
 
   def index
-    @project_users = ProjectUser.where(project: @project).decorate
+    @project_users = ProjectUser.where(project: @project).page(params[:page]).decorate
   end
 
   def new
