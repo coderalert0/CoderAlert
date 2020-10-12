@@ -88,4 +88,4 @@ en:
   activemodel:
     attributes:
       invite_user_form:
-        project_ids: Project
+        project_ids: Project(s)

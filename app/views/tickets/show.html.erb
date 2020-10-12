@@ -2,9 +2,9 @@
 <%= link_to 'Delete', project_ticket_path(@current_project, @ticket), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the ticket #{@ticket.title}?"} %>
 
 <h3><%= @ticket.title %></h3>
-<%= @ticket.priority %></br>
-<%= @ticket.status %></br>
-<%= @ticket.content %>
+<label>Priority: </label><%= @ticket.priority %></br>
+<label>Status: </label><%= @ticket.status %></br>
+<label>Content: </label><%= @ticket.content %>
 
 <br/>
 <br/>
@@ -14,10 +14,14 @@
 <% end %>
 
 <br/><br/>
-<%= bootstrap_form_for @comment_form, :url => project_ticket_comments_path(@current_project, @ticket), :layout => :vertical do |f| %>
-  <%= f.text_area :content, :label => 'Comment' %>
-  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
-<% end %>
+
+<div class="w-50">
+  <%= bootstrap_form_for @comment_form, :url => project_ticket_comments_path(@current_project, @ticket), :layout => :vertical do |f| %>
+    <%= f.text_area :content, :label => 'Comment' %>
+    <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  <% end %>
+</div>
+
 
 <% @ticket.comments.each do |comment| %>
   <%= comment.content %>

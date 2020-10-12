@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CoderAlert</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <title>CoderAlert</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body class="app">
-  <div class="peers ai-s fxw-nw h-100vh">
-    <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r" style='min-width: 320px;'>
-      <%= yield %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="app is-collapsed">
+
+<!-- @App Content -->
+<!-- =================================================== -->
+<div>
+  <!-- ### $Topbar ### -->
+  <div class="header navbar w-100">
+    <div class="header-container">
+      <div class="nav-left">
+        <h5 class="mt-3">CoderAlert</h5>
+      </div>
     </div>
-    <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style="background-image: url(<%= image_path('bg.jpg')%>)"></div>
   </div>
-  </body>
+
+  <!-- ### $App Screen Content ### -->
+  <main class='main-content bgc-grey-200'>
+    <div class="row">
+        <div class="<%= 'bgc-white w-50 p-20 bd mx-auto' %>">
+          <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
+
+          <%= yield %>
+        </div>
+    </div>
+  </main>
+
+  <!-- ### $App Screen Footer ### -->
+  <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+    <span>Copyright © 2020 CoderAlert. All rights reserved.</span>
+  </footer>
+</div>
+</body>
 </html>
-
-
-<!--<h2>Log in</h2>-->
-
-<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<!--  <div class="field">-->
-<!--    <%#= f.label :email %><br />-->
-<%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-<!--  </div>-->
-
-<!--  <div class="field">-->
-<!--    <%#= f.label :password %><br />-->
-<%#= f.password_field :password, autocomplete: "current-password" %>
-<!--  </div>-->
-
-<%# if devise_mapping.rememberable? %>
-<!--    <div class="field">-->
-<%#= f.check_box :remember_me %>
-<%#= f.label :remember_me %>
-<!--    </div>-->
-<%# end %>
-
-<!--  <div class="actions">-->
-<%#= f.submit "Log in" %>
-<!--  </div>-->
-<%# end %>
-
-<%#= render "devise/shared/links" %>

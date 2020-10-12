@@ -11,10 +11,10 @@ en:
       invitation_removed: "Your invitation was removed."
       new:
         header: "Send invitation"
-        submit_button: "Send an invitation"
+        submit_button: "Submit"
       edit:
         header: "Set your password"
-        submit_button: "Set my password"
+        submit_button: "Submit"
     mailer:
       invitation_instructions:
         subject: "Invitation instructions"

@@ -12,10 +12,12 @@
 <% end %>
 
 <br/><br/>
-<%= bootstrap_form_for @comment_form, :url => project_article_comments_path(@project, @article), :layout => :vertical do |f| %>
-  <%= f.text_area :content, :label => 'Comment' %>
-  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
-<% end %>
+<div class="w-50">
+  <%= bootstrap_form_for @comment_form, :url => project_article_comments_path(@project, @article), :layout => :vertical do |f| %>
+    <%= f.text_area :content, :label => 'Comment' %>
+    <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  <% end %>
+</div>
 
 <% @article.comments.each do |comment| %>
   <%= comment.content %>
