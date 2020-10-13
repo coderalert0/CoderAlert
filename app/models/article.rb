@@ -2,6 +2,7 @@ class Article < ApplicationRecord
   extend FriendlyId
 
   include Searchable
+  include AttachmentValidateable
 
   belongs_to :project
   belongs_to :user
@@ -23,11 +24,6 @@ class Article < ApplicationRecord
   end
 
   validates_presence_of :title, :content, :project, :user
-  validates :attachments,
-            content_type: ['image/bmp', 'text/csv', 'application/msword', 'image/gif',
-                           'image/jpeg', 'image/jpg', 'image/png', 'application/pdf',
-                           'application/rtf', 'image/tiff', 'text/plain', 'application/vnd.ms-excel'],
-            size: { less_than: 5.megabytes, message: 'file size limit is 5MB each' }
 
   has_rich_text :content
 

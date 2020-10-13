@@ -3,6 +3,7 @@ class Ticket < ApplicationRecord
 
   include DataEventPublishing
   include Searchable
+  include AttachmentValidateable
 
   belongs_to :project
   belongs_to :created_by, class_name: 'User', foreign_key: :created_by_id
@@ -33,11 +34,6 @@ class Ticket < ApplicationRecord
   end
 
   validates_presence_of :title, :status, :priority, :content, :created_by, :project
-  validates :attachments,
-            content_type: ['image/bmp', 'text/csv', 'application/msword', 'image/gif',
-                           'image/jpeg', 'image/jpg', 'image/png', 'application/pdf',
-                           'application/rtf', 'image/tiff', 'text/plain', 'application/vnd.ms-excel'],
-            size: { less_than: 5.megabytes, message: 'file size limit is 5MB each' }
 
   has_rich_text :content
 
