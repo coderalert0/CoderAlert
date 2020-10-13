@@ -6,8 +6,7 @@ class TicketsController < ApplicationController
     query = params[:search_tickets].try(:[], :query)
 
     @tickets = if query
-                 # scope this to the project or company
-                 Ticket.search("*#{query}*").records
+                 Ticket.search_project(query, @project).records
                else
                  @project.tickets.includes(:ticket_views)
                end

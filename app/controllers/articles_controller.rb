@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     query = params[:search_articles].try(:[], :query)
 
     @articles = if query
-                  Article.search("*#{query}*").records
+                  Article.search_project(query, @project).records
                 else
                   @project.articles
                 end

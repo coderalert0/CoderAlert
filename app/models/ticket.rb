@@ -2,9 +2,7 @@ class Ticket < ApplicationRecord
   extend FriendlyId
 
   include DataEventPublishing
-
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable
 
   belongs_to :project
   belongs_to :created_by, class_name: 'User', foreign_key: :created_by_id
@@ -26,6 +24,7 @@ class Ticket < ApplicationRecord
       indexes :status, type: :text
       indexes :priority, type: :text
       indexes :slug, type: :keyword
+      indexes :project_id, type: :keyword
       indexes :assignee, type: :object do
         indexes :first_name, type: :text
         indexes :last_name, type: :text
@@ -54,7 +53,7 @@ class Ticket < ApplicationRecord
   def as_indexed_json(options = {})
     as_json(
       options.merge(
-        only: %i[title content status priority slug],
+        only: %i[title content status priority slug project_id],
         include: { assignee: { only: %i[first_name last_name] } }
       )
     )
