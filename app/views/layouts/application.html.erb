@@ -120,7 +120,7 @@
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                   <div class="peer">
                     <i class="ti-ruler-pencil c-blue-500"></i>
-                    <span class="title">Projects (<%= @current_project.name %>)</span>
+                    <span class="title"><%= t(:projects, :current_project => @current_project.name, :scope => :header) %></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
@@ -153,28 +153,28 @@
                     <% end %>
                   </div>
                   <div class="peer">
-                    <span class="title">Welcome! <%= current_user.first_name %></span>
+                    <span class="title"><%= t(:welcome, :name => current_user.first_name, :scope => :header) %></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
                   <li>
                     <%= link_to edit_user_registration_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
                       <i class="ti-settings mR-10"></i>
-                      <span>Account Settings</span>
+                      <span><%= t(:account_settings, :scope => :header) %></span>
                     <% end %>
                   </li>
 
                   <li>
                     <%= link_to contacts_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
                       <i class="ti-email mR-10"></i>
-                      <span>Contact Info</span>
+                      <span><%= t(:contact_info, :scope => :header) %></span>
                     <% end %>
                   </li>
 
                   <li>
                     <%= link_to project_alert_settings_path(@current_project), class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
                       <i class="ti-bell mR-10"></i>
-                      <span>Notification Settings</span>
+                      <span><%= t(:notification_settings, :scope => :header) %></span>
                     <% end %>
                   </li>
 
@@ -182,7 +182,7 @@
                   <li>
                     <%= link_to destroy_user_session_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700', method: :delete do %>
                       <i class="ti-power-off mR-10"></i>
-                        <span>Logout</span>
+                        <span><%= t(:logout, :scope => :header) %></span>
                     <% end %>
                   </li>
                 </ul>
@@ -212,7 +212,7 @@
 
         <!-- ### $App Screen Footer ### -->
         <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
-          <span>Copyright © 2020 CoderAlert. All rights reserved.</span>
+          <span><%= t(:copyright, :scope => :footer) %></span>
         </footer>
       </div>
     </div>

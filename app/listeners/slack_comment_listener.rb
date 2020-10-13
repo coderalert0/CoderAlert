@@ -1,5 +1,7 @@
 class SlackCommentListener
   def on_comment_created(comment)
+    return if comment.commentable.project.slack_authorization.nil? || comment.commentable.slack_channel_id.nil?
+
     client = Slack::Web::Client.new(token: comment.commentable.project.slack_authorization.access_token)
     send_comment_added_message(client, comment)
   end

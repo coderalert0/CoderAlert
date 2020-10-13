@@ -1,9 +1,7 @@
-<h2>Create a Project</h2>
+<h2><%= t(:title, :scope => [:welcome_wizard, :project]) %></h2>
 
 <div class="alert alert-info">
-  Welcome to CoderAlert! Please enter information about your project below
-  <br/><br/>In case you're wondering, abbreviation is a prefix for your projects ticket numbers
-  <br/>An abbreviation of PROJ will result in your Ticket ID looking like PROJ-1234
+  <%= t(:info_message, :scope => [:welcome_wizard, :project]).html_safe %>
 </div>
 
 

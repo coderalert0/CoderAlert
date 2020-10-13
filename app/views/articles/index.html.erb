@@ -1,26 +1,12 @@
-
-
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_project_article_path, class: 'btn btn-primary' %>
+    <%= link_to t(:new), new_project_article_path, class: 'btn btn-primary' %>
     <br/><br/>
-
-<!--    <label>-->
-<!--      Show-->
-<!--      <select name="dataTable_length" aria-controls="dataTable" class="">-->
-<!--        <option value="10">10</option>-->
-<!--        <option value="25">25</option>-->
-<!--        <option value="50">50</option>-->
-<!--        <option value="100">100</option>-->
-<!--      </select>-->
-<!--      entries-->
-<!--    </label>-->
-
   </div>
 
   <div id="dataTable_filter" class="dataTables_filter">
     <%= bootstrap_form_for :search_articles, url: project_articles_path(@current_project), method: :get do |f| %>
-      <%= f.text_field :query, label: 'Search' %>
+      <%= f.text_field :query, label: t(:search) %>
     <% end %>
   </div>
   <br/>
@@ -28,10 +14,10 @@
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40%;">Title</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 26%;">Author</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;">Created</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;">Updated</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40%;"><%= t(:title, :scope => :knowledge_base) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 26%;"><%= t(:author, :scope => :knowledge_base) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:created) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:updated) %></th>
     </tr>
     </thead>
     <tbody>

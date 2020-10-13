@@ -1,2 +1,2 @@
-<%= link_to 'Edit', edit_project_schedule_path(@project, @schedule), class: 'btn btn-primary' %>
-<%= link_to 'Delete', project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this schedule?"} %>
+<%= link_to t(:edit), edit_project_schedule_path(@project, @schedule), class: 'btn btn-primary' %>
+<%= link_to t(:delete), project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-danger', data: {confirm: t(:delete_message, :scope => :schedule)} %>

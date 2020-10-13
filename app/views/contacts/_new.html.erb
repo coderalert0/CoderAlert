@@ -1,13 +1,13 @@
 <%= bootstrap_form_for @form, :url => contacts_path, :remote => true do |f| %>
   <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">Add Contact Information</h4>
+    <h4 class="modal-title" id="myModalLabel"><%= t(:title, :scope => [:contact, :create]) %></h4>
     <button type="button" class="close" data-dismiss="modal">x</button>
   </div>
 
   <div class="modal-body">
     <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required' %>
-    <%= f.text_field :value, :label_class => 'required', help: 'If entering a non-US number, prefix with plus and the country code (i.e. +44)' %>
-    <%= f.form_group :alerts, help: "This setting will apply to all projects, you can override individual projects from 'Notification Settings'" do %>
+    <%= f.text_field :value, :label_class => 'required', help: t(:phone_help_text, :scope => :contact) %>
+    <%= f.form_group :alerts, help: t(:alert_help_text, :scope => :contact) do %>
       <%= f.check_box :alerts, { custom: true }, 'true', 'false' %>
     <% end %>
   </div>

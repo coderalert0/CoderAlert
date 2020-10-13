@@ -1,4 +1,4 @@
-<h2>Edit Article</h2>
+<h2><%= t(:title, :scope => [:article, :edit]) %></h2>
 
 <%= bootstrap_form_for @form, :url => project_article_path(@current_project), :method => :put do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>

@@ -1,8 +1,7 @@
-<h2>Receive Slack Notifications</h2>
+<h2><%= t(:title, :scope => [:welcome_wizard, :slack]) %></h2>
 
 <div class="alert alert-info">
-  You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated
-  <br/>Click the "Add to Slack" button below and grant access to CoderAlert to start receiving alerts
+  <%= t(:info_message, :scope => [:welcome_wizard, :slack]).html_safe %>
 </div>
 
 <div align="center">
@@ -12,6 +11,6 @@
 <br/><br/>
 
 <div class="text-right">
-  <%= link_to 'Back', previous_wizard_path, :class => 'btn btn-outline-dark' %>
+  <%= link_to t(:back, :scope => :welcome_wizard), previous_wizard_path, :class => 'btn btn-outline-dark' %>
   <%= link_to t(:finish, :scope => :welcome_wizard), root_path, class: 'btn btn-success' %>
 </div>

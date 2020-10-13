@@ -1,41 +1,32 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
-  submit: "Submit"
+  search: 'Search'
+  edit: 'Edit'
+  comment: 'Comment'
+  delete: 'Delete'
+  submit: 'Submit'
+  created: 'Created'
+  updated: 'Updated'
+  new: 'New'
 
   welcome_wizard:
-    next: Next
-    finish: Finish
+    next: 'Next'
+    back: 'Back'
+    finish: 'Finish'
+
+    schedule:
+      title: 'Create a Schedule'
+      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint<br/>by setting the frequency to bi-weekly and entering a sprint start date.<br/><br/>If you are unsure about the schedule, you can always edit the schedule after the setup process is complete."
+
+    project:
+      title: 'Create a Project'
+      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, abbreviation is a prefix for your projects ticket numbers<br/>An abbreviation of PROJ will result in your Ticket ID looking like PROJ-1234"
+
+    slack:
+      title: 'Receive Slack Notifications'
+      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated<br/>Click the \"Add to Slack\" button below and grant access to CoderAlert to start receiving alerts"
+
+    invite:
+      info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>This purpose of entering this information is to help familiarize you with adding team members to your project(s).<br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
 
   sidebar:
     dashboard: 'Dashboard'
@@ -44,9 +35,81 @@ en:
     knowledge_base: 'Knowledge Base'
     schedule: 'Schedule'
 
+  header:
+    welcome: 'Welcome! %{name}'
+    projects: 'Projects (%{current_project})'
+    account_settings: 'Account Settings'
+    contact_info: 'Contact Info'
+    notification_settings: 'Notification Settings'
+    logout: 'Logout'
+
+  footer:
+    copyright: 'Copyright © 2020 CoderAlert. All rights reserved.'
+
+  dashboard:
+    unresolved_tickets: 'Unresolved Tickets'
+    in_progress_tickets: 'In Progress Tickets'
+    average_resolution_time: 'Average Resolution Time'
+
+  knowledge_base:
+    title: 'Title'
+    author: 'Author'
+
+  article:
+    delete_message: "Are you sure you want to delete the article %{title}?"
+
+    create:
+      title: 'Create an Article'
+    edit:
+      title: 'Edit Article'
+
+  project:
+    create:
+      title: 'Create a Project'
+    edit:
+      title: 'Edit Project'
+
+  schedule:
+    name: 'Name'
+    currently_scheduled: 'Currently Scheduled'
+    frequency: 'Frequency'
+    start: 'Start'
+    end: 'End'
+
+    delete_message: 'Are you sure you want to delete this schedule?'
+
+    frequencies:
+      daily: 'Daily'
+      weekly: 'Weekly'
+      biweekly: 'Bi-Weekly'
+      monthly: 'Monthly'
+
+    create:
+      title: 'Create a Schedule'
+
+    edit:
+      title: 'Edit Schedule'
+
+  permission_user:
+    permission_user: 'Permission User'
+    name: 'Name'
+    email: 'Email'
+    administrator: 'Administrator'
+    unconfirmed: ' (unconfirmed)'
+    invite_a_team_member: 'Invite a team member'
+    delete_message: "Are you sure you want to remove %{user_name} from the %{project_name} project?"
+
+    modal:
+      title: 'Permission User to %{project}'
 
   ticket:
-    status:
+    priority: 'Priority'
+    id: 'ID'
+    title: 'Title'
+    status: 'Status'
+    assignee: 'Assignee'
+
+    statuses:
       draft: 'Draft'
       open: 'Open'
       in_progress: 'In Progress'
@@ -57,22 +120,55 @@ en:
       closed: 'Closed'
       cancelled: 'Cancelled'
 
-    priority:
+    priorities:
       high: 'High'
       highest: 'Highest'
       low: 'Low'
       lowest: 'Lowest'
       medium: 'Medium'
 
-  schedule:
-    frequency:
-      daily: 'Daily'
-      weekly: 'Weekly'
-      biweekly: 'Bi-Weekly'
-      monthly: 'Monthly'
+    create:
+      title: 'Create a Ticket'
+
+    edit:
+      title: 'Edit Ticket'
+
+  notification_settings:
+    title: 'My Notification Settings for %{project}'
+    info_message: "Your notification settings are set per project. To change your notification settings for other projects switch the project first<br/><br/>If you are not receiving Slack notifications, you may need to update the email address associated with your Slack account below<br/>Disabling Slack notifications will only be in effect for future tickets. You can manually leave past channels from Slack itself."
+    type: 'Type'
+    workspace: 'Workspace'
+    phone_slack_email: 'Phone/Slack Email'
+    alerts_on: 'Alerts On?'
+
+    edit:
+      title: 'Edit Notification Setting'
+
+  invite_a_team_member:
+    title: 'Invite a Team Member'
+    submit_and_invite_more: 'Submit & Invite More'
 
   contact:
     phone: 'Phone'
+    type: 'Type'
+    value: 'Value'
+    phone_help_text: 'If entering a non-US number, prefix with plus and the country code (i.e. +44)'
+    alert_help_text: "This setting will apply to all projects, you can override individual projects from 'Notification Settings'"
+    delete_message: "Are you sure you want to delete this contact information?"
+
+    index:
+      title: 'My Contact Information'
+
+    create:
+      title: 'Add Contact Information'
+
+    edit:
+      title: 'Edit Contact Information'
+
+  edit_account_settings:
+    title: 'Edit Account Settings'
+    password_help_text: '%{minimum_password_length} characters minimum. Leave blank if you dont want to change it'
+    current_password_help_text: 'We need your current password to confirm your changes'
 
   popover:
     account_unconfirmed_title: 'Account unconfirmed'

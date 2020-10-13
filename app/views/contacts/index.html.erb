@@ -1,8 +1,8 @@
-<h2>My Contact Information</h2>
+<h2><%= t(:title, :scope => [:contact, :index]) %></h2>
 
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div class="dataTables_length" id="dataTable_length">
-    <%= link_to 'New', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
+    <%= link_to t(:new), new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
     <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content"></div>
@@ -14,8 +14,8 @@
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50%;">Type</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;">Value</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50%;"><%= t(:type, :scope => :contact) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 50%;"><%= t(:value, :scope => :contact) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%"></th>
 
     </tr>
@@ -27,7 +27,7 @@
           <td><%= contact.value %></td>
           <td>
             <span class="icon-holder">
-              <%= link_to 'Edit', edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %>
+              <%= link_to t(:edit), edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %>
             </span>
           </td>
         </tr>

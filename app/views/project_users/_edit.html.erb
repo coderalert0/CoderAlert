@@ -1,6 +1,6 @@
 <%= bootstrap_form_for @form, :url => project_project_user_path(@project, @project_user), :method => :put, :remote => true do |f| %>
   <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">Permission User to <%= @project.name %></h4>
+    <h4 class="modal-title" id="myModalLabel"><%= t(:title, :project => @project.name, :scope => [:permission_user, :modal]) %></h4>
     <button type="button" class="close" data-dismiss="modal">x</button>
   </div>
 
@@ -8,11 +8,11 @@
     <%= f.select :user_id, options_for_select([[ @project_user.user.decorate.full_name, @project_user.user.id ]]), :label_class => 'required' %>
     <%= f.check_box :admin, { custom: true }, 'true', 'false' %>
     <br/>
-    <%= link_to 'Invite a team member', new_user_invitation_path %>
+    <%= link_to t(:invite_a_team_member, :scope => :permission_user), new_user_invitation_path %>
   </div>
 
   <div class="modal-footer">
-    <%= link_to 'Unpermission', project_project_user_path(@project, @project_user), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: "Are you sure you want to remove #{@project_user.user.decorate.full_name} from the #{@project_user.project.name} project?"} %>
+    <%= link_to 'Unpermission', project_project_user_path(@project, @project_user), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: t(:delete_message, :user_name => @project_user.user.decorate.full_name, :project_name => @project.name, :scope => :permission_user)} %>
     <%= submit_tag t(:submit), :class => 'btn btn-success' %>
   </div>
 <% end %>

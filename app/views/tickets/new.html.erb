@@ -1,10 +1,10 @@
-<h2>Create a Ticket</h2>
+<h2><h2><%= t(:title, :scope => [:ticket, :create]) %></h2></h2>
 
 <%= bootstrap_form_for @form, :url => project_tickets_path(@current_project) do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
   <%= f.select :assignee_id, options_for_select(@current_project.users.map { |u| [ u.ticket_assignee_select_value(@project), u.id ] }, :selected => @project.on_call_user.try(:id)), {help: @form.assignee_help_text, :include_blank => true} %>
-  <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => [:ticket, :priority]) }), :include_blank => true, :label_class => 'required' %>
-  <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => [:ticket, :status]) }), :include_blank => true, :label_class => 'required' %>
+  <%= f.select :priority, options_for_select(Ticket::PRIORITY.map { |p| t(p, :scope => [:ticket, :priorities]) }), :include_blank => true, :label_class => 'required' %>
+  <%= f.select :status, options_for_select(Ticket::STATUS.map { |p| t(p, :scope => [:ticket, :statuses]) }), :include_blank => true, :label_class => 'required' %>
 
   <div class="form-group row">
     <%= f.label :description, :class => 'col-sm-2 required' %>

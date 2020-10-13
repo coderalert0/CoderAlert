@@ -1,15 +1,12 @@
-<h2>Create a Schedule</h2>
+<h2><%= t(:title, :scope => [:welcome_wizard, :schedule]) %></h2>
 
 <div class="alert alert-info">
-  A schedule allows you to pre-determine the order of responsibility for production support tickets.
-  <br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint
-  <br/>by setting the frequency to bi-weekly and entering a sprint start date.
-  <br/><br/>If you are unsure about the schedule, you can always edit the schedule after the setup process is complete.
+  <%= t(:info_message, :scope => [:welcome_wizard, :schedule]).html_safe %>
 </div>
 
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
   <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequency]), s ] }), :label_class => 'required' %>
+  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label_class => 'required' %>
   <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
   <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
 
@@ -19,7 +16,7 @@
   <% end %>
 
   <div class="actions text-right">
-    <%= link_to 'Back', previous_wizard_path, :class => 'btn btn-outline-dark' %>
+    <%= link_to t(:back, :scope => :welcome_wizard), previous_wizard_path, :class => 'btn btn-outline-dark' %>
     <%= f.submit t(:next, :scope => :welcome_wizard), :class => 'btn btn-success' %>
   </div>
 <% end %>

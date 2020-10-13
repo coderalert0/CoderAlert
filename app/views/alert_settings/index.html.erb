@@ -1,9 +1,7 @@
-<h2>My Notification Settings for <%= @project.name %></h2>
+<h2><%= t(:title, :project => @project.name, :scope => :notification_settings ) %></h2>
 
 <div class="alert alert-info">
-  Your notification settings are set per project. To change your notification settings for other projects switch the project first
-  <br/><br/>If you are not receiving Slack notifications, you may need to update the email address associated with your Slack account below
-  <br/>Disabling Slack notifications will only be in effect for future tickets. You can manually leave past channels from Slack itself.
+  <%= t(:info_message, :scope => :notification_settings).html_safe %>
 </div>
 
 <div id="dataTable_wrapper" class="dataTables_wrapper">
@@ -20,11 +18,11 @@
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 20%;">Type</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;">Workspace</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;">Phone/Slack Email</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;">Alerts On?</th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;">Actions</th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 20%;"><%= t(:type, :scope => :notification_settings ) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;"><%= t(:workspace, :scope => :notification_settings ) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30%;"><%= t(:phone_slack_email, :scope => :notification_settings ) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;"><%= t(:alerts_on, :scope => :notification_settings ) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;"></th>
     </tr>
     </thead>
     <tbody>
@@ -43,7 +41,7 @@
           <td><%= alert_setting.alert_display %></td>
         <% end %>
 
-        <td><%= link_to 'Edit', edit_project_alert_setting_path(@project, alert_setting),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
+        <td><%= link_to t(:edit), edit_project_alert_setting_path(@project, alert_setting),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
 
       </tr>
     <% end %>
