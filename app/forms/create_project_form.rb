@@ -1,4 +1,5 @@
 class CreateProjectForm < BaseForm
+  attr_accessor :success
   attr_writer :project
 
   nested_attributes :name, :company, :key, to: :project
@@ -18,6 +19,7 @@ class CreateProjectForm < BaseForm
       project.save!
       ProjectUser.find_or_create_by(user: project.user, project: project)
     end
+    self.success = true
   end
   alias save submit
 

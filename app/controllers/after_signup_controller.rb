@@ -1,4 +1,8 @@
 class AfterSignupController < ApplicationController
+  rescue_from Wicked::Wizard::InvalidStepError do
+    redirect_to wizard_path(current_user.current_welcome_step)
+  end
+
   include Wicked::Wizard
 
   skip_before_action :load_context
@@ -6,7 +10,7 @@ class AfterSignupController < ApplicationController
   layout 'welcome_wizard'
 
   before_action :initialize_progress, only: [:show]
-  before_action :load_project
+  before_action :load_and_authorize_project
   before_action :initialize_step
 
   after_action :after_success_step, only: :update
@@ -14,6 +18,7 @@ class AfterSignupController < ApplicationController
   steps :project, :users, :schedule, :slack
 
   def show
+    skip_step if slack_step_complete?
     populate_show unless finish_step?
     render_wizard
   end
@@ -36,7 +41,7 @@ class AfterSignupController < ApplicationController
   end
 
   def initialize_step
-    return if finish_step?
+    return if step.nil? || finish_step?
 
     step_args = if users_step?
                   { company: current_user.company, project: project }
@@ -59,6 +64,10 @@ class AfterSignupController < ApplicationController
     step == :schedule
   end
 
+  def slack_step_complete?
+    step == :slack && @current_project.slack_authorization.present?
+  end
+
   def finish_step?
     step == Wicked::FINISH_STEP
   end
@@ -75,20 +84,26 @@ class AfterSignupController < ApplicationController
     end
   end
 
-  def load_project
+  def load_and_authorize_project
     @current_project = Project.find(session['project_id'])
+    authorize! :read, @current_project
   end
 
   def after_success_step
+    return unless @form.success == true
+    current_user.update(current_welcome_step: next_step)
+
     return if users_step?
 
     session["#{step}_id".to_sym] = @wizard_step.send(step.to_s).id
   end
 
   def initialize_progress
-    return unless wizard_steps.index(step).present?
+    step_index = wizard_steps.index(step)
 
-    current_step = wizard_steps.index(step) + 1
+    return unless step_index.present?
+
+    current_step = step_index + 1
     total_steps = wizard_steps.count
 
     @progress = Progress.new(current_step: current_step, total_steps: total_steps).decorate

@@ -1,7 +1,7 @@
 class CreateScheduleForm < BaseForm
   include ActiveRecord::AttributeAssignment
 
-  attr_accessor :users
+  attr_accessor :users, :success
 
   attr_writer :schedule
 
@@ -22,6 +22,7 @@ class CreateScheduleForm < BaseForm
         ScheduleUser.create(user_id: user_id, schedule: schedule, priority: priority)
       end
     end
+    self.success = true
   end
   alias save submit
 

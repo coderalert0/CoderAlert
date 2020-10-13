@@ -1,5 +1,5 @@
 class InviteUserForm < BaseForm
-  attr_accessor :first_name, :last_name, :email, :project_ids, :company
+  attr_accessor :first_name, :last_name, :email, :project_ids, :company, :success
 
   accessible_attr :first_name, :last_name, :email, project_ids: []
 
@@ -15,6 +15,7 @@ class InviteUserForm < BaseForm
         create_slack_alert_settings(project, user) if project.slack_authorization.present?
       end
     end
+    self.success = true
   end
 
   alias save submit

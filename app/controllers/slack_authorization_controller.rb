@@ -1,6 +1,7 @@
 class SlackAuthorizationController < ApplicationController
   def callback
     @project = Project.find(params[:project_id])
+    return if @project.slack_authorization.present?
 
     begin
       ActiveRecord::Base.transaction do
