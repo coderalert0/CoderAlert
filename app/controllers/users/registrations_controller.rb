@@ -19,7 +19,9 @@ module Users
                  :last_name,
                  :email,
                  :password,
-                 company_attributes: :name)
+                 :password_confirmation,
+                 :global_admin,
+                 company_attributes: :name).merge(global_admin: true)
       end
 
       devise_parameter_sanitizer.permit(:account_update) do |u|
@@ -27,6 +29,7 @@ module Users
                  :last_name,
                  :email,
                  :password,
+                 :password_confirmation,
                  :current_password,
                  :profile_image,
                  company_attributes: :name)

@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
 
   def load_context
     return if current_user.nil?
-    redirect_to after_signup_path(:project) and return if session[:project_id].nil?
 
     @current_project = Project.find(session[:project_id]).decorate
     @projects = current_user.projects.decorate

@@ -10,92 +10,103 @@ class AfterSignupController < ApplicationController
   layout 'welcome_wizard'
 
   before_action :initialize_progress, only: [:show]
-  before_action :load_and_authorize_project
-  before_action :initialize_step
+  before_action :load_and_authorize_resources
 
   after_action :after_success_step, only: :update
 
-  steps :project, :users, :schedule, :slack
+  steps :project, :invite_user, :schedule, :slack
 
   def show
     skip_step if slack_step_complete?
-    populate_show unless finish_step?
+    @form = send("show_#{step}_form") unless slack_step? || finish_step?
     render_wizard
   end
 
   def update
-    populate_update
+    @form = send("update_#{step}_form")
     render_wizard @form
   end
 
   private
 
-  def populate_show
-    @projects = current_user.projects
-    @form = @wizard_step.show_form
+  def load_and_authorize_resources
+    load_and_authorize_project
+    load_and_authorize_schedule
   end
 
-  def populate_update
-    @wizard_step.post_params = params
-    @form = @wizard_step.update_form
+  def load_and_authorize_project
+    @project = if session['project_id']
+                 Project.find(session['project_id'])
+               else
+                 Project.new(user: current_user, company: current_user.company)
+               end
+    authorize! :create, @project
   end
 
-  def initialize_step
-    return if step.nil? || finish_step?
-
-    step_args = if users_step?
-                  { company: current_user.company, project: project }
-                elsif project_step? || schedule_step?
-                  { step.to_s => send(step.to_s) }
+  def load_and_authorize_schedule
+    @schedule = if session['schedule_id']
+                  Schedule.find(session['schedule_id'])
+                else
+                  Schedule.new(user: current_user, project: @project)
                 end
-
-    @wizard_step = "Wizard::#{step.to_s.camelize}Step".constantize.new(step_args)
+    authorize! :create, @schedule
   end
 
   def users_step?
-    step == :users
+    step == :invite_user
   end
 
-  def project_step?
-    step == :project
-  end
-
-  def schedule_step?
-    step == :schedule
+  def slack_step?
+    step == :slack
   end
 
   def slack_step_complete?
-    step == :slack && @current_project.slack_authorization.present?
+    step == :slack && @project.slack_authorization.present?
   end
 
   def finish_step?
     step == Wicked::FINISH_STEP
   end
 
-  def project
-    @current_project || Project.new(user: current_user, company: current_user.company)
-  end
-
-  def schedule
-    if session['schedule_id']
-      Schedule.find(session['schedule_id'])
-    else
-      Schedule.new(user: current_user, project: project)
-    end
-  end
-
-  def load_and_authorize_project
-    @current_project = Project.find(session['project_id'])
-    authorize! :read, @current_project
-  end
-
   def after_success_step
     return unless @form.success == true
+
     current_user.update(current_welcome_step: next_step)
 
     return if users_step?
 
-    session["#{step}_id".to_sym] = @wizard_step.send(step.to_s).id
+    session["#{step}_id".to_sym] = @form.send(step.to_s).id
+  end
+
+  def show_project_form
+    CreateProjectForm.new(project: @project)
+  end
+
+  def update_project_form
+    CreateProjectForm.new params.require(:create_project_form)
+                                .permit(CreateProjectForm.accessible_attributes)
+                                .merge(project: @project)
+  end
+
+  def show_schedule_form
+    CreateScheduleForm.new(schedule: @schedule)
+  end
+
+  def update_schedule_form
+    CreateScheduleForm.new params.require(:create_schedule_form)
+                                 .permit(CreateScheduleForm.accessible_attributes)
+                                 .merge(schedule: @schedule)
+  end
+
+  def show_invite_user_form
+    InviteUserForm.new
+  end
+
+  def update_invite_user_form
+    InviteUserForm.new params
+      .require(:invite_user_form)
+      .permit(InviteUserForm.accessible_attributes)
+      .merge(company: current_user.company, project_ids: [@project.id.to_s])
   end
 
   def initialize_progress

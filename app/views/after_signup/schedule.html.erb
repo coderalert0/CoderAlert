@@ -10,7 +10,7 @@
   <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
   <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
 
-  <% @current_project.users.confirmed.each do |user| %>
+  <% @project.users.confirmed.each do |user| %>
     <%= label_tag "#{user.decorate.full_name}" %>
     <%= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]", @form.schedule.priority(user) %><br/>
   <% end %>
