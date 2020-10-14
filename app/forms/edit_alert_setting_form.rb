@@ -25,7 +25,7 @@ class EditAlertSettingForm < BaseForm
       response = client.users_lookupByEmail(email: slack_email)
       self.slack_user_id = response.user.id
     rescue StandardError => e
-      Rails.logger.info e
+      Rails.logger.error e
       errors.add(:base, 'The Slack account associated with the email address could not be found')
     end
   end

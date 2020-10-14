@@ -7,7 +7,7 @@ class SMSTicketListener
                                body: SMSDecorator.decorate(ticket).ticket_created_sms_message
                              })
     rescue StandardError => e
-      Rails.logger.info e
+      Rails.logger.error e
     end
   end
 

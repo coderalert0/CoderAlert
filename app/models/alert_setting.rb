@@ -16,4 +16,8 @@ class AlertSetting < ApplicationRecord
                         }
 
   publishes_lifecycle_events
+
+  def slack_authorization
+    alertable if alertable.is_a? SlackAuthorization
+  end
 end

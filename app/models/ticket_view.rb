@@ -13,4 +13,8 @@ class TicketView < ApplicationRecord
   def time_elapsed
     TimeDifference.between(DateTime.now, created_at).humanize
   end
+
+  def slack_authorization
+    ticket.project.slack_authorization
+  end
 end

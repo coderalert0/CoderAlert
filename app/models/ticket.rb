@@ -61,11 +61,11 @@ class Ticket < ApplicationRecord
   end
 
   def cancelled?
-    status == I18n.t(:cancelled, scope: %i[ticket status])
+    status == I18n.t(:cancelled, scope: %i[ticket statuses])
   end
 
   def closed?
-    status == I18n.t(:closed, scope: %i[ticket status])
+    status == I18n.t(:closed, scope: %i[ticket statuses])
   end
 
   def publish_ticket_cancelled
@@ -74,5 +74,14 @@ class Ticket < ApplicationRecord
 
   def publish_ticket_closed
     _publish self, :closed
+  end
+
+  # workaround to facilitate DRY'ing slack_client
+  def ticket
+    self
+  end
+
+  def slack_authorization
+    project.slack_authorization
   end
 end
