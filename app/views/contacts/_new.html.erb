@@ -7,9 +7,8 @@
   <div class="modal-body">
     <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required' %>
     <%= f.text_field :value, :label_class => 'required', help: t(:phone_help_text, :scope => :contact) %>
-    <%= f.form_group :alerts, help: t(:alert_help_text, :scope => :contact) do %>
-      <%= f.check_box :alerts, { custom: true }, 'true', 'false' %>
-    <% end %>
+    <%= f.select :alerts, options_for_select(AlertSetting::ALERTS.map { |p| [t(p, :scope => [:notification_settings, :alerts]), p] }), :label_class => 'required', help: t(:alert_help_text, :scope => :contact) %>
+
   </div>
 
   <div class="modal-footer">

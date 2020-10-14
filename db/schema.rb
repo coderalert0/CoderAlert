@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
   end
 
   create_table "alert_settings", force: :cascade do |t|
-    t.boolean "alert", default: false
+    t.string "alert"
     t.string "alertable_type", null: false
     t.bigint "alertable_id", null: false
     t.bigint "user_id", null: false
@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
   create_table "contacts", force: :cascade do |t|
     t.string "type", null: false
     t.string "value", null: false
-    t.boolean "alerts", default: false, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -8,14 +8,29 @@ class AlertSetting < ApplicationRecord
   validates_presence_of :alertable, :user, :project
 
   scope :for_project_user, ->(project, user) { AlertSetting.where(project: project, user: user) }
-  scope :slack_alerts_on, -> { AlertSetting.where.not(slack_user_id: nil).where(alert: true) }
-  scope :sms_alerts_on, lambda { |project|
-                          AlertSetting.where(project: project,
-                                             alertable_type: 'Contact',
-                                             alert: true)
-                        }
+
+  scope :all_or_assigned, lambda { |user|
+    AlertSetting
+      .where('alert = ? OR (alert = ? AND user_id = ?)',
+             ALL, ASSIGNED, user.id)
+  }
+
+  scope :slack_alerts_on, lambda { |ticket|
+    AlertSetting
+      .where(project: ticket.project)
+      .where.not(slack_user_id: nil)
+      .all_or_assigned(ticket.assignee)
+  }
+
+  scope :sms_alerts_on, lambda { |ticket|
+    AlertSetting
+      .where(project: ticket.project, alertable_type: 'Contact')
+      .all_or_assigned(ticket.assignee)
+  }
 
   publishes_lifecycle_events
+
+  ALERTS = [ALL = :all, ASSIGNED = :assigned, NONE = :none].freeze
 
   def slack_authorization
     alertable if alertable.is_a? SlackAuthorization

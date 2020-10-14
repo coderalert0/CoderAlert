@@ -30,12 +30,12 @@ class PermissionUserForm < BaseForm
 
   # method repeated, try to DRY it
   def create_slack_alert_settings
-    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: true)
+    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: AlertSetting::ALL)
   end
 
   def create_contact_alert_settings
     user.contacts.each do |contact|
-      AlertSetting.create(alertable: contact, user: user, project: project, alert: false)
+      AlertSetting.create(alertable: contact, user: user, project: project, alert: AlertSetting::ASSIGNED)
     end
   end
 end

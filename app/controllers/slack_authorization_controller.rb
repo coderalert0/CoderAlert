@@ -73,7 +73,7 @@ class SlackAuthorizationController < ApplicationController
       AlertSetting.find_or_create_by(alertable: authorization,
                                      user: user,
                                      project: authorization.project) do |alert_setting|
-        alert_setting.alert = true unless alert_setting.alert
+        alert_setting.alert = AlertSetting::ALL unless alert_setting.alert
       end
     end
   end

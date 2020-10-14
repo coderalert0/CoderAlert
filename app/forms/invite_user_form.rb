@@ -24,6 +24,6 @@ class InviteUserForm < BaseForm
 
   # method repeated, try to DRY it
   def create_slack_alert_settings(project, user)
-    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: true)
+    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: AlertSetting::ALL)
   end
 end

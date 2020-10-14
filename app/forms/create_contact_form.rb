@@ -1,7 +1,8 @@
 class CreateContactForm < BaseForm
   attr_writer :contact
+  attr_accessor :alerts
 
-  nested_attributes :type, :value, :alerts, :user, to: :contact
+  nested_attributes :type, :value, :user, to: :contact
 
   accessible_attr :type, :value, :alerts
 

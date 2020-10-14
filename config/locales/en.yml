@@ -139,7 +139,12 @@ en:
     type: 'Type'
     workspace: 'Workspace'
     phone_slack_email: 'Phone/Slack Email'
-    alerts_on: 'Alerts On?'
+    alert: 'Alerts'
+
+    alerts:
+      all: 'All tickets'
+      assigned: 'Only assigned tickets'
+      none: 'None'
 
     edit:
       title: 'Edit Notification Setting'
