@@ -27,17 +27,17 @@
 
       <% @tickets.each do |ticket| %>
         <tr role="row" class="odd">
-          <td><%= ticket.priority %></td>
+          <td><%= ticket.priority_button %></td>
           <td class="sorting_1">
             <%= link_to ticket.slug, project_ticket_path(@current_project, ticket) %>
           </td>
           <td class="sorting_1">
             <%= link_to ticket.title, project_ticket_path(@current_project, ticket) %>
           </td>
-          <td><%= ticket.status %></td>
+          <td><%= ticket.status_display %></td>
           <td><%= ticket.try(:assignee).try(:full_name) %> <%= ticket.viewed_by_assignee_icon %></td>
-          <td><%= ticket.created_at.to_formatted_s(:custom_long_ordinal) %></td>
-          <td><%= ticket.updated_at.to_formatted_s(:custom_long_ordinal) %></td>
+          <td><%= ticket.created_at_display %></td>
+          <td><%= ticket.updated_at_display %></td>
         </tr>
       <% end %>
 

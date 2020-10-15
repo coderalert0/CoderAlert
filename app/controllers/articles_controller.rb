@@ -16,6 +16,7 @@ class ArticlesController < ApplicationController
 
   def show
     @comment_form = CreateCommentForm.new
+    @article = @article.decorate
   end
 
   def new

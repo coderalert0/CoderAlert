@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
     resources :tickets, path: 't' do
       resources :comments
+      put '/status', to: 'ticket_status#update'
     end
 
     resources :project_users, path: 'pu'

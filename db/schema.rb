@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
     t.bigint "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "slug"
+    t.string "slug", null: false
     t.index ["project_id"], name: "index_articles_on_project_id"
     t.index ["slug", "project_id"], name: "index_articles_on_slug_and_project_id", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
@@ -154,12 +154,12 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "company_id"
+    t.bigint "company_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "slug"
-    t.string "key"
-    t.bigint "user_id"
+    t.string "key", null: false
+    t.bigint "user_id", null: false
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["key", "company_id"], name: "index_projects_on_key_and_company_id", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -202,15 +202,14 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "title", null: false
-    t.string "status", null: false
-    t.string "priority", null: false
-    t.bigint "created_by_id", null: false
+    t.integer "status", null: false
+    t.integer "priority", null: false
+    t.bigint "created_by_id"
     t.bigint "assignee_id"
     t.bigint "project_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "viewed_by_assignee"
-    t.string "slug"
+    t.string "slug", null: false
     t.string "slack_channel_id"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
@@ -239,9 +238,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
     t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "work_phone"
-    t.string "cell_phone"
-    t.bigint "company_id"
+    t.bigint "company_id", null: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"

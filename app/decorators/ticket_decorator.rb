@@ -2,16 +2,16 @@ class TicketDecorator < ApplicationDecorator
   delegate_all
   decorates_associations :assignee, :created_by
 
-  def priority
+  def priority_button
     btn_class = {
-      'Lowest' => 'btn-outline-dark',
-      'Low' => 'btn-info',
-      'Medium' => 'btn-secondary',
-      'High' => 'btn-warning',
-      'Highest' => 'btn-danger'
+      'lowest' => 'btn-outline-dark',
+      'low' => 'btn-info',
+      'medium' => 'btn-secondary',
+      'high' => 'btn-warning',
+      'highest' => 'btn-danger'
     }
 
-    h.content_tag(:button, object.priority, class: ['btn', btn_class[object.priority], 'btn-sm'])
+    h.content_tag(:button, priority_display, class: ['btn', btn_class[priority], 'btn-sm'])
   end
 
   def viewed_by_assignee_icon
@@ -26,11 +26,11 @@ class TicketDecorator < ApplicationDecorator
                 'title' => h.t(:ticket_viewed_by_assignee_title, scope: 'popover') }
   end
 
-  def created_at_display
-    created_at.strftime("%B %d, %Y %I:%M %p")
+  def priority_display
+    h.t(priority, :scope => [:ticket, :priorities])
   end
 
-  def updated_at_display
-    updated_at.strftime("%B %d, %Y %I:%M %p")
+  def status_display
+    h.t(status, :scope => [:ticket, :statuses])
   end
 end

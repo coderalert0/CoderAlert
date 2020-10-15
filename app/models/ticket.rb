@@ -33,16 +33,16 @@ class Ticket < ApplicationRecord
     end
   end
 
+  enum priority: { lowest: 0, low: 1, medium: 2, high: 3, highest: 4 }
+  enum status: { draft: 0, open: 1, in_progress: 2, code_review: 3, qa: 4, reopened: 5, resolved: 6, closed: 7, cancelled: 8 }
+
   validates_presence_of :title, :status, :priority, :content, :created_by, :project
 
   has_rich_text :content
 
   scope :for_project, ->(project) { Ticket.where(project: project) }
-  scope :unresolved, -> { Ticket.where.not(status: 'Resolved') }
-  scope :in_progress, -> { Ticket.where(status: 'In Progress') }
-
-  PRIORITY = %i[lowest low medium high highest].freeze
-  STATUS = %i[draft open in_progress code_review qa reopened resolved closed cancelled].freeze
+  scope :unresolved, -> { Ticket.where.not(status: :resolved) }
+  scope :in_progress, -> { Ticket.where(status: :in_progress) }
 
   publishes_lifecycle_events
 

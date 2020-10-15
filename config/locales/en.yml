@@ -9,6 +9,7 @@ en:
   new: 'New'
   created_at: 'Created at'
   updated_at: 'Updated at'
+  comment: 'Comment'
 
   welcome_wizard:
     next: 'Next'
@@ -66,6 +67,7 @@ en:
       title: 'Edit Article'
 
   project:
+    key: Key
     create:
       title: 'Create a Project'
     edit:
@@ -111,7 +113,8 @@ en:
     status: 'Status'
     assignee: 'Assignee'
     reporter: 'Reporter'
-    cancel: 'Cancel'
+    cancelled: 'Cancelled'
+    description: 'Description'
 
     statuses:
       draft: 'Draft'
