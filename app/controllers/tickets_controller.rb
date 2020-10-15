@@ -17,6 +17,7 @@ class TicketsController < ApplicationController
   def show
     @comment_form = CreateCommentForm.new
     populate_ticket_view
+    @ticket = @ticket.decorate
   end
 
   def new

@@ -25,4 +25,12 @@ class TicketDecorator < ApplicationDecorator
                                       scope: 'popover'),
                 'title' => h.t(:ticket_viewed_by_assignee_title, scope: 'popover') }
   end
+
+  def created_at_display
+    created_at.strftime("%B %d, %Y %I:%M %p")
+  end
+
+  def updated_at_display
+    updated_at.strftime("%B %d, %Y %I:%M %p")
+  end
 end

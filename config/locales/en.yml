@@ -7,6 +7,8 @@ en:
   created: 'Created'
   updated: 'Updated'
   new: 'New'
+  created_at: 'Created at'
+  updated_at: 'Updated at'
 
   welcome_wizard:
     next: 'Next'
@@ -108,6 +110,8 @@ en:
     title: 'Title'
     status: 'Status'
     assignee: 'Assignee'
+    reporter: 'Reporter'
+    cancel: 'Cancel'
 
     statuses:
       draft: 'Draft'
