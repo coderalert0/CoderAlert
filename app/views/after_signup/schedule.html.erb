@@ -16,7 +16,7 @@
   <% end %>
 
   <div class="actions text-right">
-    <%= link_to t(:back, :scope => :welcome_wizard), previous_wizard_path, :class => 'btn btn-outline-dark' %>
-    <%= f.submit t(:next, :scope => :welcome_wizard), :class => 'btn btn-success' %>
+    <%= back_button %>
+    <%= next_button %>
   </div>
 <% end %>

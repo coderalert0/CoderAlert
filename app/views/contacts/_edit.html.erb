@@ -12,6 +12,6 @@
 
   <div class="modal-footer">
     <%= link_to t(:delete), contact_path(@contact), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: t(:delete_message, :scope => :contact)} %>
-  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  <%= submit_button %>
   </div>
 <% end %>

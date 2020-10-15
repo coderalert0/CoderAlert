@@ -13,6 +13,6 @@
 
   <div class="modal-footer">
     <%= link_to 'Unpermission', project_project_user_path(@project, @project_user), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: t(:delete_message, :user_name => @project_user.user.decorate.full_name, :project_name => @project.name, :scope => :permission_user)} %>
-    <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+    <%= submit_button %>
   </div>
 <% end %>

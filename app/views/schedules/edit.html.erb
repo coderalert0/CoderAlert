@@ -11,5 +11,5 @@
     <%= text_field_tag "edit_schedule_form[users][#{user.id}]", @schedule.priority(user) %><br/>
   <% end %>
 
-  <%= submit_tag t(:submit), :class => 'btn btn-success' %>
+  <%= submit_button %>
 <% end %>

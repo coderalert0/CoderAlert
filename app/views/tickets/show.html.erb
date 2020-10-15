@@ -10,7 +10,7 @@
 
     <%= link_to t(:in_progress, :scope => [:ticket, :statuses]), project_ticket_status_path(@current_project, @ticket, :status => :in_progress), :method => 'put', class: 'btn btn-light border' %>
 
-    <%= link_to t(:cancel, :scope => [:ticket, :statuses]), project_ticket_status_path(@current_project, @ticket, :status => :cancelled), :method => 'put', class: 'btn btn-light border' %>
+    <%= link_to t(:resolved, :scope => [:ticket, :statuses]), project_ticket_status_path(@current_project, @ticket, :status => :resolved), :method => 'put', class: 'btn btn-light border' %>
 
     <div class="mt-4">
       <label><%= t(:priority, :scope => :ticket) %></label>: <%= @ticket.priority_display %></br>

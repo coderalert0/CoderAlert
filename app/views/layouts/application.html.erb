@@ -144,7 +144,11 @@
               </li>
             </ul>
 
-            <ul class="nav-right">
+            <ul class="nav-right d-flex">
+              <div class="my-auto">
+                <%= link_to t(:create_ticket), new_project_ticket_path(@current_project), :class => 'btn btn-primary' %>
+              </div>
+
               <li class="dropdown">
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                   <div class="peer mR-10">

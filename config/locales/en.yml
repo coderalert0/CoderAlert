@@ -10,6 +10,7 @@ en:
   created_at: 'Created at'
   updated_at: 'Updated at'
   comment: 'Comment'
+  create_ticket: 'Create Ticket'
 
   welcome_wizard:
     next: 'Next'

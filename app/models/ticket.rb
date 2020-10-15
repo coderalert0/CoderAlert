@@ -33,8 +33,21 @@ class Ticket < ApplicationRecord
     end
   end
 
-  enum priority: { lowest: 0, low: 1, medium: 2, high: 3, highest: 4 }
-  enum status: { draft: 0, open: 1, in_progress: 2, code_review: 3, qa: 4, reopened: 5, resolved: 6, closed: 7, cancelled: 8 }
+  enum priority: { lowest: 0,
+                   low: 1,
+                   medium: 2,
+                   high: 3,
+                   highest: 4 }
+
+  enum status: { draft: 0,
+                 open: 1,
+                 in_progress: 2,
+                 code_review: 3,
+                 qa: 4,
+                 reopened: 5,
+                 resolved: 6,
+                 closed: 7,
+                 cancelled: 8 }
 
   validates_presence_of :title, :status, :priority, :content, :created_by, :project
 

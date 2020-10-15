@@ -27,10 +27,10 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def priority_display
-    h.t(priority, :scope => [:ticket, :priorities])
+    h.t(priority, scope: %i[ticket priorities])
   end
 
   def status_display
-    h.t(status, :scope => [:ticket, :statuses])
+    h.t(status, scope: %i[ticket statuses])
   end
 end
