@@ -1,6 +1,6 @@
 class TicketDecorator < ApplicationDecorator
   delegate_all
-  decorates_associations :assignee, :created_by
+  decorates_associations :assignee, :created_by, :comments
 
   def priority_button
     btn_class = {
@@ -33,4 +33,25 @@ class TicketDecorator < ApplicationDecorator
   def status_display
     h.t(status, scope: %i[ticket statuses])
   end
+
+  def previous_status_button
+    index = Ticket.statuses[status]
+
+    return if index == 0
+
+    previous_status = Ticket.statuses.key(index - 1)
+    h.link_to I18n.t(previous_status, :scope => [:ticket, :statuses]), h.project_ticket_status_path(project, self.object, :status => previous_status), :method => 'put', class: 'btn btn-light border'
+  end
+
+  def next_status_button
+    index = Ticket.statuses[status]
+    count = Ticket.statuses.count
+
+    return if index + 1 == count
+
+    next_status = Ticket.statuses.key(index + 1)
+    h.link_to I18n.t(next_status, :scope => [:ticket, :statuses]), h.project_ticket_status_path(project, self.object, :status => next_status), :method => 'put', class: 'btn btn-light border'
+  end
+
+
 end

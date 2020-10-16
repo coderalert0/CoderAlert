@@ -1,4 +1,4 @@
 class ArticleDecorator < ApplicationDecorator
   delegate_all
-  decorates_association :user
+  decorates_associations :user, :comments
 end

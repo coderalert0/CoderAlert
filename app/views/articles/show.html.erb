@@ -12,26 +12,42 @@
       <%= @article.content %>
     </div>
 
-    <% @article.attachments.each do |attachment| %>
-      <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
+    <% if @article.attachments.present? %>
+      <br/><br/>
+      <div class="font-weight-bold"><%= t(:attachments) %>:</div>
+
+      <% @article.attachments.each do |attachment| %>
+        <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment"), :class => 'mr-3' %>
+      <% end %>
     <% end %>
 
     <br/><br/>
 
-    <% @article.comments.each do |comment| %>
-      <%= comment.content %>
+    <% if @article.comments.present? %>
+      <div class="font-weight-bold mb-3"><%= t(:comments) %>:</div>
 
-      <span class="icon-holder">
-        <%= link_to project_article_comment_path(@project, @article, comment), :method => 'delete' do %>
-          <i class="ti-trash"></i>
+      <% @article.comments.each do |comment| %>
+        <div>
+        <span class="icon-holder float-right">
+          <%= link_to project_article_comment_path(@project, @article, comment), :method => 'delete' do %>
+            <%=  content_tag(:i, '', class: 'ti-trash') %>
+          <% end %>
+        </span>
+
+          <%= t(:user_added_a_comment_on_date, :user => comment.user.full_name, :date_time => comment.created_at_display).html_safe %>
+          <br/><br/>
+          <%= comment.content %>
+
+        </div>
+        <% unless comment == @article.comments.last %>
+          <hr/>
         <% end %>
-      </span>
-
+      <% end %>
     <% end %>
 
-    <div>
+    <div class="mt-3">
       <%= bootstrap_form_for @comment_form, :url => project_article_comments_path(@current_project, @article), :layout => :vertical do |f| %>
-        <%= f.text_area :content, :label => t(:comment) %>
+        <%= f.text_area :content, :rows => 4, :hide_label => true %>
         <%= button_tag(type: "submit", :class => 'btn btn-light border') do %>
           <i class="ti-comment"> </i><%= t(:comment) %>
         <% end %>
@@ -41,7 +57,7 @@
 
   <div class="col-md-4">
     <label><%= t(:author, :scope => :knowledge_base) %>: </label>
-    <%= @article.user.full_name %><br/>
+    <span class='text-primary'><%= @article.user.full_name %></span><br/>
     <label class="mt-3"><%= t(:created_at) %>: </label>
     <%= @article.created_at_display %><br/>
     <label><%= t(:updated_at) %>: </label>

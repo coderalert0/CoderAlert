@@ -9,8 +9,10 @@ en:
   new: 'New'
   created_at: 'Created at'
   updated_at: 'Updated at'
-  comment: 'Comment'
+  comments: 'Comments'
+  attachments: 'Attachments'
   create_ticket: 'Create Ticket'
+  user_added_a_comment_on_date: "<span class='text-primary'>%{user}</span> added a comment on %{date_time}"
 
   welcome_wizard:
     next: 'Next'
