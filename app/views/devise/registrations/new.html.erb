@@ -2,36 +2,27 @@
 
 <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-6') do |f| %>
 
-  <div class="field">
     <%= f.text_field :first_name, autofocus: true %>
-  </div>
 
-  <div class="field">
     <%= f.text_field :last_name, autofocus: true %>
-  </div>
 
-  <div class="field">
     <%= f.fields_for :company do |company_fields| %>
       <%= company_fields.label :company %>
       <%= company_fields.text_field :name %>
     <% end %>
-  </div>
 
-  <div class="field">
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+
+    <%= f.select :time_zone, options_for_select(ActiveSupport::TimeZone.all.map { |tz| [ tz, tz.name ] }, :selected => browser_time_zone.name), { :include_blank => true, :label_class => 'required' } %>
+
 
   <div class="actions">
     <%= f.submit "Sign up", :class => 'btn btn-success' %>

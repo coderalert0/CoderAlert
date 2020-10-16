@@ -9,8 +9,9 @@
         <% end %>
       </span>
 
-      <%= t(:user_added_a_comment_on_date, :user => comment.user.full_name_with_profile_image, :date_time => comment.created_at_display).html_safe %>
-
+      <div class="mb-2">
+        <%= t(:user_added_a_comment_on_date, :user => comment.user.full_name_with_profile_image, :date_time => comment.created_at_display).html_safe %>
+      </div>
 
       <%= comment.content %>
     </div>

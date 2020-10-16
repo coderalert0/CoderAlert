@@ -2,6 +2,8 @@ module Users
   class InvitationsController < Devise::InvitationsController
     include DeviseConcern
 
+    before_action :configure_permitted_parameters, only: :update
+
     def new
       @form = InviteUserForm.new
       @projects = current_user.company.projects
@@ -18,6 +20,13 @@ module Users
         flash.alert = @form.display_errors
         redirect_to action: :new
       end
+    end
+
+    protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:accept_invitation,
+                                        keys: %i[password password_confirmation invitation_token time_zone])
     end
 
     private

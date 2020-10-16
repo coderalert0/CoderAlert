@@ -4,7 +4,7 @@ class SlackDecorator < ApplicationDecorator
   def ticket_created_message
     "<#{hostname}#{h.project_ticket_path(project, self)}|*[#{object.priority}] #{title}*>\n"\
     "```#{content.to_plain_text}```\n\n"\
-    "_Ticket created by #{name(created_by, project)} and assigned to #{assignee_name}_\n"
+    "_Ticket created by #{name(user, project)} and assigned to #{assignee_name}_\n"
   end
 
   def name(user, project)
@@ -20,7 +20,7 @@ class SlackDecorator < ApplicationDecorator
   def ticket_updated_message
     return unless saved_changes.present?
 
-    "```#{ticket_changes}```\n\n_Ticket updated by #{name(created_by, project)}_\n"
+    "```#{ticket_changes}```\n\n_Ticket updated by #{name(user, project)}_\n"
   end
 
   def assignee_name

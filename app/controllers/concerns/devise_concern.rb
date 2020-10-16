@@ -11,6 +11,10 @@ module DeviseConcern
       session[:project_id] = last_project_permissioned_to.id
     end
 
-    session[:project_id].present? ? stored_location_for(user) : after_signup_path(:project)
+    if session[:project_id].present?
+      stored_location_for(user) || root_path
+    else
+      after_signup_path(:project)
+    end
   end
 end

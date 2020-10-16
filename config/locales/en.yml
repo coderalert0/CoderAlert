@@ -21,7 +21,7 @@ en:
 
     schedule:
       title: 'Create a Schedule'
-      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint<br/>by setting the frequency to bi-weekly and entering a sprint start date.<br/><br/>If you are unsure about the schedule, you can always edit the schedule after the setup process is complete."
+      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint<br/><br/>If you are unsure about the schedule, you can always edit the schedule after the setup process is complete."
 
     project:
       title: 'Create a Project'
@@ -29,10 +29,10 @@ en:
 
     slack:
       title: 'Receive Slack Notifications'
-      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated<br/>Click the \"Add to Slack\" button below and grant access to CoderAlert to start receiving alerts"
+      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated. Click the \"Add to Slack\" button below and grant access to CoderAlert"
 
     invite:
-      info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>This purpose of entering this information is to help familiarize you with adding team members to your project(s).<br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
+      info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
 
   sidebar:
     dashboard: 'Dashboard'
@@ -106,8 +106,11 @@ en:
     invite_a_team_member: 'Invite a team member'
     delete_message: "Are you sure you want to remove %{user_name} from the %{project_name} project?"
 
-    modal:
+    create_modal:
       title: 'Permission User to %{project}'
+
+    edit_modal:
+      title: 'Edit User Permission'
 
   ticket:
     priority: 'Priority'
@@ -118,6 +121,7 @@ en:
     reporter: 'Reporter'
     cancelled: 'Cancelled'
     description: 'Description'
+    create_article_prompt: "<br/>Do you want to <a href=%{path}>create an Article</a> describing how the issue was resolved? (it may help others in the future!)"
 
     statuses:
       draft: 'Draft'

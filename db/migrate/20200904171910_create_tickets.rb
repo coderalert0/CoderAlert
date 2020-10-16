@@ -5,7 +5,7 @@ class CreateTickets < ActiveRecord::Migration[5.2]
       t.integer :status, null: false
       t.integer :priority, null: false
       t.string :description, null: false
-      t.references :created_by
+      t.references :user, null: false
       t.references :assignee
       t.references :project, null: false
     end

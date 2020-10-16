@@ -12,7 +12,7 @@ class Ability
     can %i[update destroy], Project, project_users: { user_id: user.id, admin: true }
 
     can :read, Ticket, project_id: user_project_ids
-    can :manage, Ticket, created_by_id: user.id, project_id: user_project_ids
+    can :manage, Ticket, user_id: user.id, project_id: user_project_ids
 
     can :read, Article, project_id: user_project_ids
     can :manage, Article, user_id: user.id, project_id: user_project_ids

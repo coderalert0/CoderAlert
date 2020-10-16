@@ -16,6 +16,8 @@
 
       <%= f.label :current_password, "Current Password".html_safe %>
       <%= f.password_field :current_password, hide_label: true, autocomplete: "current-password", help: t(:current_password_help_text, :scope => :edit_account_settings) %>
+
+      <%= f.time_zone_select :time_zone %>
     </div>
 
     <div class="col-sm-4">

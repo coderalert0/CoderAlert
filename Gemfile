@@ -31,6 +31,7 @@ gem 'aws-sdk-s3', require: false
 gem 'aws-ses'
 gem 'bootstrap'
 gem 'bootstrap_form', '~> 4.5'
+gem 'browser-timezone-rails'
 gem 'cancancan'
 gem 'carrierwave'
 gem 'data-confirm-modal'

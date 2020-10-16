@@ -6,7 +6,7 @@ class Ticket < ApplicationRecord
   include AttachmentValidateable
 
   belongs_to :project
-  belongs_to :created_by, class_name: 'User', foreign_key: :created_by_id
+  belongs_to :user
   belongs_to :assignee, class_name: 'User', foreign_key: :assignee_id
 
   has_many :comments, as: :commentable, dependent: :destroy
@@ -49,7 +49,7 @@ class Ticket < ApplicationRecord
                  reopened: 7,
                  cancelled: 8 }
 
-  validates_presence_of :title, :status, :priority, :content, :created_by, :project
+  validates_presence_of :title, :status, :priority, :content, :user, :project
 
   has_rich_text :content
 

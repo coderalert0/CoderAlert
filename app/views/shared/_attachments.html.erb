@@ -1,8 +1,9 @@
 <% if attachable.attachments.present? %>
-  <br/><br/>
-  <div class="font-weight-bold"><i class="ti-image"> </i><%= t(:attachments) %>:</div>
+  <div class="font-weight-bold mb-3"><i class="ti-image"> </i><%= t(:attachments) %>:</div>
 
   <% attachable.attachments.each do |attachment| %>
-    <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment"), :class => 'mr-3' %>
+    <div>
+      <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
+    </div>
   <% end %>
 <% end %>

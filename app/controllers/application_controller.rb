@@ -2,12 +2,25 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   around_action :current_user_tag
+  around_action :user_time_zone_setter, if: :current_user
 
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
   before_action :load_context
 
+  def browser_time_zone
+    browser_tz = ActiveSupport::TimeZone.find_tzinfo(cookies['browser.timezone'])
+    ActiveSupport::TimeZone.all.find { |zone| zone.tzinfo == browser_tz } || Time.zone
+  rescue TZInfo::UnknownTimezone, TZInfo::InvalidTimezoneIdentifier
+    Time.zone
+  end
+  helper_method :browser_time_zone
+
   private
+
+  def user_time_zone_setter(&block)
+    Time.use_zone(current_user.time_zone, &block)
+  end
 
   def current_user_tag(&block)
     logger.tagged("USER_ID: #{current_user.try(:id)}", &block)

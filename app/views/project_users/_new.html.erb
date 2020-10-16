@@ -1,6 +1,6 @@
 <%= bootstrap_form_for @form, :url => project_project_users_path(@project) do |f| %>
   <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel"><%= t(:title, :project => @project.name, :scope => [:permission_user, :modal]) %></h4>
+    <h4 class="modal-title" id="myModalLabel"><%= t(:title, :project => @project.name, :scope => [:permission_user, :create_modal]) %></h4>
     <button type="button" class="close" data-dismiss="modal">x</button>
   </div>
 

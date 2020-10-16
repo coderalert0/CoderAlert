@@ -4,7 +4,7 @@ class SMSDecorator < ApplicationDecorator
   def ticket_created_sms_message
     "[#{priority}] #{title}\n"\
     "#{content.to_plain_text}\n\n"\
-    "Ticket created by #{created_by.decorate.full_name} and assigned to #{assignee_name}\n"\
+    "Ticket created by #{user.decorate.full_name} and assigned to #{assignee_name}\n"\
     "#{hostname}#{h.project_ticket_path(project, self)}"
   end
 

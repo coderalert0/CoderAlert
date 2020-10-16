@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_211424) do
+ActiveRecord::Schema.define(version: 2020_10_16_223804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
     t.string "title", null: false
     t.integer "status", null: false
     t.integer "priority", null: false
-    t.bigint "created_by_id"
+    t.bigint "user_id", null: false
     t.bigint "assignee_id"
     t.bigint "project_id", null: false
     t.datetime "created_at"
@@ -212,8 +212,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
     t.string "slug", null: false
     t.string "slack_channel_id"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
-    t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_211424) do
     t.bigint "last_accessed_project_id"
     t.boolean "global_admin", default: false
     t.string "current_welcome_step", default: "project"
+    t.string "time_zone", default: "UTC"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

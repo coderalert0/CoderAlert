@@ -1,6 +1,6 @@
 class TicketDecorator < ApplicationDecorator
   delegate_all
-  decorates_associations :assignee, :created_by, :comments
+  decorates_associations :assignee, :user, :comments
 
   def priority_button
     btn_class = {
