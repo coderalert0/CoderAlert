@@ -47,6 +47,11 @@ class SlackDecorator < ApplicationDecorator
     saved_changes.each do |attribute|
       next if attribute[0] == 'updated_at'
 
+      if ['status', 'priority'].include? attribute[0]
+        attribute[1][0] = h.t(attribute[1][0].to_sym, :scope => [:ticket, attribute[0].pluralize.to_sym])
+        attribute[1][1] = h.t(attribute[1][1].to_sym, :scope => [:ticket, attribute[0].pluralize.to_sym])
+      end
+
       formatted_changes << "#{attribute[0].to_s.capitalize}: "\
                                     "Changed from #{attribute[1][0]}"\
                                     " to #{attribute[1][1]}\n"

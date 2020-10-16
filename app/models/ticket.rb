@@ -44,9 +44,9 @@ class Ticket < ApplicationRecord
                  in_progress: 2,
                  code_review: 3,
                  qa: 4,
-                 reopened: 5,
-                 resolved: 6,
-                 closed: 7,
+                 resolved: 5,
+                 closed: 6,
+                 reopened: 7,
                  cancelled: 8 }
 
   validates_presence_of :title, :status, :priority, :content, :created_by, :project

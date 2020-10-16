@@ -62,7 +62,7 @@ en:
     author: 'Author'
 
   article:
-    delete_message: "Are you sure you want to delete the article %{title}?"
+    delete_message: "Are you sure you want to delete this article?"
 
     create:
       title: 'Create an Article'

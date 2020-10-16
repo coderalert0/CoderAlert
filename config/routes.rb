@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root 'dashboard#show'
 
-  resources :projects, path: 'p' do
+  resources :projects, path: 'p', except: :destroy do
     resources :schedules, path: 's'
     resources :alert_settings, path: 'as'
 
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :comments
     end
 
-    resources :tickets, path: 't' do
+    resources :tickets, path: 't', except: :destroy do
       resources :comments
       put '/status', to: 'ticket_status#update'
     end
