@@ -40,7 +40,10 @@ class TicketDecorator < ApplicationDecorator
     return unless index.between?(1, 6)
 
     previous_status = Ticket.statuses.key(index - 1)
-    h.link_to I18n.t(previous_status, :scope => [:ticket, :statuses]), h.project_ticket_status_path(project, self.object, :status => previous_status), :method => 'put', class: 'btn btn-light border'
+    h.link_to I18n.t(previous_status, scope: %i[ticket statuses]),
+              h.project_ticket_status_path(project, object, status: previous_status),
+              method: 'put',
+              class: 'btn btn-light border'
   end
 
   def next_status_button
@@ -49,8 +52,9 @@ class TicketDecorator < ApplicationDecorator
     return if index >= 6
 
     next_status = Ticket.statuses.key(index + 1)
-    h.link_to I18n.t(next_status, :scope => [:ticket, :statuses]), h.project_ticket_status_path(project, self.object, :status => next_status), :method => 'put', class: 'btn btn-light border'
+    h.link_to I18n.t(next_status, scope: %i[ticket statuses]),
+              h.project_ticket_status_path(project, object, status: next_status),
+              method: 'put',
+              class: 'btn btn-light border'
   end
-
-
 end

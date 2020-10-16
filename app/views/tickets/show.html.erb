@@ -29,9 +29,9 @@
 
   <div class="col-md-4">
     <label><%= t(:assignee, :scope => :ticket) %>: </label>
-    <span class='text-primary'><%= @ticket.assignee.full_name %></span><br/>
+    <span class='text-primary'><%= @ticket.assignee.full_name_with_profile_image %></span><br/>
     <label><%= t(:reporter, :scope => :ticket) %>: </label>
-    <span class='text-primary'><%= @ticket.created_by.full_name %></span><br/>
+    <span class='text-primary'><%= @ticket.created_by.full_name_with_profile_image %></span><br/>
     <label class="mt-3"><%= t(:created_at) %>: </label>
     <%= @ticket.created_at_display %><br/>
     <label><%= t(:updated_at) %>: </label>

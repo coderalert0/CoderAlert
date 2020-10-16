@@ -5,6 +5,15 @@ class UserDecorator < ApplicationDecorator
     "#{first_name} #{last_name}"
   end
 
+  def full_name_with_profile_image
+    if profile_image.attached?
+      h.image_tag(profile_image.variant(resize: '32x32>'))
+       .concat full_name
+    else
+      full_name
+    end
+  end
+
   def confirmation_state
     return unless confirmed_at.nil?
 

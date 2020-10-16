@@ -20,7 +20,7 @@
         <td class="sorting_1">
           <%= link_to schedule.name, project_schedule_path(@current_project, schedule) %>
         </td>
-        <td><%= schedule.on_call_user.decorate.full_name %></td>
+        <td><%= schedule.on_call_user.decorate.full_name_with_profile_image %></td>
         <td><%= t(schedule.frequency.to_sym, :scope => [:schedule, :frequencies]) %></td>
         <td><%= schedule.start.to_formatted_s(:custom_long_ordinal) %></td>
         <td><%= schedule.try(:end).try(:to_formatted_s, :custom_long_ordinal) %></td>
