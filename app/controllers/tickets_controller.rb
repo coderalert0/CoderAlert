@@ -49,7 +49,7 @@ class TicketsController < ApplicationController
       flash.notice = 'The ticket was edited successfully.'
 
       if @form.ticket.saved_change_to_status?(to: 'closed')
-        flash.notice << t(:create_article_prompt, :path => new_project_article_path, :scope => :ticket).html_safe
+        flash.notice << t(:create_article_prompt, path: new_project_article_path, scope: :ticket).html_safe
       end
 
       redirect_to project_tickets_path(@current_project)

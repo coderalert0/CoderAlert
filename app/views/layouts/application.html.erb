@@ -152,9 +152,7 @@
               <li class="dropdown">
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                   <div class="peer mR-10">
-                    <% if current_user.profile_image.attached? %>
-                      <%= image_tag current_user.profile_image.variant(resize: '32x32>') %>
-                    <% end %>
+                    <%= current_user.decorate.profile_image_display('32x32') %>
                   </div>
                   <div class="peer">
                     <span class="title"><%= t(:welcome, :name => current_user.first_name, :scope => :header) %></span>

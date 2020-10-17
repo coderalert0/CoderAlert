@@ -35,7 +35,7 @@
             <%= link_to ticket.title, project_ticket_path(@current_project, ticket) %>
           </td>
           <td><%= ticket.status_display %></td>
-          <td><%= ticket.try(:assignee).try(:full_name_with_profile_image) %> <%= ticket.viewed_by_assignee_icon %></td>
+          <td><%= ticket.try(:assignee).try(:full_name_link, @project) %> <%= ticket.viewed_by_assignee_icon %></td>
           <td><%= ticket.created_at_display %></td>
           <td><%= ticket.updated_at_display %></td>
         </tr>

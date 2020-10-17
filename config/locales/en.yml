@@ -1,17 +1,16 @@
 en:
-  search: 'Search'
-  edit: 'Edit'
-  comment: 'Comment'
-  delete: 'Delete'
-  submit: 'Submit'
-  created: 'Created'
-  updated: 'Updated'
-  new: 'New'
-  created_at: 'Created at'
-  updated_at: 'Updated at'
-  comments: 'Comments'
   attachments: 'Attachments'
+  comment: 'Comment'
+  comments: 'Comments'
+  created: 'Created'
   create_ticket: 'Create Ticket'
+  delete: 'Delete'
+  edit: 'Edit'
+  email: 'Email'
+  new: 'New'
+  search: 'Search'
+  submit: 'Submit'
+  updated: 'Updated'
   user_added_a_comment_on_date: "<span class='text-primary'>%{user}</span> added a comment on %{date_time}"
 
   welcome_wizard:
@@ -153,6 +152,7 @@ en:
     type: 'Type'
     workspace: 'Workspace'
     phone_slack_email: 'Phone/Slack Email'
+    slack_email: 'Slack Email'
     alert: 'Alerts'
 
     alerts:

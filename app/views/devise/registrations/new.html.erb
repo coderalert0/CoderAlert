@@ -21,7 +21,7 @@
 
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
 
-    <%= f.select :time_zone, options_for_select(ActiveSupport::TimeZone.all.map { |tz| [ tz, tz.name ] }, :selected => browser_time_zone.name), { :include_blank => true, :label_class => 'required' } %>
+    <%= f.select :time_zone, options_for_select(ActiveSupport::TimeZone.all.map { |tz| [ tz, tz.name ] }, :selected => browser_time_zone.name), { :include_blank => true, :label_class => 'required', :control_col  => 'col-md-8' } %>
 
 
   <div class="actions">

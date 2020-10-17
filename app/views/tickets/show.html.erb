@@ -29,12 +29,12 @@
 
   <div class="col-md-4">
     <label><%= t(:assignee, :scope => :ticket) %>: </label>
-    <span class='text-primary'><%= @ticket.assignee.full_name_with_profile_image %></span><br/>
+    <span><%= @ticket.assignee.full_name_link(@project) %> <%= @ticket.viewed_by_assignee_icon %></span><br/>
     <label><%= t(:reporter, :scope => :ticket) %>: </label>
-    <span class='text-primary'><%= @ticket.user.full_name_with_profile_image %></span><br/>
-    <label class="mt-3"><%= t(:created_at) %>: </label>
+    <span><%= @ticket.user.full_name_link(@project) %></span><br/>
+    <label class="mt-3"><%= t(:created) %>: </label>
     <%= @ticket.created_at_display %><br/>
-    <label><%= t(:updated_at) %>: </label>
+    <label><%= t(:updated) %>: </label>
     <%= @ticket.updated_at_display %><br/>
   </div>
 </div>

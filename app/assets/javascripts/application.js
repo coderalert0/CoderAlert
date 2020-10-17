@@ -25,3 +25,13 @@
 $(document).on('turbolinks:load', function () {
     $("[data-toggle='popover']").popover({trigger: 'hover'})
 });
+
+document.addEventListener('turbolinks:before-cache', function () {
+    if (document.body.classList.contains('modal-open')) {
+        $('.modal').hide()
+            .removeAttr('aria-modal')
+            .attr('aria-hidden', 'true');
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+    }
+});

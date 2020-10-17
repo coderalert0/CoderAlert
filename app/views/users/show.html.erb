@@ -1,0 +1,22 @@
+<div class="row">
+
+  <% if @user.profile_image.attached? %>
+    <div class="col-md-3">
+      <%= @user.profile_image_display('200x200') %>
+    </div>
+  <% end %>
+
+  <div class="col-md-9">
+    <h2><%= @user.full_name %></h2>
+
+    <div>
+      <label><%= t(:email) %></label>: <%= @user.email %>
+    </div>
+
+    <% @user.contacts.each do |contact| %>
+      <div>
+        <label><%= t(:phone, :scope => :contact) %></label>: <%= contact.value %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -5,13 +5,15 @@ class UserDecorator < ApplicationDecorator
     "#{first_name} #{last_name}"
   end
 
-  def full_name_with_profile_image
-    if profile_image.attached?
-      h.image_tag(profile_image.variant(resize: '32x32>'))
-       .concat full_name
-    else
-      full_name
+  def full_name_link(project)
+    h.link_to h.project_user_path(project, object) do
+      h.concat profile_image_display('32x32>') if profile_image.attached?
+      h.concat full_name
     end
+  end
+
+  def profile_image_display(size = '32x32', css_class = '')
+    h.image_tag(profile_image.variant(resize: "#{size}>"), class: css_class) if profile_image.attached?
   end
 
   def confirmation_state

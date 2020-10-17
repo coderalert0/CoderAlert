@@ -27,7 +27,7 @@
         <td class="sorting_1">
           <%= link_to article.title, project_article_path(@current_project, article) %>
         </td>
-        <td><%= article.user.full_name_with_profile_image %></td>
+        <td><%= article.user.full_name_link(@project) %></td>
         <td><%= article.created_at.to_formatted_s(:custom_long_ordinal) %></td>
         <td><%= article.updated_at.to_formatted_s(:custom_long_ordinal) %></td>
       </tr>

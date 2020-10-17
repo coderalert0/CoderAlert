@@ -29,6 +29,8 @@ class Ability
     can :manage, Contact, user_id: user.id
 
     can :manage, AlertSetting, user_id: user.id, project: { id: user_project_ids }
+
+    can :read, User
   end
 
   private

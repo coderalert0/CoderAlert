@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
 
     resources :project_users, path: 'pu'
+
+    resources :users, path: 'u', only: :show
   end
 
   resources :contacts, path: 'c'
