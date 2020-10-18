@@ -57,4 +57,10 @@ class TicketDecorator < ApplicationDecorator
               method: 'put',
               class: 'btn btn-light border'
   end
+
+  def assignee_help_text
+    return if project.schedules.present?
+
+    h.t(:schedule_help_text, path: h.new_project_schedule_path(ticket.project), scope: :ticket).html_safe
+  end
 end

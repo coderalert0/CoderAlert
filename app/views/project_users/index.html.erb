@@ -1,6 +1,6 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
-  <div class="dataTables_length" id="dataTable_length">
 
+  <% if can? :create, ProjectUser.new(project: @project) %>
     <%= link_to t(:permission_user, :scope => :permission_user), new_project_project_user_path(@project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
     <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -9,7 +9,7 @@
     </div>
 
     <br/><br/>
-  </div>
+  <% end %>
 
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
@@ -17,7 +17,9 @@
       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 35%"><%= t(:name, :scope => :permission_user) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 35%"><%= t(:email, :scope => :permission_user) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 20%"><%= t(:administrator, :scope => :permission_user) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%"></th>
+      <% if can? :create, ProjectUser.new(project: @project) %>
+        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%"></th>
+      <% end %>
     </tr>
     </thead>
     <tbody>
@@ -30,9 +32,12 @@
         </td>
         <td><%= project_user.user.email %></td>
         <td><%= project_user.admin_display %></td>
-        <td>
-          <%= link_to t(:edit), edit_project_project_user_path(@project, project_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %>
-        </td>
+
+        <% if can? :create, ProjectUser.new(project: @project) %>
+          <td>
+              <%= link_to t(:edit), edit_project_project_user_path(@project, project_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
 

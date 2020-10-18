@@ -121,6 +121,7 @@ en:
     cancelled: 'Cancelled'
     description: 'Description'
     create_article_prompt: "<br/>Do you want to <a href=%{path}>create an Article</a> describing how the issue was resolved? (it may help others in the future!)"
+    schedule_help_text: "You can create a <a target='_blank' href=%{path}>Schedule</a> to automatically assign team members. i.e. rotate every sprint"
 
     statuses:
       draft: 'Draft'

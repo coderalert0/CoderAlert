@@ -1,8 +1,12 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
-  <div class="dataTables_length" id="dataTable_length">
-    <%= link_to t(:new), new_project_schedule_path(@project), class: 'btn btn-primary' %>
-    <br/><br/>
-  </div>
+
+  <% if can? :create, Schedule.new(project: @project) %>
+    <div class="dataTables_length" id="dataTable_length">
+      <%= link_to t(:new), new_project_schedule_path(@project), class: 'btn btn-primary' %>
+      <br/><br/>
+    </div>
+  <% end %>
+
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">

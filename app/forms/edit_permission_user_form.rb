@@ -1,0 +1,2 @@
+class EditPermissionUserForm < BaseForm
+end

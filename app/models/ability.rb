@@ -14,6 +14,16 @@ class Ability
     project_user_admin_cans
   end
 
+  def can?(action, subject, *extra_args)
+    subject_arg = subject.is_a?(Draper::Decorator) ? subject.model : subject
+    super(action, subject_arg, *extra_args)
+  end
+
+  def authorize!(action, subject, *extra_args)
+    subject_arg = subject.is_a?(Draper::Decorator) ? subject.model : subject
+    super(action, subject_arg, *extra_args)
+  end
+
   private
 
   def global_admin_cans
@@ -42,11 +52,16 @@ class Ability
   def project_user_admin_cans
     can :update, Project, project_users: { user_id: @user.id, admin: true }
     can :crud, ProjectUser, project: { project_users: { user_id: @user.id, admin: true } }
+    can :permission, ProjectUser, user_id: company_user_ids
     can :crud, Schedule, project: { project_users: { user_id: @user.id, admin: true } }
     can %i[create update], Authorization, project: { project_users: { user_id: @user.id, admin: true } }
   end
 
   def project_user_ids
     @user.projects.pluck(:id)
+  end
+
+  def company_user_ids
+    @user.company.users.pluck(:id)
   end
 end

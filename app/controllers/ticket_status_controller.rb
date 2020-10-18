@@ -1,6 +1,7 @@
 class TicketStatusController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource :ticket, through: :project, find_by: :slug
+
   def update
     @ticket.status = params[:status]
 

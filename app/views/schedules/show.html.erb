@@ -1,2 +1,9 @@
-<%= link_to t(:edit), edit_project_schedule_path(@project, @schedule), class: 'btn btn-primary' %>
-<%= link_to t(:delete), project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-danger', data: {confirm: t(:delete_message, :scope => :schedule)} %>
+<h2><%= @schedule.name %></h2>
+
+<% if can? :update, @schedule %>
+  <%= link_to t(:edit), edit_project_schedule_path(@project, @schedule), class: 'btn btn-light border' %>
+<% end %>
+
+<% if can? :destroy, @schedule %>
+  <%= link_to t(:delete), project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-light border', data: {confirm: t(:delete_message, :scope => :schedule)} %>
+<% end %>

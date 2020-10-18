@@ -2,11 +2,15 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= link_to edit_project_article_path(@current_project, @article), class: 'btn btn-light border' do %>
-      <i class="ti-pencil"> </i><%= t(:edit) %>
+    <% if can? :update, @article %>
+      <%= link_to edit_project_article_path(@current_project, @article), class: 'btn btn-light border' do %>
+        <i class="ti-pencil"> </i><%= t(:edit) %>
+      <% end %>
     <% end %>
 
-    <%= link_to t(:delete), project_article_path(@current_project, @article), :method => 'delete', class: 'btn btn-light border', data: {confirm: t(:delete_message, :scope => :article)} %>
+    <% if can? :destroy, @article %>
+      <%= link_to t(:delete), project_article_path(@current_project, @article), :method => 'delete', class: 'btn btn-light border', data: {confirm: t(:delete_message, :scope => :article)} %>
+    <% end %>
 
     <div class="mt-4">
       <%= @article.content %>

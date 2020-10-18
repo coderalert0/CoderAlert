@@ -17,7 +17,10 @@ class ProjectUsersController < ApplicationController
   end
 
   def create
-    if form.submit
+    @form = create_form
+    authorize! :permission, @project_user
+
+    if @form.submit
       flash.notice = 'The user was permissioned to the project successfully'
       redirect_to project_project_users_path(@project)
     else
@@ -36,7 +39,9 @@ class ProjectUsersController < ApplicationController
   end
 
   def update
-    if form.submit
+    @form = edit_form
+
+    if @form.submit
       flash.notice = 'The user permission was edited successfully'
       redirect_to project_project_users_path(@project)
     else
@@ -60,7 +65,11 @@ class ProjectUsersController < ApplicationController
     params.require(:permission_user_form).permit(PermissionUserForm.accessible_attributes)
   end
 
-  def form
+  def create_form
     PermissionUserForm.new form_params.merge(project_user: @project_user)
+  end
+
+  def edit_form
+    EditPermissionUserForm.new form_params.merge(project_user: @project_user)
   end
 end
