@@ -1,6 +1,8 @@
 class SlackAuthorizationController < ApplicationController
   def callback
     @project = Project.find(params[:project_id])
+    authorize! :create, SlackAuthorization.new(project: @project)
+
     return if @project.slack_authorization.present?
 
     begin

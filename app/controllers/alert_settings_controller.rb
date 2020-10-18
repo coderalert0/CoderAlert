@@ -3,7 +3,7 @@ class AlertSettingsController < ApplicationController
   load_and_authorize_resource :project
 
   def index
-    @alert_settings = @alert_settings.for_project_user(@project, current_user).decorate
+    @alert_settings = @alert_settings.decorate
   end
 
   def edit

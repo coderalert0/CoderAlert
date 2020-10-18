@@ -8,7 +8,6 @@ class InviteUserForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       user = User.invite!(first_name: first_name, last_name: last_name, email: email, company: company)
-      projects = Project.find(project_ids)
 
       projects.each do |project|
         ProjectUser.find_or_create_by(user: user, project: project)
@@ -20,10 +19,16 @@ class InviteUserForm < BaseForm
 
   alias save submit
 
+  def projects
+    Project.find(project_ids)
+  end
+
   private
 
   # method repeated, try to DRY it
   def create_slack_alert_settings(project, user)
-    AlertSetting.create(alertable: project.slack_authorization, user: user, project: project, alert: AlertSetting::ALL)
+    AlertSetting.find_or_create_by(alertable: project.slack_authorization, user: user, project: project) do |alert_setting|
+      alert_setting.alert = AlertSetting::ALL
+    end
   end
 end

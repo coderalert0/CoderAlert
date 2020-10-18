@@ -5,13 +5,16 @@ module Users
     before_action :configure_permitted_parameters, only: :update
 
     def new
-      @form = InviteUserForm.new
       @projects = current_user.company.projects
+      authorize_project_user(@projects)
+
+      @form = InviteUserForm.new
       super
     end
 
     def create
       @form = create_form
+      authorize_project_user(@form.projects)
 
       if @form.submit
         flash.notice = "#{@form.first_name} #{@form.last_name} was invited to the project(s) successfully"
@@ -54,6 +57,10 @@ module Users
       when 'Submit & Invite More'
         new_user_invitation_path
       end
+    end
+
+    def authorize_project_user(projects)
+      projects.each { |project| authorize! :crud, ProjectUser.new(project: project) }
     end
   end
 end
