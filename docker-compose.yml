@@ -13,7 +13,6 @@ services:
     volumes:
       - .:/coder_alert
       - node_modules:/coder_alert/node_modules
-      - /coderalert/tmp
     ports:
       - "3000:3000"
     environment:
@@ -35,15 +34,15 @@ services:
     ports:
       - "9200:9200"
 
+  delayed_job:
+    build: .
+    command: bash -c "bundle exec rake jobs:work"
+    volumes:
+      - .:/coder_alert
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+
 volumes:
   node_modules:
-
-#  delayed_job:
-#    build: .
-#    command: bash -c "bundle exec rake jobs:work"
-#    volumes:
-#      - .:/coder_alert
-#    depends_on:
-#      - db
-#    tty: true
-#    stdin_open: true

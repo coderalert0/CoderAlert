@@ -21,7 +21,7 @@ class SlackClient
     @channel_id = create_channel
 
     @client.conversations_invite(channel: @channel_id, users: user_list)
-    @client.chat_postMessage(channel: @channel_id, text: SlackDecorator.decorate(@ticket).ticket_created_message)
+    @client.chat_postMessage(channel: @channel_id, text: SlackTicketDecorator.decorate(@ticket).ticket_created_message)
   rescue StandardError => e
     Rails.logger.error e
   end
@@ -30,7 +30,7 @@ class SlackClient
     return unless slack_channel?
 
     @client.chat_postMessage(channel: @ticket.slack_channel_id,
-                             text: SlackDecorator.decorate(@ticket).ticket_updated_message)
+                             text: SlackTicketDecorator.decorate(@ticket).ticket_updated_message)
   rescue StandardError => e
     Rails.logger.error e
   end
@@ -39,7 +39,7 @@ class SlackClient
     return unless slack_channel?
 
     @client.chat_postMessage(channel: @ticket.slack_channel_id,
-                             text: SlackDecorator.decorate(@comment).comment_added)
+                             text: SlackTicketDecorator.decorate(@comment).comment_added)
   rescue StandardError => e
     Rails.logger.error e
   end
@@ -47,8 +47,9 @@ class SlackClient
   def send_ticket_viewed_message
     return unless slack_channel?
 
-    @client.chat_postMessage(channel: @ticket_view.ticket.slack_channel_id,
-                             text: SlackDecorator.decorate(@ticket_view).ticket_viewed)
+    ticket = @ticket_view.ticket
+    @client.chat_postMessage(channel: ticket.slack_channel_id,
+                             text: SlackTicketDecorator.decorate(ticket).ticket_viewed)
   rescue StandardError => e
     Rails.logger.error e
   end

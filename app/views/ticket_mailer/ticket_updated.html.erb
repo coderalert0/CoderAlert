@@ -1,0 +1,7 @@
+<div>
+  <%= @content %>
+</div>
+
+<div>
+  <%= link_to t(:view_ticket, :scope => :ticket), project_ticket_url(@ticket.project, @ticket) %>
+</div>
