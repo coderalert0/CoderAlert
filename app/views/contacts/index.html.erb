@@ -23,7 +23,7 @@
     <tbody>
       <% @contacts.each do |contact| %>
         <tr role="row" class="odd">
-          <td><%= link_to contact.type, edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
+          <td><%= link_to contact.decorate.type_display, edit_contact_path(contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } %></td>
           <td><%= contact.value %></td>
           <td>
             <span class="icon-holder">

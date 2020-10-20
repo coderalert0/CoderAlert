@@ -157,6 +157,9 @@ en:
     slack_email: 'Slack Email'
     alert: 'Alerts'
 
+    types:
+      slack
+
     alerts:
       all: 'All tickets'
       assigned: 'Only assigned tickets'

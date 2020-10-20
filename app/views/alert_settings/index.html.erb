@@ -35,7 +35,7 @@
           <td><%= alert_setting.alert_display %></td>
 
         <% elsif alert_setting.alertable.is_a? Contact %>
-          <td><%= alert_setting.alertable.type %></td>
+          <td><%= alert_setting.alertable.type_display %></td>
           <td></td>
           <td><%= alert_setting.alertable.value %></td>
           <td><%= alert_setting.alert_display %></td>

@@ -380,6 +380,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    store_base_sti_class (2.0.1)
+      activerecord (>= 4.0)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -472,6 +474,7 @@ DEPENDENCIES
   slack-ruby-client
   spring
   spring-watcher-listen (~> 2.0.0)
+  store_base_sti_class
   time_difference
   turbolinks (~> 5)
   twilio-ruby

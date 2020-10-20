@@ -1,8 +1,10 @@
 class SmsClient
   def send_ticket_created_message
+    from_phone_number = Rails.application.credentials.dig(:twilio, :twilio_phone_number)
+
     AlertSetting.sms_alerts_on(@ticket).each do |alert_setting|
       @client.messages.create({
-                                from: Rails.application.credentials.dig(:twilio, :twilio_phone_number),
+                                from: from_phone_number,
                                 to: alert_setting.alertable.value,
                                 body: SMSDecorator.decorate(@ticket).ticket_created_sms_message
                               })

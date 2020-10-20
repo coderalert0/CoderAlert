@@ -40,7 +40,7 @@ class AfterSignupController < ApplicationController
                else
                  Project.new(user: current_user, company: current_user.company)
                end
-    authorize! :create, @project
+    # authorize! :create, @project
   end
 
   def load_and_authorize_schedule
@@ -49,7 +49,7 @@ class AfterSignupController < ApplicationController
                 else
                   Schedule.new(user: current_user, project: @project)
                 end
-    authorize! :create, @schedule
+    # authorize! :create, @schedule
   end
 
   def users_step?

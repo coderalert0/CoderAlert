@@ -9,6 +9,13 @@ module Users
       respond_with resource
     end
 
+    def create
+      super do
+        resource.build_contact_email(value: resource.email)
+        resource.save!
+      end
+    end
+
     protected
 
     # rubocop:disable Metrics/MethodLength
@@ -39,9 +46,7 @@ module Users
     end
 
     def after_inactive_sign_up_path_for(_user)
-      flash.notice = 'We have sent an email with a confirmation link to your email address.'\
-                     'Please click the confirmation link. If you do not see the invitation email in your inbox, '\
-                     'please look in the spam folder and mark it as not spam'
+      flash.notice = t('devise.registrations.confirmation_instructions')
 
       new_user_session_path
     end

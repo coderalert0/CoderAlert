@@ -7,8 +7,12 @@ class User < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   has_many :schedule_users, dependent: :destroy
+  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: :assignee_id, dependent: :nullify
+  has_many :created_tickets, class_name: 'Ticket', foreign_key: :user_id, dependent: :nullify
   has_many :contacts, dependent: :destroy
   has_many :alert_settings
+
+  has_one :contact_email, dependent: :destroy
   has_one_attached :profile_image
 
   accepts_nested_attributes_for :company

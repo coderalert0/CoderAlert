@@ -6,4 +6,5 @@ class Contact < ApplicationRecord
   validates_presence_of :type, :value, :user
 end
 
-require_dependency Phone.to_s
+require_dependency 'contact_email'
+require_dependency 'phone'

@@ -17,7 +17,15 @@ class CreateProjectForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       project.save!
-      ProjectUser.find_or_create_by(user: project.user, project: project)
+      user = project.user
+
+      ProjectUser.find_or_create_by(user: user, project: project, admin: true)
+
+      user.contacts.each do |contact|
+        AlertSetting.find_or_create_by(alertable: contact, user: user, project: project) do |alert_setting|
+          alert_setting.alert = AlertSetting::ALL
+        end
+      end
     end
     self.success = true
   end
