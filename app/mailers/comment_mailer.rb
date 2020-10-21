@@ -2,18 +2,17 @@ class CommentMailer < ApplicationMailer
   before_action :load_resources
 
   def comment_created
-    mail(to: receipient_email_addresses, subject: "Comment was added by #{@comment.user.full_name}")
+    mail(to: receipient_email_addresses, subject: @comment.created_subject)
   end
 
   def comment_updated
-    mail(to: receipient_email_addresses, subject: "Comment was edited by #{@comment.user.full_name}")
+    mail(to: receipient_email_addresses, subject: @comment.updated_subject)
   end
 
   private
 
   def load_resources
-    @comment = params[:comment].decorate
-    @changes = params[:changes]
+    @comment = CommentMailerDecorator.decorate(params[:comment])
   end
 
   # DRY it possibly, similar to ticket mailer method

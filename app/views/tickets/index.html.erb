@@ -14,13 +14,12 @@
   <table id="dataTable" class="table" cellspacing="0" width="100%" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 5%;"><%= t(:priority, :scope => :ticket) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 5%;"><%= t(:id, :scope => :ticket) %></th>
-      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 36%;"><%= t(:title, :scope => :ticket) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 5%;"><%= t(:status, :scope => :ticket) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 10%;"><%= t(:priority, :scope => :ticket) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 10%;"><%= t(:id, :scope => :ticket) %></th>
+      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 30%;"><%= t(:title, :scope => :ticket) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 15%;"><%= t(:status, :scope => :ticket) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 20%;"><%= t(:assignee, :scope => :ticket) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:created) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:updated) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 15%;"><%= t(:created) %></th>
     </tr>
     </thead>
     <tbody>
@@ -36,8 +35,7 @@
           </td>
           <td><%= ticket.status_display %></td>
           <td><%= ticket.try(:assignee).try(:full_name_link, @project) %> <%= ticket.viewed_by_assignee_icon %></td>
-          <td><%= ticket.created_at_display %></td>
-          <td><%= ticket.updated_at_display %></td>
+          <td><%= ticket.created_at_short_display %></td>
         </tr>
       <% end %>
 

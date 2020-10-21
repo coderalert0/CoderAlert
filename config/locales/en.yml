@@ -174,6 +174,7 @@ en:
 
   contact:
     phone: 'Phone'
+    contact_email: Email
     type: 'Type'
     value: 'Value'
     phone_help_text: 'If entering a non-US number, prefix with plus and the country code (i.e. +44)'
@@ -199,6 +200,14 @@ en:
     account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'
     ticket_viewed_by_assignee_title: 'Ticket viewed'
     ticket_viewed_by_assignee_content: 'The ticket was first viewed by the current assignee %{time_elapsed} ago'
+
+  mailer:
+    ticket:
+      created_subject: '%{title} was created by %{assignee}'
+      updated_subject: '%{title} was updated'
+    comment:
+      created_subject: '[%{title}] Comment was added by %{user}'
+      updated_subject: '[%{title}] Comment was updated by %{user}'
 
   activerecord:
     errors:

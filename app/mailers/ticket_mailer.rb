@@ -13,7 +13,7 @@ class TicketMailer < ApplicationMailer
 
   def load_resources
     @content = params[:content]
-    @ticket =  MailTicketDecorator.decorate(params[:ticket])
+    @ticket =  TicketMailerDecorator.decorate(params[:ticket])
   end
 
   # DRY it

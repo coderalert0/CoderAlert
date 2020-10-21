@@ -1,9 +1,11 @@
 class CommentListener
   def on_comment_created(comment)
-    CommentMailer.with(comment: comment, changes: comment.changes.to_json).comment_created.deliver_later
+    return unless comment.commentable.is_a? Ticket
+    CommentMailer.with(comment: comment).comment_created.deliver_later
   end
 
-  def on_comment_updated(comment, _block)
-    CommentMailer.with(comment: comment, changes: comment.changes.to_json).comment_updated.deliver_later
+  def on_comment_updated(comment)
+    return unless comment.commentable.is_a? Ticket
+    CommentMailer.with(comment: comment).comment_updated.deliver_later
   end
 end

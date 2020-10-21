@@ -1,6 +1,6 @@
 class TicketListener
   def on_ticket_created(ticket)
-    TicketMailer.with(ticket: ticket, content: MailTicketDecorator.decorate(ticket)
+    TicketMailer.with(ticket: ticket, content: TicketMailerDecorator.decorate(ticket)
                                                    .created_content)
                 .ticket_created
                 .deliver_later

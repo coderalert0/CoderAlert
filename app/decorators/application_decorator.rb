@@ -10,4 +10,12 @@ class ApplicationDecorator < Draper::Decorator
   def updated_at_display
     updated_at.to_formatted_s(:custom_long_ordinal)
   end
+
+  def created_at_short_display
+    created_at.to_formatted_s(:custom_short)
+  end
+
+  def updated_at_short_display
+    updated_at.to_formatted_s(:custom_short)
+  end
 end
