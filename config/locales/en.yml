@@ -102,7 +102,7 @@ en:
     email: 'Email'
     administrator: 'Administrator'
     unconfirmed: ' (unconfirmed)'
-    invite_a_team_member: 'Invite a team member'
+    invite_a_team_member: 'Add a new user'
     delete_message: "Are you sure you want to remove %{user_name} from the %{project_name} project?"
 
     create_modal:

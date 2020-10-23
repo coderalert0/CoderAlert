@@ -1,15 +1,31 @@
 <h2><%= t(:title, :scope => [:schedule, :edit]) %></h2>
 
-<%= bootstrap_form_for @form, :url => project_schedule_path(@project, @schedule), :method => :put do |f| %>
-  <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label_class => 'required' %>
-  <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
-  <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
+<%= bootstrap_form_for @form, :url => project_schedule_path(@project, @schedule), :control_col => 9,:method => :put do |f| %>
 
-  <% @current_project.users.object.confirmed.each do |user| %>
-    <%= user.decorate.full_name_link(@project) %>
-    <%= text_field_tag "edit_schedule_form[users][#{user.id}]", @schedule.priority(user) %><br/>
-  <% end %>
+  <div class="row">
+    <div class="col-md-7">
+      <%= f.text_field :name, :label_class => 'required' %>
+      <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label_class => 'required' %>
+      <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
+      <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
+    </div>
 
-  <%= submit_button %>
+    <div class="col-md-5">
+      <div id="users">
+        <% @current_project.users.object.confirmed.each do |user| %>
+          <div>
+            <%= user.decorate.full_name_link(@project) %>
+            <%= hidden_field_tag "edit_schedule_form[users][#{user.id}]", @schedule.priority(user) %><br/>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= submit_button %>
+  </div>
 <% end %>
+
+
+
+
+

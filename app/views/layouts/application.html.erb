@@ -90,20 +90,20 @@
             </li>
 
             <li class="nav-item">
-              <%= link_to project_articles_path(@current_project) do %>
+              <%= link_to project_schedules_path(@current_project) do %>
                 <span class="icon-holder">
-                  <i class="c-green-500 ti-book"></i>
+                  <i class="c-green-500 ti-calendar"></i>
                 </span>
-                <span class="title"><%= t(:knowledge_base, :scope => :sidebar) %></span>
+                <span class="title"><%= t(:schedule, :scope => :sidebar) %></span>
               <% end %>
             </li>
 
             <li class="nav-item">
-              <%= link_to project_schedules_path(@current_project) do %>
+              <%= link_to project_articles_path(@current_project) do %>
                 <span class="icon-holder">
-                  <i class="c-orange-500 ti-calendar"></i>
+                  <i class="c-orange-500 ti-book"></i>
                 </span>
-                <span class="title"><%= t(:schedule, :scope => :sidebar) %></span>
+                <span class="title"><%= t(:knowledge_base, :scope => :sidebar) %></span>
               <% end %>
             </li>
           </ul>
