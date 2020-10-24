@@ -78,9 +78,10 @@ en:
   schedule:
     name: 'Name'
     currently_scheduled: 'Currently Scheduled'
-    frequency: 'Frequency'
+    rotatie: 'Rotate'
     start: 'Start'
     end: 'End'
+    select_users: 'Select User(s)'
 
     delete_message: 'Are you sure you want to delete this schedule?'
 

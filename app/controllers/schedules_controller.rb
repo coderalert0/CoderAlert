@@ -2,6 +2,8 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource through: :project
 
+  before_action :load_time_zone, only: [:new, :edit]
+
   def index
     @schedules = @current_project.schedules
   end
@@ -58,5 +60,9 @@ class SchedulesController < ApplicationController
 
   def edit_form
     EditScheduleForm.new form_params(EditScheduleForm).merge(schedule: @schedule)
+  end
+
+  def load_time_zone
+    cookies['user.timezone'] = ActiveSupport::TimeZone::MAPPING[current_user.time_zone]
   end
 end

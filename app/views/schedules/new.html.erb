@@ -1,15 +1,43 @@
 <h2><%= t(:title, :scope => [:schedule, :create]) %></h2>
 
-<%= bootstrap_form_for @form, :url => project_schedules_path(@current_project) do |f| %>
-  <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label_class => 'required' %>
-  <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
-  <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
+<%= bootstrap_form_for @form, :url => project_schedules_path(@current_project), label_col: 'col-sm-4' do |f| %>
 
-  <% @current_project.users.object.confirmed.each do |user| %>
-    <%= user.decorate.full_name_link(@project) %>
-    <%= text_field_tag "create_schedule_form[users][#{user.id}]" %><br/>
-  <% end %>
+  <div class="row schedule-container">
+    <div class="col-md-6 vertical-divider">
+      <%= f.text_field :name, :label_class => 'required' %>
+      <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label => t(:rotate, :scope => :schedule), :label_class => 'required' %>
 
-  <%= submit_button %>
+      <div class="form-group row">
+        <label class="required col-form-label col-sm-4"><%= t(:start, :scope => :schedule) %></label>
+
+        <div class="input-group date col-md-7" id="start" data-target-input="nearest">
+          <input name="create_schedule_form[start]" type="text" class="form-control datetimepicker-input" data-target="#start"/>
+          <div class="input-group-append" data-target="#start" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-form-label col-sm-4"><%= t(:end, :scope => :schedule) %></label>
+
+        <div class="input-group date col-md-7" id="end" data-target-input="nearest">
+          <input name="create_schedule_form[end]" type="text" class="form-control datetimepicker-input" data-target="#end"/>
+          <div class="input-group-append" data-target="#end" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+      <%= submit_button %>
+
+    </div>
+
+    <div class="col-md-6">
+<!--      @current_project.users.object.confirmed-->
+      <%= f.select :user, options_for_select(User.all.map { |u| [u.decorate.full_name, u.id] }), { label: t(:select_users, :scope => :schedule), :label_class => 'required', :include_blank => true }, :class => 'js-select-users' %>
+
+      <div id="users">
+      </div>
+    </div>
+  </div>
 <% end %>

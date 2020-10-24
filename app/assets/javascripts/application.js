@@ -21,4 +21,8 @@
 //= require confirm-modal
 //= require js.cookie
 //= require browser_timezone_rails/set_time_zone
+//= require moment
+//= require moment-timezone-with-data
+//= require tempusdominus-bootstrap-4
+//= require date-time-picker
 //= require_tree .
