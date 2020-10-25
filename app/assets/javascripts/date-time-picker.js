@@ -1,5 +1,5 @@
 $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-    timeZone: decodeURIComponent(getCookieValue('user.timezone')),
+    timeZone: gon.time_zone,
     sideBySide: true,
     widgetPositioning: {
         horizontal: 'left'
@@ -18,8 +18,3 @@ $(document).on('turbolinks:load', function () {
         $('#start').datetimepicker('maxDate', e.date);
     });
 });
-
-function getCookieValue(a) {
-    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
-}

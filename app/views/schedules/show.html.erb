@@ -1,9 +1,3 @@
-<h2><%= @schedule.name %></h2>
+<%= Gon::Base.render_data %>
 
-<% if can? :update, @schedule %>
-  <%= link_to t(:edit), edit_project_schedule_path(@project, @schedule), class: 'btn btn-light border' %>
-<% end %>
-
-<% if can? :destroy, @schedule %>
-  <%= link_to t(:delete), project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-light border', data: {confirm: t(:delete_message, :scope => :schedule)} %>
-<% end %>
+<div id="calendar"></div>

@@ -1,5 +1,9 @@
 <h2><%= t(:title, :scope => [:schedule, :edit]) %></h2>
 
+<% if can? :destroy, @schedule %>
+<%= link_to t(:delete), project_schedule_path(@project, @schedule), :method => 'delete', class: 'btn btn-light border', data: {confirm: t(:delete_message, :scope => :schedule)} %>
+<% end %>
+
 <%= bootstrap_form_for @form, :url => project_schedule_path(@project, @schedule), label_col: 'col-sm-4', :method => :put do |f| %>
 
   <div class="row schedule-container">

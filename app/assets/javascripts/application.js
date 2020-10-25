@@ -25,4 +25,6 @@
 //= require moment-timezone-with-data
 //= require tempusdominus-bootstrap-4
 //= require date-time-picker
+//= require fullcalendar
+//= require calendar
 //= require_tree .

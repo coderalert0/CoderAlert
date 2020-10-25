@@ -2,13 +2,15 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource through: :project
 
-  before_action :load_time_zone, only: [:new, :edit]
+  before_action :load_time_zone, only: %i[new edit]
 
   def index
     @schedules = @current_project.schedules
   end
 
-  def show; end
+  def show
+    gon.url = project_schedule_path(@project, @schedule, format: :json)
+  end
 
   def new
     @form = CreateScheduleForm.new
@@ -19,7 +21,7 @@ class SchedulesController < ApplicationController
 
     if @form.submit
       flash.notice = 'The schedule was created successfully'
-      redirect_to project_schedules_path
+      redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
       render :new
@@ -35,7 +37,7 @@ class SchedulesController < ApplicationController
 
     if @form.submit
       flash.notice = 'The schedule was edited successfully'
-      redirect_to project_schedules_path
+      redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
       render :edit
@@ -63,6 +65,6 @@ class SchedulesController < ApplicationController
   end
 
   def load_time_zone
-    cookies['user.timezone'] = ActiveSupport::TimeZone::MAPPING[current_user.time_zone]
+    gon.time_zone = ActiveSupport::TimeZone::MAPPING[current_user.time_zone].to_s
   end
 end

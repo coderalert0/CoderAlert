@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_223804) do
+ActiveRecord::Schema.define(version: 2020_10_26_042922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_223804) do
     t.boolean "global_admin", default: false
     t.string "current_welcome_step", default: "project"
     t.string "time_zone", default: "UTC"
+    t.string "title"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

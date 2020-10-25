@@ -14,7 +14,7 @@
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 25%;"><%= t(:currently_scheduled, :scope => :schedule) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 10%;"><%= t(:rotate, :scope => :schedule) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 20%;"><%= t(:start, :scope => :schedule) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 20%;"><%= t(:end, :scope => :schedule) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 20%;"></th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,11 @@
         <td><%= schedule.on_call_user.decorate.full_name_link(@project) %></td>
         <td><%= t(schedule.frequency.to_sym, :scope => [:schedule, :frequencies]) %></td>
         <td><%= schedule.start.to_formatted_s(:custom_long_ordinal) %></td>
-        <td><%= schedule.try(:end).try(:to_formatted_s, :custom_long_ordinal) %></td>
+        <td>
+          <% if can? :update, schedule %>
+            <%= link_to t(:edit), edit_project_schedule_path(@project, schedule) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 

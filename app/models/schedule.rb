@@ -21,10 +21,10 @@ class Schedule < ApplicationRecord
     occurrences = []
     schedule_users = self.schedule_users.to_a
 
-    ice_cube_schedule.next_occurrences(number, Time.now).each do |occurrence|
+    ice_cube_schedule.next_occurrences(number, Time.zone.now).each do |occurrence|
       schedule_users = reprioritize_users(schedule_users)
 
-      occurrences << [occurrence, schedule_users.max_by(&:priority).user ]
+      occurrences << [occurrence, schedule_users.max_by(&:priority).user]
     end
 
     occurrences

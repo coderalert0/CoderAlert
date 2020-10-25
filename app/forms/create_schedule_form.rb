@@ -17,12 +17,14 @@ class CreateScheduleForm < BaseForm
 
   def start
     return if schedule.start.nil?
-    schedule.start.strftime("%m/%d/%Y %I:%M %p")
+
+    schedule.start.strftime('%m/%d/%Y %I:%M %p')
   end
 
   def end
     return if schedule.end.nil?
-    schedule.end.strftime("%m/%d/%Y %I:%M %p")
+
+    schedule.end.strftime('%m/%d/%Y %I:%M %p')
   end
 
   def _submit

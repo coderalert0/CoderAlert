@@ -7,7 +7,10 @@ class InviteUserForm < BaseForm
 
   def _submit
     ActiveRecord::Base.transaction do
-      user = User.invite!(first_name: first_name, last_name: last_name, email: email, company: company)
+      user = User.invite!(first_name: first_name,
+                          last_name: last_name,
+                          email: email,
+                          company: company)
 
       projects.each do |project|
         ProjectUser.find_or_create_by(user: user, project: project)

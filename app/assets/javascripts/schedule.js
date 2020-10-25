@@ -17,11 +17,11 @@ function add_user_item() {
     $("select.js-select-users").on("change", function() {
         var selected_option = $(this).children(":selected");
         var user_id = selected_option.val();
-        var user_name = selected_option.html();
+        var full_name = selected_option.html();
         var action = $("form").attr('id').match(/(?<=new_)(.*?)(?=_schedule_form)/g)
 
         $('#users').append("<div class='ui-sortable-handle form-control col-md-11'>" +
-            "<span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" + user_name +
+            "<span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" + full_name +
             "<span onclick=remove_user_item(this) class='float-right'>x</span>" +
             "<input type=hidden name=" + action + "_schedule_form[users][" + user_id + "] " +
             "id=" + action + "_schedule_form_users_" + user_id + " value=" + next_user_item_priority() + ">" +
@@ -52,6 +52,13 @@ function next_user_item_priority() {
 }
 
 function change_user_item_color() {
-    var hue = 'rgb(' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ')';
+    var full_name = $('.ui-sortable-handle:last').text().toLowerCase();
+    var indice_ratios = []
+
+    for (var i = 0; i < full_name.length; i++) {
+        indice_ratios.push((full_name.charAt(i).charCodeAt(0) - 96)/26);
+    }
+
+    var hue = 'rgb(' + (Math.floor(57*indice_ratios[0]) + 200) + ',' + (Math.floor(57*indice_ratios[1]) + 200) + ',' + (Math.floor(57*indice_ratios[2]) + 200) + ')';
     $('.ui-sortable-handle:last').css("background-color", hue);
 }
