@@ -19,27 +19,15 @@ class Schedule < ApplicationRecord
 
   def next_occurrences_with_users(number)
     occurrences = []
-    schedule_users = self.schedule_users.to_a
 
-    ice_cube_schedule.next_occurrences(number, Time.zone.now).each do |occurrence|
-      schedule_users = reprioritize_users(schedule_users)
+    ice_cube_schedule.next_occurrences(number, Time.zone.now).each.with_index(1) do |occurrence, index|
+      priority = schedule_users.count - (index % schedule_users.count)
+      user = schedule_users.find_by(priority: priority).user
 
-      occurrences << [occurrence, schedule_users.max_by(&:priority).user]
+      occurrences << [occurrence, user]
     end
 
     occurrences
-  end
-
-  def reprioritize_users(schedule_users)
-    num_users = schedule_users.count
-
-    schedule_users.rotate!
-
-    schedule_users.each_with_index do |schedule_user, index|
-      schedule_user.priority = num_users - index
-    end
-
-    schedule_users
   end
 
   def jobs
@@ -51,7 +39,7 @@ class Schedule < ApplicationRecord
   end
 
   def priority(user)
-    schedule_users.where(user: user).first.try(:priority)
+    schedule_users.find_by(user: user).try(:priority)
   end
 
   def ice_cube_schedule
