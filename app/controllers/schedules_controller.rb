@@ -61,7 +61,7 @@ class SchedulesController < ApplicationController
   end
 
   def edit_form
-    EditScheduleForm.new form_params(EditScheduleForm).merge(schedule: @schedule)
+    EditScheduleForm.new form_params(EditScheduleForm).merge(schedule: @schedule, user: current_user)
   end
 
   def load_time_zone

@@ -25,8 +25,8 @@
           <%= link_to schedule.name, project_schedule_path(@current_project, schedule) %>
         </td>
         <td><%= schedule.on_call_user.decorate.full_name_link(@project) %></td>
-        <td><%= t(schedule.frequency.to_sym, :scope => [:schedule, :frequencies]) %></td>
-        <td><%= schedule.start.to_formatted_s(:custom_long_ordinal) %></td>
+        <td><%= t(schedule.decorate.interval_unit_display, :scope => [:schedule, :interval_unit]) %></td>
+        <td><%= schedule.decorate.start_datetime %></td>
         <td>
           <% if can? :update, schedule %>
             <%= link_to t(:edit), edit_project_schedule_path(@project, schedule) %>

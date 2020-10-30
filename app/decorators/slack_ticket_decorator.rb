@@ -7,8 +7,8 @@ class SlackTicketDecorator < TicketDecorator
 
   def name(user, project)
     alert_setting = AlertSetting.find_by(project: project,
-                                       user: user,
-                                       alertable: project.slack_authorization)
+                                         user: user,
+                                         alertable: project.slack_authorization)
 
     return unless alert_setting.present?
 

@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  around_action :current_user_tag
-  around_action :user_time_zone_setter, if: :current_user
+  # around_action :current_user_tag
+  # around_action :user_time_zone_setter, if: :current_user
 
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!

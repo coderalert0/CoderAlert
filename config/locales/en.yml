@@ -78,18 +78,27 @@ en:
   schedule:
     name: 'Name'
     currently_scheduled: 'Currently Scheduled'
-    rotatie: 'Rotate'
+    rotate: 'Rotate'
     start: 'Start'
     end: 'End'
     select_users: 'Select User(s)'
 
     delete_message: 'Are you sure you want to delete this schedule?'
 
-    frequencies:
-      daily: 'Daily'
-      weekly: 'Weekly'
-      biweekly: 'Bi-Weekly'
-      monthly: 'Monthly'
+    interval_unit:
+      day: 'Daily'
+      week: 'Weekly'
+      biweek: 'Every 2 Weeks'
+      month: 'Monthly'
+
+    days_of_the_week:
+      sunday: 'Su'
+      monday: 'M'
+      tuesday: 'Tu'
+      wednesday: 'W'
+      thursday: 'Th'
+      friday: 'F'
+      saturday: 'Sa'
 
     create:
       title: 'Create a Schedule'

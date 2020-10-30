@@ -19,30 +19,30 @@ services:
       - ELASTICSEARCH_URL=elasticsearch
     depends_on:
       - db
-      - elasticsearch
+#      - elasticsearch
     tty: true
     stdin_open: true
 
-  elasticsearch:
-    image: elasticsearch:7.9.1
-    volumes:
-      - .:/coder_alert
-    environment:
-      - discovery.type=single-node
-      - cluster.name=elasticsearch-rails
-      - cluster.routing.allocation.disk.threshold_enabled=false
-    ports:
-      - "9200:9200"
+#  elasticsearch:
+#    image: elasticsearch:7.9.1
+#    volumes:
+#      - .:/coder_alert
+#    environment:
+#      - discovery.type=single-node
+#      - cluster.name=elasticsearch-rails
+#      - cluster.routing.allocation.disk.threshold_enabled=false
+#    ports:
+#      - "9200:9200"
 
-  delayed_job:
-    build: .
-    command: bash -c "bundle exec rake jobs:work"
-    volumes:
-      - .:/coder_alert
-    depends_on:
-      - db
-    tty: true
-    stdin_open: true
+#  delayed_job:
+#    build: .
+#    command: bash -c "bundle exec rake jobs:work"
+#    volumes:
+#      - .:/coder_alert
+#    depends_on:
+#      - db
+#    tty: true
+#    stdin_open: true
 
 volumes:
   node_modules:

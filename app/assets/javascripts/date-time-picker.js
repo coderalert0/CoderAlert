@@ -7,14 +7,14 @@ $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Const
 });
 
 $(document).on('turbolinks:load', function () {
-    $('#start').datetimepicker();
-    $('#end').datetimepicker({
+    $('#start_date').datetimepicker();
+    $('#end_time').datetimepicker({
         useCurrent: false
     });
-    $("#start").on("change.datetimepicker", function (e) {
-        $('#end').datetimepicker('minDate', e.date);
+    $("#start_date").on("change.datetimepicker", function (e) {
+        $('#end_time').datetimepicker('minDate', e.date);
     });
-    $("#end").on("change.datetimepicker", function (e) {
-        $('#start').datetimepicker('maxDate', e.date);
+    $("#end_time").on("change.datetimepicker", function (e) {
+        $('#start_date').datetimepicker('maxDate', e.date);
     });
 });

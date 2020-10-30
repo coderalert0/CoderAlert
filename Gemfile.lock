@@ -157,6 +157,10 @@ GEM
     devise_invitable (2.0.2)
       actionmailer (>= 5.0)
       devise (>= 4.6)
+    dgp-schedule_attributes (0.5.3)
+      activesupport (>= 3.2)
+      ice_cube (~> 0.13)
+      tzinfo
     diff-lcs (1.4.4)
     draper (4.0.1)
       actionpack (>= 5.0)
@@ -472,6 +476,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   devise_invitable
+  dgp-schedule_attributes
   draper (~> 4.0, >= 4.0.1)
   elasticsearch-model
   elasticsearch-rails

@@ -1,30 +1,28 @@
 class CreateScheduleForm < BaseForm
   include ActiveRecord::AttributeAssignment
 
-  attr_accessor :users, :success
+  attr_accessor :select_user, :users, :success
 
   attr_writer :schedule
 
-  nested_attributes :name, :frequency, :start, :end, :project, :user, to: :schedule
+  nested_attributes :name, :project, :schedule_attributes, :user, to: :schedule
 
-  accessible_attr :name, :frequency, :start, :end, users: {}
+  accessible_attr :name, schedule_attributes: {}, users: {}
 
   validates_presence_of :users
+  validate :weekday_selected
 
   def schedule
     @schedule ||= Schedule.new
   end
 
-  def start
-    return if schedule.start.nil?
+  def schedule_attributes=(value)
+    if value[:interval_unit] == 'biweek'
+      value[:interval_unit] = 'week'
+      value[:interval] = 2
+    end
 
-    schedule.start.strftime('%m/%d/%Y %I:%M %p')
-  end
-
-  def end
-    return if schedule.end.nil?
-
-    schedule.end.strftime('%m/%d/%Y %I:%M %p')
+    schedule.schedule_attributes = value
   end
 
   def _submit
@@ -44,5 +42,12 @@ class CreateScheduleForm < BaseForm
 
   def initialize(args = {})
     super args_key_first args, :schedule
+  end
+
+  def weekday_selected
+    if schedule.weekly?
+      present = Schedule::DAYS_OF_THE_WEEK.reduce(false) { |a, e| a || schedule_attributes.send(e).present? }
+      errors.add(:base, 'Please select atleast one day of the week') unless present
+    end
   end
 end
