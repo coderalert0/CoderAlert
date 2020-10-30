@@ -12,7 +12,7 @@
       <br/>
 
       <%= f.fields_for :schedule_attributes do |schedule_attributes| %>
-        <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }, :selected => @form.schedule.decorate.selected_interval_unit), { :include_blank => true, :label => t(:rotate, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
+        <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }, :selected => @form.schedule.decorate.selected_interval_unit), { :include_blank => true, :label => t(:rotate_user, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
 
         <div class="container js-days-of-the-week">
           <div class="row">
@@ -22,7 +22,6 @@
           </div>
         </div>
 
-        <br/>
         <br/>
 
         <div class="form-group row">
@@ -38,9 +37,9 @@
         <div class="form-group row">
           <label class="col-form-label col-sm-4"><%= t(:end, :scope => :schedule) %></label>
           <div class="input-group date col-md-7" id="end_time" data-target-input="nearest">
-            <input name="edit_schedule_form[schedule_attributes][end_time]" type="text" value="<%= @form.schedule.schedule_attributes.end_time %>" class="form-control datetimepicker-input" data-target="#end_time"/>
+            <input name="edit_schedule_form[schedule_attributes][end_time]"  type="text" value="<%= @form.schedule.schedule_attributes.end_time %>" class="form-control datetimepicker-input" data-target="#end_time"/>
             <div class="input-group-append" data-target="#end_time" data-toggle="datetimepicker">
-              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
             </div>
           </div>
         </div>

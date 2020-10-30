@@ -9,7 +9,7 @@ $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Const
 $(document).on('turbolinks:load', function () {
     $('#start_date').datetimepicker();
     $('#end_time').datetimepicker({
-        useCurrent: false
+        format: 'LT'
     });
     $("#start_date").on("change.datetimepicker", function (e) {
         $('#end_time').datetimepicker('minDate', e.date);

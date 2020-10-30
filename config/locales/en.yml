@@ -78,7 +78,7 @@ en:
   schedule:
     name: 'Name'
     currently_scheduled: 'Currently Scheduled'
-    rotate: 'Rotate'
+    rotate_user: 'Rotate User'
     start: 'Start'
     end: 'End'
     select_users: 'Select User(s)'

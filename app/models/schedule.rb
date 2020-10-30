@@ -49,12 +49,20 @@ class Schedule < ApplicationRecord
     occurrences
   end
 
+  def daily?
+    schedule_attributes.interval_unit == 'day'
+  end
+
   def weekly?
     schedule_attributes.interval_unit == 'week' && schedule_attributes.interval == 1
   end
 
   def biweekly?
     schedule_attributes.interval_unit == 'week' && schedule_attributes.interval == 2
+  end
+
+  def monthly?
+    schedule_attributes.interval_unit == 'month'
   end
 
   def jobs

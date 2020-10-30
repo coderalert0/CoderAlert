@@ -18,10 +18,12 @@ class CreateScheduleForm < BaseForm
 
   def schedule_attributes=(value)
     if value[:interval_unit] == 'biweek'
-      value[:interval_unit] = 'week'
-      value[:interval] = 2
+      set_biweek_schedule_attributes(value)
+    elsif value[:interval_unit] == 'month'
+      set_month_schedule_attributes(value)
     end
 
+    value[:ends] = 'never'
     schedule.schedule_attributes = value
   end
 
@@ -42,6 +44,24 @@ class CreateScheduleForm < BaseForm
 
   def initialize(args = {})
     super args_key_first args, :schedule
+  end
+
+  def set_biweek_schedule_attributes(value)
+    value[:interval_unit] = 'week'
+    value[:interval] = 2
+    value[:end_time] = schedule_attributes_end_time(value, 2.weeks - 1.day)
+  end
+
+  def set_month_schedule_attributes(value)
+    value[:end_time] = schedule_attributes_end_time(value, 1.month - 1.day)
+  end
+
+  def schedule_attributes_end_time(value, duration)
+    value[:end_time] = '11:59 PM' if value[:end_time].blank?
+
+    (Time.zone.parse(value[:start_date]) + duration)
+        .strftime('%m/%d/%Y %I:%M %p')
+        .split(' ')[0] + ' ' + value[:end_time]
   end
 
   def weekday_selected
