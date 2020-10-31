@@ -29,6 +29,8 @@ module Users
                  :password_confirmation,
                  :global_admin,
                  :time_zone,
+                 :pto,
+                 :title,
                  company_attributes: :name).merge(global_admin: true)
       end
 
@@ -41,6 +43,8 @@ module Users
                  :current_password,
                  :profile_image,
                  :time_zone,
+                 :pto,
+                 :title,
                  company_attributes: :name)
       end
     end

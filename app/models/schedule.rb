@@ -44,7 +44,7 @@ class Schedule < ApplicationRecord
     return occurrence_user(occurrence_index) if occurrence.cover? Time.now
   end
 
-  def occurrence_index(date_time_now = DateTime.now)
+  def occurrence_index(date_time_now = Time.zone.now.to_datetime)
     start_date_time = rule.start_date.to_datetime
 
     # need to decrement week number for Sundays (international vs USA)
@@ -61,6 +61,19 @@ class Schedule < ApplicationRecord
   end
 
   def occurrence_user(index)
+    priority = index % schedule_users.count
+
+    user = schedule_users.find_by(priority: priority).user
+
+    if user.pto?
+      priorities = schedule_users.reject { |su| su.user.pto? }.map(&:priority)
+      user = schedule_users.find_by(priority: priorities.sample).user
+    end
+
+    user
+  end
+
+  def occurrence_user_calendar(index)
     priority = index % schedule_users.count
 
     schedule_users.find_by(priority: priority).user

@@ -2,7 +2,7 @@ class UserDecorator < ApplicationDecorator
   delegate_all
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name} #{h.t(:on_pto, :scope => :user) if pto?}"
   end
 
   def full_name_link(project)
@@ -23,12 +23,6 @@ class UserDecorator < ApplicationDecorator
               { 'data-toggle' => 'popover',
                 'data-content' => h.t(:account_unconfirmed_content, scope: 'popover'),
                 'title' => h.t(:account_unconfirmed_title, scope: 'popover') }
-  end
-
-  def ticket_assignee_select_value(project)
-    value = full_name
-    value << ' (currently scheduled)' if self == project.on_call_user
-    value
   end
 
   def color

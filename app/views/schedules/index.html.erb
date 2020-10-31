@@ -1,6 +1,5 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
-
-  <% if can? :create, Schedule.new(project: @project) %>
+  <% if can?(:create, Schedule.new(project: @project)) && @project.schedules.size.zero? %>
     <div class="dataTables_length" id="dataTable_length">
       <%= link_to t(:new), new_project_schedule_path(@project), class: 'btn btn-primary' %>
       <br/><br/>
@@ -12,9 +11,9 @@
     <tr role="row">
       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 25%;"><%= t(:name, :scope => :schedule) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 25%;"><%= t(:currently_scheduled, :scope => :schedule) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 10%;"><%= t(:rotate_users, :scope => :schedule) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 20%;"><%= t(:rotate_users, :scope => :schedule) %></th>
       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 20%;"><%= t(:start, :scope => :schedule) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 20%;"></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 10%;"></th>
     </tr>
     </thead>
     <tbody>
@@ -24,7 +23,7 @@
         <td class="sorting_1">
           <%= link_to schedule.name, project_schedule_path(@current_project, schedule) %>
         </td>
-        <td><%= schedule.on_call_user.decorate.full_name_link(@project) %></td>
+        <td><%= schedule.try(:occurrence_user_calendar, schedule.occurrence_index).try(:decorate).try(:full_name_link, @project) %></td>
         <td><%= t(schedule.decorate.interval_unit_display, :scope => [:schedule, :interval_unit]) %></td>
         <td><%= schedule.decorate.start_datetime %></td>
         <td>

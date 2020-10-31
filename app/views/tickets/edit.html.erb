@@ -4,7 +4,7 @@
 
 <%= bootstrap_form_for @form, :url => project_ticket_path(@current_project), :method => :put do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
-  <%= f.select :assignee_id, options_for_select(@current_project.users.map { |u| [ u.ticket_assignee_select_value(@project), u.id ] }, :selected => @form.assignee_id), {help: @form.ticket.decorate.assignee_help_text, :include_blank => true} %>
+  <%= f.select :assignee_id, options_for_select(@current_project.users.map { |u| [ u.full_name, u.id ] }, :selected => @form.assignee_id), {help: @form.ticket.decorate.assignee_help_text, :include_blank => true} %>
   <%= f.select :priority, options_for_select(Ticket.priorities.keys.map { |p| [t(p, :scope => [:ticket, :priorities]), p] }, :selected => @form.priority), :include_blank => true, :label_class => 'required' %>
   <%= f.select :status, options_for_select(Ticket.statuses.keys.map { |p| [t(p, :scope => [:ticket, :statuses]), p] }, :selected => @form.status), :include_blank => true, :label_class => 'required' %>
 

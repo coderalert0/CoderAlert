@@ -204,6 +204,11 @@ en:
     password_help_text: '%{minimum_password_length} characters minimum. Leave blank if you dont want to change it'
     current_password_help_text: 'We need your current password to confirm your changes'
 
+  user:
+    on_pto: '(on PTO)'
+    pto: 'PTO'
+    title: 'Title'
+
   popover:
     account_unconfirmed_title: 'Account unconfirmed'
     account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'
