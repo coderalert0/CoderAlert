@@ -29,20 +29,7 @@ class Schedule < ApplicationRecord
     occurrences = []
 
     rule.next_occurrences(number, rule.start_date).each.with_index do |occurrence, index|
-      priority =
-        if weekly?
-          date_time = occurrence.start_time.to_datetime
-
-          # need to decrement week number for Sundays (international vs USA)
-          week_number = date_time.cwday == 7 ? date_time.cweek - 1 : date_time.cweek
-
-          (week_number - 1) % schedule_users.count + 1
-        else
-          index % schedule_users.count + 1
-        end
-
-      user = schedule_users.find_by(priority: priority).user
-
+      user = occurrence_user(occurrence, index)
       occurrences << [occurrence, user]
     end
 
@@ -66,7 +53,27 @@ class Schedule < ApplicationRecord
   end
 
   def on_call_user
-    schedule_users.max_by(&:priority).user if users.present?
+    rule.next_occurrences(20, rule.start_date).each_with_index do |occurrence, index|
+      if occurrence.cover? Time.now
+        return occurrence_user(occurrence, index)
+      end
+    end
+  end
+
+  def occurrence_user(occurrence, index)
+    priority =
+        if weekly?
+          date_time = occurrence.start_time.to_datetime
+
+          # need to decrement week number for Sundays (international vs USA)
+          week_number = date_time.cwday == 7 ? date_time.cweek - 1 : date_time.cweek
+
+          (week_number - 1) % schedule_users.count + 1
+        else
+          index % schedule_users.count + 1
+        end
+
+    schedule_users.find_by(priority: priority).user
   end
 
   def priority(user)
