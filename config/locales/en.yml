@@ -78,7 +78,7 @@ en:
   schedule:
     name: 'Name'
     currently_scheduled: 'Currently Scheduled'
-    rotate_user: 'Rotate User'
+    rotate_users: 'Rotate Users'
     start: 'Start'
     end: 'End'
     select_users: 'Select User(s)'
@@ -89,7 +89,6 @@ en:
       day: 'Daily'
       week: 'Weekly'
       biweek: 'Every 2 Weeks'
-      month: 'Monthly'
 
     days_of_the_week:
       sunday: 'Su'

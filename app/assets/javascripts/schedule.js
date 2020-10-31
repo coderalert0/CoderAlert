@@ -9,7 +9,7 @@ function init_user_items() {
     $('#users').sortable({
         stop: function () {
             $('#users input').each(function(idx) {
-                $(this).val(idx);
+                $(this).val(idx + 1);
             });
         }
     });
@@ -40,7 +40,9 @@ function remove_user_item(el) {
 
     element.parentNode.remove();
 
-    $("select.js-select-users").append("<option value=" + user_id + ">" + el.parentNode.textContent.slice(0, -1) + "</option>")
+    $("select.js-select-users").append("<option value=" + user_id + ">" + el.parentNode.textContent.trim().slice(0, -1) + "</option>")
+
+    update_user_item_priorities();
 }
 
 function next_user_item_priority() {
@@ -51,6 +53,12 @@ function next_user_item_priority() {
         if(val > max) max = val;
     });
     return parseInt(max) + 1;
+}
+
+function update_user_item_priorities() {
+    $('.ui-sortable-handle input').each(function( index ) {
+        $(this).val(0 + 1);
+    });
 }
 
 function change_user_item_color() {

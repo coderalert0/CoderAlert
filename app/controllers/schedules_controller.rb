@@ -3,6 +3,7 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource through: :project
 
   before_action :load_time_zone, only: %i[new edit]
+  before_action :populate_select_users, only: %i[edit update]
 
   def index
     @schedules = @current_project.schedules
@@ -62,6 +63,11 @@ class SchedulesController < ApplicationController
 
   def edit_form
     EditScheduleForm.new form_params(EditScheduleForm).merge(schedule: @schedule, user: current_user)
+  end
+
+  def populate_select_users
+    user_ids = @schedule.schedule_users.pluck(:user_id)
+    @select_users = @project.users.where.not(id: user_ids)
   end
 
   def load_time_zone

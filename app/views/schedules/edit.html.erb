@@ -12,7 +12,7 @@
       <br/>
 
       <%= f.fields_for :schedule_attributes do |schedule_attributes| %>
-        <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }, :selected => @form.schedule.decorate.selected_interval_unit), { :include_blank => true, :label => t(:rotate_user, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
+        <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }, :selected => @form.schedule.decorate.selected_interval_unit), { :include_blank => true, :label => t(:rotate_users, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
 
         <div class="container js-days-of-the-week">
           <div class="row">
@@ -51,9 +51,17 @@
 
     <div class="col-md-6">
       <!--      @current_project.users.object.confirmed-->
-      <%= f.select :select_user, options_for_select(User.all.map { |u| [u.decorate.full_name, u.id] }), { label: t(:select_users, :scope => :schedule), :label_class => 'required', :include_blank => true }, :class => 'js-select-users' %>
+      <%= f.select :select_user, options_for_select(@select_users.map { |u| [u.decorate.full_name, u.id] }), { label: t(:select_users, :scope => :schedule), :label_class => 'required', :include_blank => true }, :class => 'js-select-users' %>
 
       <div id="users">
+        <% @schedule.schedule_users.each do |schedule_user| %>
+          <div class='ui-sortable-handle form-control col-md-11' style='background-color: <%= schedule_user.user.decorate.color %>'>
+            <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+            <%= schedule_user.user.decorate.full_name %>
+            <span onclick=remove_user_item(this) class='float-right'>x</span>
+            <input type=hidden name=edit_schedule_form[users][<%= schedule_user.user.id %>] id=edit_schedule_form_users_<%= schedule_user.user.id %> value=<%= schedule_user.priority %>>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@
         <br/>
 
         <%= f.fields_for :schedule_attributes do |schedule_attributes| %>
-          <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }), { :include_blank => true, :label => t(:rotate_user, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
+          <%= schedule_attributes.select :interval_unit, options_for_select(Schedule::INTERVAL_UNIT.map { |s| [ t(s, :scope => [:schedule, :interval_unit]), s ] }), { :include_blank => true, :label => t(:rotate_users, :scope => :schedule), :label_class => 'required' }, { :control_class => 'form-control js-interval-unit' } %>
 
           <div class="container js-days-of-the-week">
             <div class="row">

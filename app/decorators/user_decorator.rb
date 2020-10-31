@@ -30,4 +30,8 @@ class UserDecorator < ApplicationDecorator
     value << ' (currently scheduled)' if self == project.on_call_user
     value
   end
+
+  def color
+    full_name.generate_random_color
+  end
 end

@@ -18,9 +18,9 @@ class CreateScheduleForm < BaseForm
 
   def schedule_attributes=(value)
     if value[:interval_unit] == 'biweek'
-      set_biweek_schedule_attributes(value)
-    elsif value[:interval_unit] == 'month'
-      set_month_schedule_attributes(value)
+      populate_biweek_schedule_attributes(value)
+    else
+      populate_day_week_schedule_attributes(value)
     end
 
     value[:ends] = 'never'
@@ -46,28 +46,28 @@ class CreateScheduleForm < BaseForm
     super args_key_first args, :schedule
   end
 
-  def set_biweek_schedule_attributes(value)
+  def populate_day_week_schedule_attributes(value)
+    value[:end_time] = schedule_attributes_end_time(value)
+  end
+
+  def populate_biweek_schedule_attributes(value)
     value[:interval_unit] = 'week'
     value[:interval] = 2
-    value[:end_time] = schedule_attributes_end_time(value, 2.weeks - 1.day)
+    value[:end_time] = schedule_attributes_end_time(value, 13.days)
   end
 
-  def set_month_schedule_attributes(value)
-    value[:end_time] = schedule_attributes_end_time(value, 1.month - 1.day)
-  end
-
-  def schedule_attributes_end_time(value, duration)
+  def schedule_attributes_end_time(value, duration = 0.days)
     value[:end_time] = '11:59 PM' if value[:end_time].blank?
 
     (Time.zone.parse(value[:start_date]) + duration)
-        .strftime('%m/%d/%Y %I:%M %p')
-        .split(' ')[0] + ' ' + value[:end_time]
+      .strftime('%m/%d/%Y %I:%M %p')
+      .split(' ')[0] + ' ' + value[:end_time]
   end
 
   def weekday_selected
-    if schedule.weekly?
-      present = Schedule::DAYS_OF_THE_WEEK.reduce(false) { |a, e| a || schedule_attributes.send(e).present? }
-      errors.add(:base, 'Please select atleast one day of the week') unless present
-    end
+    return unless schedule.weekly?
+
+    present = Schedule::DAYS_OF_THE_WEEK.reduce(false) { |a, e| a || schedule_attributes.send(e).present? }
+    errors.add(:base, 'Please select atleast one day of the week') unless present
   end
 end
