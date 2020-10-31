@@ -1,15 +1,13 @@
 document.addEventListener('turbolinks:load', function () {
     init_user_items();
     add_user_item();
-    init_days_of_the_week();
-    toggle_days_of_the_week();
 });
 
 function init_user_items() {
     $('#users').sortable({
         stop: function () {
             $('#users input').each(function(idx) {
-                $(this).val(idx + 1);
+                $(this).val(idx);
             });
         }
     });
@@ -48,16 +46,22 @@ function remove_user_item(el) {
 function next_user_item_priority() {
     var max = 0;
 
+    if($('.ui-sortable-handle input').length == 0)
+        return max;
+
+
+
     $('.ui-sortable-handle input').each(function(){
         var val = $(this).val();
         if(val > max) max = val;
     });
+
     return parseInt(max) + 1;
 }
 
 function update_user_item_priorities() {
     $('.ui-sortable-handle input').each(function( index ) {
-        $(this).val(0 + 1);
+        $(this).val(index);
     });
 }
 
@@ -71,23 +75,4 @@ function change_user_item_color() {
 
     var hue = 'rgb(' + (Math.floor(57*indice_ratios[0]) + 200) + ',' + (Math.floor(57*indice_ratios[1]) + 200) + ',' + (Math.floor(57*indice_ratios[2]) + 200) + ')';
     $('.ui-sortable-handle:last').css("background-color", hue);
-}
-
-function init_days_of_the_week(){
-    if($('.js-interval-unit').val() == 'week') {
-        $('.js-days-of-the-week').show();
-    } else {
-        $('.js-days-of-the-week').hide();
-    }
-}
-
-function toggle_days_of_the_week(){
-    $('.js-interval-unit').on('change', function() {
-        if($('.js-interval-unit').val() == 'week') {
-            $('.js-days-of-the-week').show();
-        } else {
-            $('.js-days-of-the-week').hide();
-            $('input:checkbox:checked').prop('checked', false);
-        }
-    });
 }

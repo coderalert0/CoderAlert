@@ -21,21 +21,6 @@ class Schedule < ApplicationRecord
 
   publishes_lifecycle_events
 
-  def next_occurrence
-    rule.next_occurrence.start_time
-  end
-
-  def next_occurrences_with_users(number)
-    occurrences = []
-
-    rule.next_occurrences(number, rule.start_date).each.with_index do |occurrence, index|
-      user = occurrence_user(occurrence, index)
-      occurrences << [occurrence, user]
-    end
-
-    occurrences
-  end
-
   def daily?
     schedule_attributes.interval_unit == 'day'
   end
@@ -53,30 +38,31 @@ class Schedule < ApplicationRecord
   end
 
   def on_call_user
-    rule.next_occurrences(20, rule.start_date).each_with_index do |occurrence, index|
-      if occurrence.cover? Time.now
-        return occurrence_user(occurrence, index)
-      end
+    occurrences = rule.first(90)
+    occurrence = occurrences[occurrence_index]
+
+    return occurrence_user(occurrence_index) if occurrence.cover? Time.now
+  end
+
+  def occurrence_index(date_time_now = DateTime.now)
+    start_date_time = rule.start_date.to_datetime
+
+    # need to decrement week number for Sundays (international vs USA)
+    week_number_now = date_time_now.cwday == 7 ? date_time_now.cweek - 1 : date_time_now.cweek
+    start_week_number = start_date_time.cwday == 7 ? start_date_time.cweek - 1 : start_date_time.cweek
+
+    if daily?
+      (date_time_now - start_date_time).to_i
+    elsif biweekly?
+      week_number_now / 2 - start_week_number / 2
+    elsif weekly?
+      week_number_now - start_week_number
     end
   end
 
-  def occurrence_user(occurrence, index)
-    priority =
-        if weekly?
-          date_time = occurrence.start_time.to_datetime
-
-          # need to decrement week number for Sundays (international vs USA)
-          week_number = date_time.cwday == 7 ? date_time.cweek - 1 : date_time.cweek
-
-          (week_number - 1) % schedule_users.count + 1
-        else
-          index % schedule_users.count + 1
-        end
+  def occurrence_user(index)
+    priority = index % schedule_users.count
 
     schedule_users.find_by(priority: priority).user
-  end
-
-  def priority(user)
-    schedule_users.find_by(user: user).try(:priority)
   end
 end

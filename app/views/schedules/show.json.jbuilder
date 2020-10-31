@@ -1,7 +1,8 @@
-json.array!(@schedule.next_occurrences_with_users(180)) do |occurrence|
-  json.id occurrence[1].id
-  json.title occurrence[1].first_name
-  json.color occurrence[1].first_name.generate_random_color
-  json.start occurrence[0]
-  json.end occurrence[0].end_time
+json.array! @schedule.rule.first(90).each do |occurrence|
+  index = @schedule.occurrence_index(occurrence.start_time.to_datetime)
+
+  json.title @schedule.occurrence_user(index).first_name
+  json.color @schedule.occurrence_user(index).first_name.generate_random_color
+  json.start occurrence.start_time
+  json.end occurrence.end_time
 end
