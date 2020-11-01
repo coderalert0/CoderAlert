@@ -5,9 +5,7 @@ class SchedulesController < ApplicationController
   before_action :load_time_zone, only: %i[new edit]
   before_action :populate_select_users, only: %i[edit update]
 
-  def index
-    @schedules = @current_project.schedules
-  end
+  def index; end
 
   def show
     gon.url = project_schedule_path(@project, @schedule, format: :json)

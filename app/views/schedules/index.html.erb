@@ -1,3 +1,7 @@
+<div class="alert alert-info">
+  <%= t(:pto_info_message, :scope => :schedule).html_safe %>
+</div>
+
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <% if can?(:create, Schedule.new(project: @project)) && @project.schedules.size.zero? %>
     <div class="dataTables_length" id="dataTable_length">

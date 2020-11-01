@@ -33,30 +33,22 @@ class Schedule < ApplicationRecord
     schedule_attributes.interval_unit == 'week' && schedule_attributes.interval == 2
   end
 
-  def jobs
-    Delayed::Job.where('handler LIKE ?', "%Schedule/#{id}\%")
-  end
-
   def on_call_user
     occurrences = rule.first(90)
     occurrence = occurrences[occurrence_index]
 
-    return occurrence_user(occurrence_index) if occurrence.cover? Time.now
+    return occurrence_user(occurrence_index) if occurrence.cover? Time.zone.now
   end
 
   def occurrence_index(date_time_now = Time.zone.now.to_datetime)
-    start_date_time = rule.start_date.to_datetime
-
-    # need to decrement week number for Sundays (international vs USA)
-    week_number_now = date_time_now.cwday == 7 ? date_time_now.cweek - 1 : date_time_now.cweek
-    start_week_number = start_date_time.cwday == 7 ? start_date_time.cweek - 1 : start_date_time.cweek
+    start_date_time = rule.start_time.to_datetime
 
     if daily?
       (date_time_now - start_date_time).to_i
     elsif biweekly?
-      week_number_now / 2 - start_week_number / 2
+      date_time_now.cweek / 2 - start_date_time.cweek / 2
     elsif weekly?
-      week_number_now - start_week_number
+      date_time_now.cweek - start_date_time.cweek
     end
   end
 
@@ -74,8 +66,7 @@ class Schedule < ApplicationRecord
   end
 
   def occurrence_user_calendar(index)
-    priority = index % schedule_users.count
-
-    schedule_users.find_by(priority: priority).user
+    priority = index % schedule_users.size
+    schedule_users.select{|su| su.priority == priority }[0].user
   end
 end

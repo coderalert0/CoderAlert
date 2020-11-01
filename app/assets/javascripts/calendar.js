@@ -16,7 +16,14 @@ function eventCalendar() {
         },
         events: gon.url,
         nextDayThreshold : "09:01:00",
-        aspectRatio: 2
+        aspectRatio: 2,
+        loading: function( isLoading, view ) {
+            if(isLoading) {
+                $('#overlay').show();
+            } else {
+                $('#overlay').hide();
+            }
+        }
     });
 };
 function clearCalendar() {
