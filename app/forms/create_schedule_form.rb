@@ -23,6 +23,8 @@ class CreateScheduleForm < BaseForm
       populate_day_week_schedule_attributes(value, 6.days)
     when 'biweek'
       populate_biweek_schedule_attributes(value)
+    when 'triweek'
+      populate_triweek_schedule_attributes(value)
     end
 
     value[:ends] = 'never'
@@ -56,6 +58,12 @@ class CreateScheduleForm < BaseForm
     value[:interval_unit] = 'week'
     value[:interval] = 2
     value[:end_time] = schedule_attributes_end_time(value, 13.days)
+  end
+
+  def populate_triweek_schedule_attributes(value)
+    value[:interval_unit] = 'week'
+    value[:interval] = 3
+    value[:end_time] = schedule_attributes_end_time(value, 20.days)
   end
 
   def schedule_attributes_end_time(value, duration)

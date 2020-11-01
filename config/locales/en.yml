@@ -90,6 +90,7 @@ en:
       day: 'Daily'
       week: 'Weekly'
       biweek: 'Every 2 Weeks'
+      triweek: 'Every 3 Weeks'
 
     days_of_the_week:
       sunday: 'Su'

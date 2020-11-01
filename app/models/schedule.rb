@@ -12,7 +12,7 @@ class Schedule < ApplicationRecord
 
   has_schedule_attributes column_name: 'rule'
 
-  INTERVAL_UNIT = %i[day week biweek].freeze
+  INTERVAL_UNIT = %i[day week biweek triweek].freeze
   DAYS_OF_THE_WEEK = %i[sunday monday tuesday wednesday thursday friday saturday].freeze
 
   validates_presence_of :name, :schedule_attributes, :project
@@ -33,6 +33,10 @@ class Schedule < ApplicationRecord
     schedule_attributes.interval_unit == 'week' && schedule_attributes.interval == 2
   end
 
+  def triweekly?
+    schedule_attributes.interval_unit == 'week' && schedule_attributes.interval == 3
+  end
+
   def on_call_user
     occurrences = rule.first(90)
     occurrence = occurrences[occurrence_index]
@@ -45,10 +49,12 @@ class Schedule < ApplicationRecord
 
     if daily?
       (date_time_now - start_date_time).to_i
-    elsif biweekly?
-      date_time_now.cweek / 2 - start_date_time.cweek / 2
     elsif weekly?
       date_time_now.cweek - start_date_time.cweek
+    elsif biweekly?
+      date_time_now.cweek / 2 - start_date_time.cweek / 2
+    elsif triweekly?
+      date_time_now.cweek / 3 - start_date_time.cweek / 3
     end
   end
 
