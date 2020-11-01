@@ -2,11 +2,12 @@ class PermissionUserForm < BaseForm
   attr_writer :project_user
 
   nested_attributes :user_id, :project, :admin, to: :project_user
+  nested_attributes :pto, to: :user
 
-  accessible_attr :user_id, :admin
+  accessible_attr :user_id, :admin, :pto
 
   def user
-    User.find(user_id)
+    @user ||= User.find(user_id)
   end
 
   def project_user
@@ -16,6 +17,7 @@ class PermissionUserForm < BaseForm
   def _submit
     ActiveRecord::Base.transaction do
       project_user.save!
+      user.save!
       create_slack_alert_settings if project.slack_authorization.present?
       create_contact_alert_settings
     end

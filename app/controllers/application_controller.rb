@@ -37,6 +37,12 @@ class ApplicationController < ActionController::Base
     params.require(clazz.to_s.snakify.to_sym).permit(clazz.accessible_attributes)
   end
 
+  def disable_browser_caching
+    response.headers['Cache-Control'] = 'no-cache, no-store'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Fri, 09 Aug 1985 00:00:00 GMT'
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { render nothing: true, status: :not_found }

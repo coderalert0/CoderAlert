@@ -19,8 +19,8 @@ en:
     finish: 'Finish'
 
     schedule:
-      title: 'Create a Schedule'
-      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint<br/><br/>If you are unsure about the schedule, you can always edit the schedule after the setup process is complete."
+      title: 'What is a Schedule?'
+      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint.<br/><br/>When a currently scheduled user is on PTO, tickets will randomly be assigned to available users to evenly distribute the workload."
 
     project:
       title: 'Create a Project'
@@ -208,7 +208,7 @@ en:
 
   user:
     on_pto: '(on PTO)'
-    pto: 'PTO'
+    pto: 'On PTO'
     title: 'Title'
 
   popover:

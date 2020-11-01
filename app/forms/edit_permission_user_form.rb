@@ -1,2 +1,2 @@
-class EditPermissionUserForm < BaseForm
+class EditPermissionUserForm < PermissionUserForm
 end

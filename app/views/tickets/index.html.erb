@@ -1,9 +1,4 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
-  <div class="dataTables_length" id="dataTable_length">
-    <%= link_to t(:new), new_project_ticket_path(@current_project), class: 'btn btn-primary' %>
-    <br/><br/>
-  </div>
-
   <div id="dataTable_filter" class="dataTables_filter">
   <%= bootstrap_form_for :search_tickets, url: project_tickets_path(@project), method: :get do |f| %>
     <%= f.text_field :query, label: t(:search) %>

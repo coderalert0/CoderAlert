@@ -49,6 +49,10 @@ module Users
       end
     end
 
+    def update_resource(resource, params)
+      resource.update_without_password(params)
+    end
+
     def after_inactive_sign_up_path_for(_user)
       flash.notice = t('devise.registrations.confirmation_instructions')
 

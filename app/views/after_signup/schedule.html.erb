@@ -4,19 +4,7 @@
   <%= t(:info_message, :scope => [:welcome_wizard, :schedule]).html_safe %>
 </div>
 
-<%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
-  <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.select :frequency, options_for_select(Schedule.frequencies.keys.map { |s| [ t(s, :scope => [:schedule, :frequencies]), s ] }), :label_class => 'required' %>
-  <%= f.datetime_select :start, :order => [:hour, :minute, :day, :month, :year], :label_class => 'required' %>
-  <%= f.datetime_select :end, :order => [:hour, :minute, :day, :month, :year] %>
-
-  <% @project.users.confirmed.each do |user| %>
-    <%= user.decorate.full_name_link(@project) %>
-<!--    <%#= text_field_tag "#{@form.class.name.snakify}[users][#{user.id}]", @form.schedule.priority(user) %><br/>-->
-  <% end %>
-
-  <div class="actions text-right">
-    <%= wizard_back_button %>
-    <%= wizard_next_button %>
-  </div>
-<% end %>
+<div class="actions text-right">
+  <%= wizard_back_button %>
+  <%= wizard_schedule_next_button %>
+</div>

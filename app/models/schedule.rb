@@ -50,11 +50,11 @@ class Schedule < ApplicationRecord
     if daily?
       (date_time_now - start_date_time).to_i
     elsif weekly?
-      date_time_now.cweek - start_date_time.cweek
+      TimeDifference.between(date_time_now, start_date_time).in_weeks.to_i
     elsif biweekly?
-      date_time_now.cweek / 2 - start_date_time.cweek / 2
+      TimeDifference.between(date_time_now, start_date_time).in_weeks.to_i / 2
     elsif triweekly?
-      date_time_now.cweek / 3 - start_date_time.cweek / 3
+      TimeDifference.between(date_time_now, start_date_time).in_weeks.to_i / 3
     end
   end
 
@@ -73,6 +73,6 @@ class Schedule < ApplicationRecord
 
   def occurrence_user_calendar(index)
     priority = index % schedule_users.size
-    schedule_users.select{|su| su.priority == priority }[0].user
+    schedule_users.select { |su| su.priority == priority }[0].user
   end
 end

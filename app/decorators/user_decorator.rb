@@ -2,13 +2,13 @@ class UserDecorator < ApplicationDecorator
   delegate_all
 
   def full_name
-    "#{first_name} #{last_name} #{h.t(:on_pto, :scope => :user) if pto?}"
+    "#{first_name} #{last_name} #{h.t(:on_pto, scope: :user) if pto?}"
   end
 
   def full_name_link(project)
     h.link_to h.project_user_path(project, object) do
       h.concat profile_image_display('32x32>') if profile_image.attached?
-      h.concat full_name
+      h.concat " #{full_name}"
     end
   end
 

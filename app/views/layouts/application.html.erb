@@ -134,14 +134,16 @@
                     </li>
                   <% end %>
 
-                  <li role="separator" class="divider"></li>
+                  <% if can? :create, Project %>
+                    <li role="separator" class="divider"></li>
 
-                  <li>
-                    <%= link_to new_project_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
-                      <i class="ti-plus mR-10"></i>
-                      <span>New Project</span>
-                    <% end %>
-                  </li>
+                    <li>
+                      <%= link_to new_project_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                        <i class="ti-plus mR-10"></i>
+                        <span>New Project</span>
+                      <% end %>
+                    </li>
+                  <% end %>
                 </ul>
               </li>
             </ul>

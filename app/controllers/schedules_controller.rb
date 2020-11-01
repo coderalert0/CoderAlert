@@ -3,7 +3,8 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource through: :project
 
   before_action :load_time_zone, only: %i[new edit]
-  before_action :populate_select_users, only: %i[edit update]
+  before_action :populate_select_users, only: %i[new edit]
+  before_action :disable_browser_caching, only: :edit
 
   def index; end
 
@@ -65,7 +66,7 @@ class SchedulesController < ApplicationController
 
   def populate_select_users
     user_ids = @schedule.schedule_users.pluck(:user_id)
-    @select_users = @project.users.where.not(id: user_ids)
+    @select_users = @project.users.confirmed.where.not(id: user_ids)
   end
 
   def load_time_zone
