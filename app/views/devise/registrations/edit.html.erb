@@ -28,12 +28,13 @@
     </div>
 
     <div class="col-sm-4">
-      <% if @user.profile_image.attached? %>
+      <% if @user.profile_image.attachment.id.present? %>
         <%= resource.decorate.profile_image_display('300x300', 'mb-3') %>
       <% end %>
 
       <br/>
-      <%= f.file_field :profile_image, hide_label: true %>
+        <%= f.file_field :profile_image, control_col: 'col-md-9', hide_label: true %>
+
     </div>
   </div>
 

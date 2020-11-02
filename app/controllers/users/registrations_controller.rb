@@ -51,6 +51,8 @@ module Users
 
     def update_resource(resource, params)
       resource.update_without_password(params)
+    rescue StandardError => e
+      flash.alert = resource.errors.full_messages
     end
 
     def after_inactive_sign_up_path_for(_user)

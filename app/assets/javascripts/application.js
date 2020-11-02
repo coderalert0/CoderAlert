@@ -27,4 +27,5 @@
 //= require date-time-picker
 //= require fullcalendar
 //= require calendar
+//= require file-browse
 //= require_tree .
