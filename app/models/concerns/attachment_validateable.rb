@@ -3,7 +3,6 @@ module AttachmentValidateable
 
   included do
     validates :attachments,
-              attached: true,
               content_type: ['image/bmp', 'text/csv', 'application/msword', 'image/gif',
                              'image/jpeg', 'image/jpg', 'image/png', 'application/pdf',
                              'application/rtf', 'image/tiff', 'text/plain', 'application/vnd.ms-excel'],

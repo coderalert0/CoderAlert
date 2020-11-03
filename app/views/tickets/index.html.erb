@@ -1,7 +1,7 @@
 <div id="dataTable_wrapper" class="dataTables_wrapper">
   <div id="dataTable_filter" class="dataTables_filter">
   <%= bootstrap_form_for :search_tickets, url: project_tickets_path(@project), method: :get do |f| %>
-    <%= f.text_field :query, label: t(:search) %>
+    <%= f.text_field :query, label: t(:search), control_col: 'col-md-9' %>
   <% end %>
   </div>
   <br/>

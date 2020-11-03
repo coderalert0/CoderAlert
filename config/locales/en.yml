@@ -173,7 +173,7 @@ en:
 
     alerts:
       all: 'All tickets'
-      assigned: 'Only assigned tickets'
+      assigned: 'Only tickets assigned to me'
       none: 'None'
 
     edit:
