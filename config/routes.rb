@@ -12,10 +12,12 @@ Rails.application.routes.draw do
 
     resources :articles, path: 'kb' do
       resources :comments
+      resources :attachments
     end
 
     resources :tickets, path: 't', except: :destroy do
       resources :comments
+      resources :attachments
       put '/status', to: 'ticket_status#update'
     end
 

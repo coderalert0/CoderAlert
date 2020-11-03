@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     form.submit ? flash.notice = 'The comment was added successfully' : flash.alert = form.display_errors
-    redirect_to create_redirect_path
+    redirect_to resource_path
   end
 
   def destroy
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       flash.alert = 'The comment could not be deleted'
     end
 
-    redirect_to create_redirect_path
+    redirect_to resource_path
   end
 
   private
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
     @ticket || @article
   end
 
-  def create_redirect_path
+  def resource_path
     case owner
     when Ticket
       project_ticket_path(@project, @ticket)
