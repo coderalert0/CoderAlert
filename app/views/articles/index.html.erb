@@ -15,9 +15,9 @@
     <thead>
     <tr role="row">
       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40%;"><%= t(:title, :scope => :knowledge_base) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 26%;"><%= t(:author, :scope => :knowledge_base) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:created) %></th>
-      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 17%;"><%= t(:updated) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 24%;"><%= t(:author, :scope => :knowledge_base) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 18%;"><%= t(:created) %></th>
+      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 18%;"><%= t(:updated) %></th>
     </tr>
     </thead>
     <tbody>
@@ -28,8 +28,8 @@
           <%= link_to article.title, project_article_path(@current_project, article) %>
         </td>
         <td><%= article.user.full_name_link(@project) %></td>
-        <td><%= article.created_at.to_formatted_s(:custom_long_ordinal) %></td>
-        <td><%= article.updated_at.to_formatted_s(:custom_long_ordinal) %></td>
+        <td><%= article.created_at_short_display %></td>
+        <td><%= article.updated_at_short_display %></td>
       </tr>
     <% end %>
 

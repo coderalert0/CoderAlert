@@ -1,12 +1,14 @@
 <% if attachable.attachments.present? %>
   <div class="font-weight-bold mb-3 mt-5"><i class="ti-image"> </i><%= t(:attachments) %>:</div>
 
-  <% attachable.attachments.each do |attachment| %>
-    <div>
-      <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
-      <%= link_to send("project_#{attachable.object.class.name.snakify}_attachment_path", @project, attachable, attachment ), :method => 'delete' do %>
-        <%=  content_tag(:i, '', class: 'ti-trash') %>
-      <% end %>
-    </div>
-  <% end %>
+    <% attachable.attachments.each do |attachment| %>
+        <div>
+            <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
+            <% if can? :destroy, attachment %>
+                <%= link_to send("project_#{attachable.object.class.name.snakify}_attachment_path", @project, attachable, attachment ), :method => 'delete' do %>
+                  <%=  content_tag(:i, '', class: 'ti-trash') %>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
 <% end %>

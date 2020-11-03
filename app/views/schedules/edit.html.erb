@@ -42,7 +42,6 @@
     </div>
 
     <div class="col-md-6">
-      <!--      @current_project.users.object.confirmed-->
       <%= f.select :select_user, options_for_select(@select_users.map { |u| [u.decorate.full_name, u.id] }), { label: t(:select_users, :scope => :schedule), :label_class => 'required', :include_blank => true }, :class => 'js-select-users' %>
 
       <div id="users">

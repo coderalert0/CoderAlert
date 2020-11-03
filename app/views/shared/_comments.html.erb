@@ -3,11 +3,13 @@
 
   <% commentable.comments.each do |comment| %>
     <div>
-      <span class="icon-holder float-right">
-        <%= link_to send("project_#{commentable.object.class.name.snakify}_comment_path", @project, commentable, comment ), :method => 'delete' do %>
-          <%=  content_tag(:i, '', class: 'ti-trash') %>
-        <% end %>
-      </span>
+      <% if can? :destroy, comment %>
+        <span class="icon-holder float-right">
+          <%= link_to send("project_#{commentable.object.class.name.snakify}_comment_path", @project, commentable, comment ), :method => 'delete' do %>
+            <%=  content_tag(:i, '', class: 'ti-trash') %>
+          <% end %>
+        </span>
+      <% end %>
 
       <div class="mb-2">
         <%= t(:user_added_a_comment_on_date, :user => comment.user.full_name_link(@project), :date_time => comment.created_at_display).html_safe %>
