@@ -1,7 +1,5 @@
 en:
   attachments: 'Attachments'
-  comment: 'Comment'
-  comments: 'Comments'
   created: 'Created'
   create_ticket: 'Create Ticket'
   delete: 'Delete'
@@ -13,52 +11,13 @@ en:
   updated: 'Updated'
   user_added_a_comment_on_date: "<span class='text-primary'>%{user}</span> added a comment on %{date_time}"
 
-  welcome_wizard:
-    next: 'Next'
-    back: 'Back'
-    finish: 'Finish'
+  active_project:
+    flash:
+      update: 'Project switched successfully'
 
-    schedule:
-      title: 'What is a Schedule?'
-      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint.<br/><br/>When a currently scheduled user is on PTO, tickets will randomly be assigned to available users to evenly distribute the workload."
-
-    project:
-      title: 'Create a Project'
-      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, abbreviation is a prefix for your projects ticket numbers<br/>An abbreviation of PROJ will result in your Ticket ID looking like PROJ-1234"
-
-    slack:
-      title: 'Receive Slack Notifications'
-      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated. Click the \"Add to Slack\" button below and grant access to CoderAlert"
-
-    invite:
-      info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
-
-  sidebar:
-    dashboard: 'Dashboard'
-    tickets: 'Tickets'
-    team: 'Team'
-    knowledge_base: 'Knowledge Base'
-    schedule: 'Schedule'
-
-  header:
-    welcome: 'Welcome! %{name}'
-    projects: 'Projects (%{current_project})'
-    account_settings: 'Account Settings'
-    contact_info: 'Contact Info'
-    notification_settings: 'Notification Settings'
-    logout: 'Logout'
-
-  footer:
-    copyright: 'Copyright © 2020 CoderAlert. All rights reserved.'
-
-  dashboard:
-    unresolved_tickets: 'Unresolved Tickets'
-    in_progress_tickets: 'In Progress Tickets'
-    average_resolution_time: 'Average Resolution Time'
-
-  knowledge_base:
-    title: 'Title'
-    author: 'Author'
+  alert_setting:
+    flash:
+      update: 'The notification setting was edited successfully'
 
   article:
     delete_message: "Are you sure you want to delete this article?"
@@ -68,12 +27,149 @@ en:
     edit:
       title: 'Edit Article'
 
+    flash:
+      create: 'The article was created successfully'
+      update: 'The article was edited successfully.'
+      destroy: 'The article was deleted successfully'
+      destroy_error: 'The article could not be deleted'
+
+  attachment:
+    flash:
+      destroy: 'The attachment was deleted'
+      destroy_error: 'The attachment could not be deleted'
+
+  comment:
+    comment: 'Comment'
+    comments: 'Comments'
+    flash:
+      create: 'The comment was added successfully'
+      destroy: 'The comment was deleted successfully'
+      destroy_error: 'The comment could not be deleted'
+
+  contact:
+    phone: 'Phone'
+    contact_email: Email
+    type: 'Type'
+    value: 'Value'
+    phone_help_text: 'If entering a non-US number, prefix with plus and the country code (i.e. +44)'
+    alert_help_text: "This setting will apply to all projects, you can override individual projects from 'Notification Settings'"
+    delete_message: "Are you sure you want to delete this contact information?"
+
+    index:
+      title: 'My Contact Information'
+
+    create:
+      title: 'Add Contact Information'
+
+    edit:
+      title: 'Edit Contact Information'
+
+    flash:
+      create: 'The contact information was created successfully'
+      update: 'The contact information was edited successfully.'
+      destroy: 'The contact information was deleted successfully'
+      destroy_error: 'The contact information could not be deleted'
+
+  dashboard:
+    unresolved_tickets: 'Unresolved Tickets'
+    in_progress_tickets: 'In Progress Tickets'
+    average_resolution_time: 'Average Resolution Time'
+
+  edit_account_settings:
+    title: 'Edit Account Settings'
+    password_help_text: '%{minimum_password_length} characters minimum. Leave blank if you dont want to change it'
+    current_password_help_text: 'We need your current password to confirm your changes'
+
+  footer:
+    copyright: 'Copyright © 2020 CoderAlert. All rights reserved.'
+
+  header:
+    welcome: 'Welcome! %{name}'
+    projects: 'Projects (%{current_project})'
+    account_settings: 'Account Settings'
+    contact_info: 'Contact Info'
+    notification_settings: 'Notification Settings'
+    logout: 'Logout'
+
+  invite_a_team_member:
+    title: 'Invite a Team Member'
+    submit_and_invite_more: 'Submit & Invite More'
+
+    flash:
+      create: "%{first_name} %{last_name} was invited to the project(s) successfully"
+
+  knowledge_base:
+    title: 'Title'
+    author: 'Author'
+
+  mailer:
+    ticket:
+      created_subject: '%{title} was created by %{assignee}'
+      updated_subject: '%{title} was updated'
+    comment:
+      created_subject: '[%{title}] Comment was added by %{user}'
+      updated_subject: '[%{title}] Comment was updated by %{user}'
+
+  notification_settings:
+    title: 'My Notification Settings for %{project}'
+    info_message: "Your notification settings are set per project. To change your notification settings for other projects switch the project first<br/><br/>If you are not receiving Slack notifications, you may need to update the email address associated with your Slack account below<br/>Disabling Slack notifications will only be in effect for future tickets. You can manually leave past channels from Slack itself."
+    type: 'Type'
+    workspace: 'Workspace'
+    phone_slack_email: 'Phone/Slack Email'
+    slack_email: 'Slack Email'
+    alert: 'Alerts'
+
+    types:
+      slack
+
+    alerts:
+      all: 'All tickets'
+      assigned: 'Only tickets assigned to me'
+      none: 'None'
+
+    edit:
+      title: 'Edit Notification Setting'
+
+  permission_user:
+    permission_user: 'Permission User'
+    name: 'Name'
+    email: 'Email'
+    administrator: 'Administrator'
+    unconfirmed: ' (unconfirmed)'
+    invite_a_team_member: 'Add a new user'
+    delete_message: "Are you sure you want to remove %{user_name} from the %{project_name} project?"
+
+    create_modal:
+      title: 'Permission User to %{project}'
+
+    edit_modal:
+      title: 'Edit User Permission'
+
+  popover:
+    account_unconfirmed_title: 'Account unconfirmed'
+    account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'
+    ticket_viewed_by_assignee_title: 'Ticket viewed'
+    ticket_viewed_by_assignee_content: 'The ticket was first viewed by the current assignee %{time_elapsed} ago'
+
   project:
     key: Key
     create:
       title: 'Create a Project'
     edit:
       title: 'Edit Project'
+
+    flash:
+      create: 'The project was created successfully. You can switch projects by clicking the dropdown above'
+      update: 'The project was edited successfully.'
+      destroy: 'The project was deleted successfully'
+      destroy_error: 'The project could not be deleted'
+
+  project_user:
+    flash:
+      create: 'The user was permissioned to the project successfully'
+      update: 'The user permission was edited successfully'
+      destroy: 'The user was unpermissioned from the project successfully'
+      destroy_error: 'The user could not be unpermissioned from the project'
 
   schedule:
     name: 'Name'
@@ -82,6 +178,12 @@ en:
     start: 'Start'
     end: 'End'
     select_users: 'Select User(s)'
+
+    flash:
+      create: 'The schedule was created successfully'
+      update: 'The schedule was edited successfully.'
+      destroy: 'The schedule was deleted successfully'
+      destroy_error: 'The schedule could not be deleted'
 
     pto_info_message: 'When a currently scheduled user is on PTO, tickets will randomly be assigned to available users to evenly distribute the workload'
     delete_message: 'Are you sure you want to delete this schedule?'
@@ -107,20 +209,12 @@ en:
     edit:
       title: 'Edit Schedule'
 
-  permission_user:
-    permission_user: 'Permission User'
-    name: 'Name'
-    email: 'Email'
-    administrator: 'Administrator'
-    unconfirmed: ' (unconfirmed)'
-    invite_a_team_member: 'Add a new user'
-    delete_message: "Are you sure you want to remove %{user_name} from the %{project_name} project?"
-
-    create_modal:
-      title: 'Permission User to %{project}'
-
-    edit_modal:
-      title: 'Edit User Permission'
+  sidebar:
+    dashboard: 'Dashboard'
+    tickets: 'Tickets'
+    team: 'Team'
+    knowledge_base: 'Knowledge Base'
+    schedule: 'Schedule'
 
   ticket:
     priority: 'Priority'
@@ -134,6 +228,11 @@ en:
     view_ticket: 'View Ticket'
     create_article_prompt: "<br/>Do you want to <a href=%{path}>create an Article</a> describing how the issue was resolved? (it may help others in the future!)"
     schedule_help_text: "You can create a <a target='_blank' href=%{path}>Schedule</a> to automatically assign team members. i.e. rotate every sprint"
+    flash:
+      create: 'The ticket was created successfully'
+      update: 'The ticket was edited successfully.'
+      destroy: 'The ticket was deleted successfully'
+      destroy_error: 'The ticket could not be deleted'
 
     statuses:
       draft: 'Draft'
@@ -159,71 +258,34 @@ en:
     edit:
       title: 'Edit Ticket'
 
-  notification_settings:
-    title: 'My Notification Settings for %{project}'
-    info_message: "Your notification settings are set per project. To change your notification settings for other projects switch the project first<br/><br/>If you are not receiving Slack notifications, you may need to update the email address associated with your Slack account below<br/>Disabling Slack notifications will only be in effect for future tickets. You can manually leave past channels from Slack itself."
-    type: 'Type'
-    workspace: 'Workspace'
-    phone_slack_email: 'Phone/Slack Email'
-    slack_email: 'Slack Email'
-    alert: 'Alerts'
-
-    types:
-      slack
-
-    alerts:
-      all: 'All tickets'
-      assigned: 'Only tickets assigned to me'
-      none: 'None'
-
-    edit:
-      title: 'Edit Notification Setting'
-
-  invite_a_team_member:
-    title: 'Invite a Team Member'
-    submit_and_invite_more: 'Submit & Invite More'
-
-  contact:
-    phone: 'Phone'
-    contact_email: Email
-    type: 'Type'
-    value: 'Value'
-    phone_help_text: 'If entering a non-US number, prefix with plus and the country code (i.e. +44)'
-    alert_help_text: "This setting will apply to all projects, you can override individual projects from 'Notification Settings'"
-    delete_message: "Are you sure you want to delete this contact information?"
-
-    index:
-      title: 'My Contact Information'
-
-    create:
-      title: 'Add Contact Information'
-
-    edit:
-      title: 'Edit Contact Information'
-
-  edit_account_settings:
-    title: 'Edit Account Settings'
-    password_help_text: '%{minimum_password_length} characters minimum. Leave blank if you dont want to change it'
-    current_password_help_text: 'We need your current password to confirm your changes'
+  ticket_status:
+    flash:
+      update: 'Ticket status changed successfully'
 
   user:
     on_pto: '(on PTO)'
     pto: 'On PTO'
     title: 'Title'
 
-  popover:
-    account_unconfirmed_title: 'Account unconfirmed'
-    account_unconfirmed_content: 'The user has not confirmed their account. If they do not see the invitation email in their inbox, ask them to look in their spam folder and mark it as not spam'
-    ticket_viewed_by_assignee_title: 'Ticket viewed'
-    ticket_viewed_by_assignee_content: 'The ticket was first viewed by the current assignee %{time_elapsed} ago'
+  welcome_wizard:
+    next: 'Next'
+    back: 'Back'
+    finish: 'Finish'
 
-  mailer:
-    ticket:
-      created_subject: '%{title} was created by %{assignee}'
-      updated_subject: '%{title} was updated'
-    comment:
-      created_subject: '[%{title}] Comment was added by %{user}'
-      updated_subject: '[%{title}] Comment was updated by %{user}'
+    schedule:
+      title: 'What is a Schedule?'
+      info_message: "A schedule allows you to pre-determine the order of responsibility for production support tickets.<br/>For example, if your sprint is bi-weekly you could rotate responsibility to an engineer every sprint.<br/><br/>When a currently scheduled user is on PTO, tickets will randomly be assigned to available users to evenly distribute the workload."
+
+    project:
+      title: 'Create a Project'
+      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, abbreviation is a prefix for your projects ticket numbers<br/>An abbreviation of PROJ will result in your Ticket ID looking like PROJ-1234"
+
+    slack:
+      title: 'Receive Slack Notifications'
+      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated. Click the \"Add to Slack\" button below and grant access to CoderAlert"
+
+    invite:
+      info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
 
   activerecord:
     errors:

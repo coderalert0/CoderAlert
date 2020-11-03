@@ -21,7 +21,7 @@ class ProjectUsersController < ApplicationController
     authorize! :permission, @project_user
 
     if @form.submit
-      flash.notice = 'The user was permissioned to the project successfully'
+      flash.notice = t(:create, scope: %i[project_user flash])
       redirect_to project_project_users_path(@project)
     else
       flash.alert = @form.display_errors
@@ -42,7 +42,7 @@ class ProjectUsersController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The user permission was edited successfully'
+      flash.notice = t(:update, scope: %i[project_user flash])
       redirect_to project_project_users_path(@project)
     else
       flash.alert = @form.display_errors
@@ -51,10 +51,10 @@ class ProjectUsersController < ApplicationController
 
   def destroy
     if @project_user.destroy
-      flash.notice = 'The user was unpermissioned from the project successfully'
+      flash.notice = t(:destroy, scope: %i[project_user flash])
       redirect_to project_project_users_path(@project)
     else
-      flash.alert = 'The user could not be unpermissioned from the project'
+      flash.alert = t(:destroy_error, scope: %i[project_user flash])
       render :index
     end
   end

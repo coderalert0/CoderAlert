@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
     @form = create_form
 
     if @form.submit
-      flash.notice = 'The schedule was created successfully'
+      flash.notice = t(:create, scope: %i[schedule flash])
       redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
@@ -36,7 +36,7 @@ class SchedulesController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The schedule was edited successfully'
+      flash.notice = t(:update, scope: %i[schedule flash])
       redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
@@ -46,10 +46,10 @@ class SchedulesController < ApplicationController
 
   def destroy
     if @schedule.destroy
-      flash.notice = 'The schedule was deleted successfully'
+      flash.notice = t(:destroy, scope: %i[schedule flash])
       redirect_to project_schedules_path
     else
-      flash.alert = 'The schedule could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[schedule flash])
       render :show
     end
   end

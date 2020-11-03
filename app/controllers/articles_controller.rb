@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @form = create_form
 
     if @form.submit
-      flash.notice = 'The article was created successfully'
+      flash.notice = t(:create, scope: %i[article flash])
       redirect_to project_articles_path(@project)
     else
       flash.alert = @form.display_errors
@@ -43,7 +43,7 @@ class ArticlesController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The article was edited successfully'
+      flash.notice = t(:update, scope: %i[article flash])
       redirect_to project_articles_path(@project)
     else
       flash.alert = @form.display_errors
@@ -53,10 +53,10 @@ class ArticlesController < ApplicationController
 
   def destroy
     if @article.destroy
-      flash.notice = 'The article was deleted successfully'
+      flash.notice = t(:destroy, scope: %i[article flash])
       redirect_to project_articles_path(@project)
     else
-      flash.alert = 'The article could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[article flash])
       render :show
     end
   end

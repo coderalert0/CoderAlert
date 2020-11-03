@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
     @form = create_form
 
     if @form.submit
-      flash.notice = 'The ticket was created successfully'
+      flash.notice = t(:create, scope: %i[ticket flash])
       populate_ticket_view
 
       redirect_to project_tickets_path(@current_project)
@@ -46,7 +46,7 @@ class TicketsController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The ticket was edited successfully.'
+      flash.notice = t(:update, scope: %i[ticket flash])
 
       if @form.ticket.saved_change_to_status?(to: 'closed')
         flash.notice << t(:create_article_prompt, path: new_project_article_path, scope: :ticket).html_safe
@@ -61,10 +61,10 @@ class TicketsController < ApplicationController
 
   def destroy
     if @ticket.destroy
-      flash.notice = 'The ticket was deleted successfully'
+      flash.notice = t(:destroy, scope: %i[ticket flash])
       redirect_to project_tickets_path(@current_project)
     else
-      flash.alert = 'The ticket could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[ticket flash])
       render :show
     end
   end

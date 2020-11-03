@@ -1,5 +1,5 @@
 <% if commentable.comments.present? %>
-  <div class="font-weight-bold mt-5 mb-3"><i class="ti-comment"> </i><%= t(:comments) %>:</div>
+  <div class="font-weight-bold mt-5 mb-3"><i class="ti-comment"> </i><%= t(:comments, :scope => :comment) %>:</div>
 
   <% commentable.comments.each do |comment| %>
     <div>
@@ -30,7 +30,7 @@
     <%= bootstrap_form_for @comment_form, :url => send("project_#{commentable.object.class.name.snakify}_comments_path", @project, commentable), :layout => :vertical do |f| %>
       <%= f.text_area :content, :rows => 4, :hide_label => true %>
       <%= button_tag(type: "submit", :class => 'btn btn-light border') do %>
-        <i class="ti-comment-alt"> </i><%= t(:comment) %>
+        <i class="ti-comment-alt"> </i><%= t(:comment, :scope => :comment) %>
       <% end %>
     <% end %>
   </div>

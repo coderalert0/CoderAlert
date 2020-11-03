@@ -5,22 +5,6 @@ class ProjectsController < ApplicationController
 
   def show; end
 
-  def edit
-    @form = EditProjectForm.new project: @project
-  end
-
-  def update
-    @form = edit_form
-
-    if @form.submit
-      flash.notice = 'The project was edited successfully'
-      redirect_to projects_path
-    else
-      flash.alert = @form.display_errors
-      render :edit
-    end
-  end
-
   def new
     @form = CreateProjectForm.new
   end
@@ -29,7 +13,7 @@ class ProjectsController < ApplicationController
     @form = create_form
 
     if @form.submit
-      flash.notice = 'The project was created successfully. You can switch projects by clicking the dropdown above'
+      flash.notice = t(:create, scope: %i[project flash])
       redirect_to projects_path
     else
       flash.alert = @form.display_errors
@@ -37,12 +21,28 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy
-    if @project.destroy
-      flash.notice = 'The project was deleted successfully'
+  def edit
+    @form = EditProjectForm.new project: @project
+  end
+
+  def update
+    @form = edit_form
+
+    if @form.submit
+      flash.notice = t(:update, scope: %i[project flash])
       redirect_to projects_path
     else
-      flash.alert = 'The project could not be deleted'
+      flash.alert = @form.display_errors
+      render :edit
+    end
+  end
+
+  def destroy
+    if @project.destroy
+      flash.notice = t(:destroy, scope: %i[project flash])
+      redirect_to projects_path
+    else
+      flash.alert = t(:destroy_error, scope: %i[project flash])
       render :show
     end
   end

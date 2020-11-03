@@ -12,6 +12,17 @@ class ContactsController < ApplicationController
     end
   end
 
+  def create
+    @form = create_form
+
+    if @form.submit
+      flash.notice = t(:create, scope: %i[contact flash])
+      redirect_to contacts_path
+    else
+      flash.alert = @form.display_errors
+    end
+  end
+
   def edit
     @form = CreateContactForm.new contact: @contact
 
@@ -25,18 +36,7 @@ class ContactsController < ApplicationController
     @form = edit_form
 
     if @form.submit
-      flash.notice = 'The contact information was edited successfully'
-      redirect_to contacts_path
-    else
-      flash.alert = @form.display_errors
-    end
-  end
-
-  def create
-    @form = create_form
-
-    if @form.submit
-      flash.notice = 'The contact information was created successfully'
+      flash.notice = t(:update, scope: %i[contact flash])
       redirect_to contacts_path
     else
       flash.alert = @form.display_errors
@@ -45,10 +45,10 @@ class ContactsController < ApplicationController
 
   def destroy
     if @contact.destroy
-      flash.notice = 'The contact was deleted successfully'
+      flash.notice = t(:destroy, scope: %i[contact flash])
       redirect_to contacts_path
     else
-      flash.alert = 'The contact could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[contact flash])
       render :show
     end
   end

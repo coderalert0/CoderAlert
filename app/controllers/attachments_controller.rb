@@ -8,10 +8,10 @@ class AttachmentsController < ApplicationController
     @attachment.purge
 
     if !ActiveStorage::Attachment.exists?(@attachment.id)
-      flash.notice = 'The attachment was deleted'
+      flash.notice = t(:destroy, scope: %i[attachment flash])
       redirect_to resource_path
     else
-      flash.alert = 'The attachment could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[attachment flash])
     end
   end
 

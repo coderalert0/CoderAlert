@@ -7,7 +7,7 @@ class ActiveProjectController < ApplicationController
 
     switch_active_project
 
-    flash.notice = 'Project switched successfully'
+    flash.notice = t(:update, scope: %i[active_project flash])
     redirect_to root_path
   end
 

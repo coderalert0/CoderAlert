@@ -5,15 +5,15 @@ class CommentsController < ApplicationController
   load_and_authorize_resource :comment, through: %i[article ticket]
 
   def create
-    form.submit ? flash.notice = 'The comment was added successfully' : flash.alert = form.display_errors
+    form.submit ? flash.notice = t(:create, scope: %i[comment flash]) : flash.alert = form.display_errors
     redirect_to resource_path
   end
 
   def destroy
     if @comment.destroy
-      flash.notice = 'The comment was deleted successfully'
+      flash.notice = t(:destroy, scope: %i[comment flash])
     else
-      flash.alert = 'The comment could not be deleted'
+      flash.alert = t(:destroy_error, scope: %i[comment flash])
     end
 
     redirect_to resource_path

@@ -6,7 +6,7 @@ class TicketStatusController < ApplicationController
     @ticket.status = params[:status]
 
     if @ticket.save!
-      flash.notice = 'Ticket status changed successfully'
+      flash.notice = t(:update, scope: %i[ticket_status flash])
       redirect_to project_tickets_path(@current_project)
     else
       flash.alert = @form.display_errors
