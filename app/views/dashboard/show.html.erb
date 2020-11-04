@@ -41,12 +41,12 @@
       <div class='col-md-3'>
         <div class="layers bd bgc-white p-20">
           <div class="layer w-100 mB-10">
-            <h6 class="lh-1"><%= t(:average_resolution_time, :scope => :dashboard) %></h6>
+            <h6 class="lh-1"><%= t(:current_on_call_user, :scope => :dashboard) %></h6>
           </div>
           <div class="layer w-100">
             <div class="peers ai-sb fxw-nw">
               <div class="peer">
-                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">4 hours</span>
+                <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500"><%= @on_call_user %></span>
               </div>
             </div>
           </div>

@@ -6,5 +6,6 @@ class DashboardController < ApplicationController
 
     @unresolved_ticket_count = tickets.unresolved.count
     @in_progress_ticket_count = tickets.in_progress.count
+    @on_call_user = @current_project.try(:schedules).try(:first).try(:on_call_user).try(:decorate).try(:full_name)
   end
 end

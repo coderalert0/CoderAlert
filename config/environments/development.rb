@@ -40,7 +40,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       port: 587,
-      address: 'email-smtp.us-east-1.amazonaws.com',
+      address: 'email-smtp.us-east-2.amazonaws.com',
       user_name: Rails.application.credentials.dig(:aws, :ses_username),
       password: Rails.application.credentials.dig(:aws, :ses_password),
       authentication: :login,

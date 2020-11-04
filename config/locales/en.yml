@@ -71,9 +71,10 @@ en:
       destroy_error: 'The contact information could not be deleted'
 
   dashboard:
-    unresolved_tickets: 'Unresolved Tickets'
-    in_progress_tickets: 'In Progress Tickets'
     average_resolution_time: 'Average Resolution Time'
+    current_on_call_user: 'Current On-Call User'
+    in_progress_tickets: 'In Progress Tickets'
+    unresolved_tickets: 'Unresolved Tickets'
 
   edit_account_settings:
     title: 'Edit Account Settings'
