@@ -17,7 +17,9 @@ module Users
       authorize_project_user(@form.projects)
 
       if @form.submit
-        flash.notice = t(:create, first_name: @form.first_name, last_name: @form.last_name, scope: %i[invite_a_team_member flash])
+        flash.notice = t(:create, first_name: @form.first_name,
+                                  last_name: @form.last_name,
+                                  scope: %i[invite_a_team_member flash])
         redirect_to submit_redirect_path
       else
         flash.alert = @form.display_errors

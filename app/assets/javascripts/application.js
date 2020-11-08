@@ -28,4 +28,5 @@
 //= require fullcalendar
 //= require calendar
 //= require file-browse
+//= require project
 //= require_tree .

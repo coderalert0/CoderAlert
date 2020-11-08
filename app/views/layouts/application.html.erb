@@ -128,9 +128,12 @@
                 <ul class="dropdown-menu fsz-sm">
                   <% @projects.each do |p| %>
                     <li>
-                      <%= link_to active_project_path(:id => p.id), :method => :put, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
-                        <span><%= p.name %></span>
+                      <div class="d-flex justify-content-between">
+                      <%= link_to p.name, active_project_path(:id => p.id), :method => :put, class: 'd-b td-n pY-5 c-grey-700' %>
+                      <% if can? :edit, p %>
+                        <%= link_to t(:edit), edit_project_path(p), class: 'float-right pY-5' %>
                       <% end %>
+                      </div>
                     </li>
                   <% end %>
 
@@ -138,9 +141,9 @@
                     <li role="separator" class="divider"></li>
 
                     <li>
-                      <%= link_to new_project_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
-                        <i class="ti-plus mR-10"></i>
-                        <span>New Project</span>
+                      <%= link_to new_project_path, class: 'd-b td-n c-grey-700' do %>
+                        <i class="ti-plus mR-2"></i>
+                        <span><%= t(:new_project) %></span>
                       <% end %>
                     </li>
                   <% end %>
@@ -164,21 +167,21 @@
                 </a>
                 <ul class="dropdown-menu fsz-sm">
                   <li>
-                    <%= link_to edit_user_registration_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                    <%= link_to edit_user_registration_path, class: 'd-b td-n pY-5 c-grey-700' do %>
                       <i class="ti-settings mR-10"></i>
                       <span><%= t(:account_settings, :scope => :header) %></span>
                     <% end %>
                   </li>
 
                   <li>
-                    <%= link_to contacts_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                    <%= link_to contacts_path, class: 'd-b td-n pY-5 c-grey-700' do %>
                       <i class="ti-email mR-10"></i>
                       <span><%= t(:contact_info, :scope => :header) %></span>
                     <% end %>
                   </li>
 
                   <li>
-                    <%= link_to project_alert_settings_path(@current_project), class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700' do %>
+                    <%= link_to project_alert_settings_path(@current_project), class: 'd-b td-n pY-5 c-grey-700' do %>
                       <i class="ti-bell mR-10"></i>
                       <span><%= t(:notification_settings, :scope => :header) %></span>
                     <% end %>
@@ -186,7 +189,7 @@
 
                   <li role="separator" class="divider"></li>
                   <li>
-                    <%= link_to destroy_user_session_path, class: 'd-b td-n pY-5 bgcH-grey-100 c-grey-700', method: :delete do %>
+                    <%= link_to destroy_user_session_path, class: 'd-b td-n c-grey-700', method: :delete do %>
                       <i class="ti-power-off mR-10"></i>
                         <span><%= t(:logout, :scope => :header) %></span>
                     <% end %>

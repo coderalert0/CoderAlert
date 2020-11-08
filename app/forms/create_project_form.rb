@@ -2,7 +2,7 @@ class CreateProjectForm < BaseForm
   attr_accessor :success
   attr_writer :project
 
-  nested_attributes :name, :company, :key, to: :project
+  nested_attributes :name, :company, :key, :user, to: :project
 
   accessible_attr :name, :key
 

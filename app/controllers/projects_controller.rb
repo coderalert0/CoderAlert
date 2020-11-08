@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
 
   def create_form
     CreateProjectForm.new form_params(CreateProjectForm)
-      .merge(project: @project, company: current_user.company)
+      .merge(project: @project, company: current_user.company, user: current_user)
   end
 
   def edit_form

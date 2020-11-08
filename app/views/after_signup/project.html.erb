@@ -6,8 +6,14 @@
 
 
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
-  <%= f.text_field :name, :label_class => 'required' %>
-  <%= f.text_field :key, :class => 'col-sm-3', :disabled => @form.project.key.present? %>
+  <% if @form.project.key.present? %>
+    <%= f.text_field :name, :label_class => 'required' %>
+    <%= f.text_field :key, :class => 'col-sm-3', :disabled => true %>
+  <% else %>
+    <%= f.text_field :name, :label_class => 'required', :class => 'js-name' %>
+    <%= f.text_field :key, :class => 'col-sm-3 js-key' %>
+  <% end %>
+
   <div class="text-right">
     <%= wizard_next_button %>
   </div>

@@ -51,7 +51,7 @@ module Users
 
     def update_resource(resource, params)
       resource.update_without_password(params)
-    rescue StandardError => e
+    rescue StandardError
       flash.alert = resource.errors.full_messages
     end
 

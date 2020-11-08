@@ -24,7 +24,7 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    @form = CreateContactForm.new contact: @contact
+    @form = EditContactForm.new contact: @contact
 
     respond_to do |format|
       format.html
@@ -55,15 +55,11 @@ class ContactsController < ApplicationController
 
   private
 
-  def form_params
-    params.require(:create_contact_form).permit(CreateContactForm.accessible_attributes)
-  end
-
   def create_form
-    CreateContactForm.new form_params.merge(user: current_user)
+    CreateContactForm.new form_params(CreateContactForm).merge(user: current_user)
   end
 
   def edit_form
-    EditContactForm.new form_params.merge(contact: @contact)
+    EditContactForm.new form_params(EditContactForm).merge(contact: @contact)
   end
 end

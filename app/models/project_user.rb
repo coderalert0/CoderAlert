@@ -4,9 +4,9 @@ class ProjectUser < ApplicationRecord
 
   has_many :alert_settings, through: :project
 
-  scope :admin, -> { ProjectUser.where(admin: :true) }
+  scope :admin, -> { ProjectUser.where(admin: true) }
 
-  after_destroy :destroy_alert_settings
+  after_destroy :destroy_alert_settings, :nullify_last_accessed_project
 
   validates_presence_of :project, :user
 
@@ -15,5 +15,9 @@ class ProjectUser < ApplicationRecord
   # workaround for activerecord error for dependent destroy
   def destroy_alert_settings
     alert_settings.each(&:destroy)
+  end
+
+  def nullify_last_accessed_project
+    user.update(last_accessed_project: nil) if user.last_accessed_project == project
   end
 end

@@ -1,6 +1,6 @@
 class AlertSettingsController < ApplicationController
-  load_and_authorize_resource
   load_and_authorize_resource :project
+  load_and_authorize_resource through: :project
 
   def index
     @alert_settings = @alert_settings.decorate
