@@ -4,6 +4,8 @@ class ProjectUser < ApplicationRecord
 
   has_many :alert_settings, through: :project
 
+  scope :admin, -> { ProjectUser.where(admin: :true) }
+
   after_destroy :destroy_alert_settings
 
   validates_presence_of :project, :user

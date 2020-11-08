@@ -154,6 +154,7 @@ en:
 
   project:
     key: Key
+    key_help: 'A prefix for your projects ticket numbers.<br/>A key of PROJ will result in your Ticket ID looking like PROJ-1234'
     create:
       title: 'Create a Project'
     edit:
@@ -279,7 +280,7 @@ en:
 
     project:
       title: 'Create a Project'
-      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, abbreviation is a prefix for your projects ticket numbers<br/>An abbreviation of PROJ will result in your Ticket ID looking like PROJ-1234"
+      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, key is a prefix for your projects ticket numbers<br/>A key of PROJ will result in your Ticket ID looking like PROJ-1234"
 
     slack:
       title: 'Receive Slack Notifications'

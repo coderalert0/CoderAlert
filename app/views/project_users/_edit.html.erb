@@ -13,7 +13,9 @@
   </div>
 
   <div class="modal-footer">
-    <%= link_to 'Unpermission', project_project_user_path(@project, @project_user), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: t(:delete_message, :user_name => @project_user.user.decorate.full_name, :project_name => @project.name, :scope => :permission_user)} %>
+    <% if @form.project.project_users.admin.size > 1 %>
+      <%= link_to 'Unpermission', project_project_user_path(@project, @project_user), :method => 'delete', class: 'btn btn-outline-dark', data: {confirm: t(:delete_message, :user_name => @project_user.user.decorate.full_name, :project_name => @project.name, :scope => :permission_user)} %>
+    <% end %>
     <%= submit_button %>
   </div>
 <% end %>

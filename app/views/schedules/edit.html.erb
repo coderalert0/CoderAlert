@@ -6,7 +6,7 @@
 
 <%= bootstrap_form_for @form, :url => project_schedule_path(@project, @schedule), label_col: 'col-sm-4', :method => :put do |f| %>
 
-  <div class="row schedule-container">
+  <div class="row schedule-container mt-4">
     <div class="col-md-6 vertical-divider">
       <%= f.text_field :name, :label_class => 'required' %>
       <br/>

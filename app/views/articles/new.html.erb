@@ -1,4 +1,4 @@
-<h2><%= t(:title, :scope => [:article, :create]) %></h2>
+<h2 class="mb-4"><%= t(:title, :scope => [:article, :create]) %></h2>
 
 <%= bootstrap_form_for @form, :url => project_articles_path(@project) do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>

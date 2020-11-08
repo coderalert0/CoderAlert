@@ -1,4 +1,4 @@
-<h2><%= t(:title, :scope => [:ticket, :create]) %></h2>
+<h2 class="mb-4"><%= t(:title, :scope => [:ticket, :create]) %></h2>
 
 <%= bootstrap_form_for @form, :url => project_tickets_path(@current_project) do |f| %>
   <%= f.text_field :title, :label_class => 'required' %>
