@@ -5,9 +5,9 @@
   </div>
 
   <div class="modal-body">
-    <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required' %>
+    <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]} ), :label_class => 'required', :include_blank => true %>
     <%= f.text_field :value, :label_class => 'required', help: t(:phone_help_text, :scope => :contact) %>
-    <%= f.select :alerts, options_for_select(AlertSetting::ALERTS.map { |p| [t(p, :scope => [:notification_settings, :alerts]), p] }), :label_class => 'required', help: t(:alert_help_text, :scope => :contact) %>
+    <%= f.select :alerts, options_for_select(AlertSetting::ALERTS.map { |p| [t(p, :scope => [:notification_settings, :alerts]), p] }), :label_class => 'required', :label_class => 'required', help: t(:alert_help_text, :scope => :contact), :include_blank => true  %>
 
   </div>
 

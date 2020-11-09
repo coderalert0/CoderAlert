@@ -52,11 +52,11 @@ class ProjectUsersController < ApplicationController
   def destroy
     if @project_user.destroy
       flash.notice = t(:destroy, scope: %i[project_user flash])
-      redirect_to project_project_users_path(@project)
     else
       flash.alert = t(:destroy_error, scope: %i[project_user flash])
-      render :index
     end
+
+    redirect_to project_project_users_path(@project)
   end
 
   private

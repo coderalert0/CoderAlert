@@ -6,6 +6,8 @@ class CreateContactForm < BaseForm
 
   accessible_attr :type, :value, :alerts
 
+  validates_presence_of :alerts, if: proc { |record| record.class == CreateContactForm }
+
   def contact
     @contact ||= Contact.new
   end
@@ -16,7 +18,7 @@ class CreateContactForm < BaseForm
 
       user.projects.each do |project|
         alert_setting = AlertSetting.find_or_create_by(alertable: contact, user: user, project: project)
-        alert_setting.update(alert: alerts)
+        alert_setting.update(alert: alerts) if alerts.present?
       end
     end
   end

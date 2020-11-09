@@ -6,9 +6,10 @@ class ProjectUser < ApplicationRecord
 
   scope :admin, -> { ProjectUser.where(admin: true) }
 
-  after_destroy :destroy_alert_settings, :nullify_last_accessed_project
-
   validates_presence_of :project, :user
+
+  before_destroy :validate_atleast_one_admin, on: :destroy
+  after_destroy :destroy_alert_settings, :nullify_last_accessed_project
 
   private
 
@@ -19,5 +20,9 @@ class ProjectUser < ApplicationRecord
 
   def nullify_last_accessed_project
     user.update(last_accessed_project: nil) if user.last_accessed_project == project
+  end
+
+  def validate_atleast_one_admin
+    throw(:abort) if project.project_users.admin.size == 1 && admin?
   end
 end
