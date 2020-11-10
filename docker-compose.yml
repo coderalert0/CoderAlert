@@ -33,8 +33,7 @@ services:
     image: elasticsearch:7.9.1
     container_name: elastichsearch
     volumes:
-      - .:/coder_alert
-      - /coder_alert/tmp
+      - es_data:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - cluster.name=elasticsearch-rails
@@ -44,3 +43,4 @@ services:
 volumes:
   storage:
   db:
+  es_data:
