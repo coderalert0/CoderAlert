@@ -5,6 +5,7 @@ sed -i '/host:/c\  host: '$DATABASE_HOST'' config/database.yml
 sed -i '/username:/c\  username: '$DATABASE_USER'' config/database.yml
 sed -i '/database:/c\  database: '$DATABASE_NAME'' config/database.yml
 sed -i '/password:/c\  password: '$DATABASE_PASSWORD'' config/database.yml
+echo $CREDENTIALS > config/credentials.yml.enc
 cat config/database.yml
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /coder_alert/tmp/pids/server.pid
