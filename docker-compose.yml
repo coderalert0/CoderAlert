@@ -34,7 +34,7 @@ services:
       memlock:
         soft: -1
         hard: -1
-    container_name: elastichsearch
+    container_name: elasticsearch
     volumes:
       - es_data:/usr/share/elasticsearch/data
     environment:
