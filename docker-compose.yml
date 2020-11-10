@@ -28,9 +28,12 @@ services:
       - elasticsearch
     tty: true
     stdin_open: true
-
   elasticsearch:
-    image: elasticsearch:7.9.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     container_name: elastichsearch
     volumes:
       - es_data:/usr/share/elasticsearch/data
@@ -38,6 +41,7 @@ services:
       - discovery.type=single-node
       - cluster.name=elasticsearch-rails
       - cluster.routing.allocation.disk.threshold_enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "9200:9200"
 volumes:
