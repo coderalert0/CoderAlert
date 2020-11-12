@@ -18,6 +18,6 @@ class SMSDecorator < ApplicationDecorator
 
   # might be worth moving to a common class
   def hostname
-    Rails.env.development? ? h.root_url(port: 3000).chomp!('/') : 'http://coderalert.com'
+    Rails.env.development? ? h.root_url(port: 3000).chomp!('/') : h.root_url.chomp!('/')
   end
 end
