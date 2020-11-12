@@ -38,7 +38,7 @@ class Schedule < ApplicationRecord
   end
 
   def on_call_user
-    occurrences = rule.first(90)
+    occurrences = rule.first(365)
     occurrence = occurrences[occurrence_index]
 
     return occurrence_user(occurrence_index) if occurrence.cover? Time.zone.now
@@ -65,7 +65,7 @@ class Schedule < ApplicationRecord
 
     if user.pto?
       priorities = schedule_users.reject { |su| su.user.pto? }.map(&:priority)
-      user = schedule_users.find_by(priority: priorities.sample).user
+      user = schedule_users.find_by(priority: priorities.sample).try(:user)
     end
 
     user
