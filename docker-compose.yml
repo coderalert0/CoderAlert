@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: hieu123
       POSTGRES_DB: testdb
   web:
-    image: test_rail
+    image: coder_alert:staging
     container_name: web
     volumes:
       - storage:/coder_alert/tmp
@@ -23,7 +23,7 @@ services:
       - DATABASE_PASSWORD=Ngoc@hieu2019
       - DATABASE_NAME=testdb
       - ELASTICSEARCH_URL=elasticsearch
-      - MASTER_KEY=8e9445d8c00175f14009b3eda769608f
+      - RAILS_MASTER_KEY=8e9445d8c00175f14009b3eda769608f
     depends_on:
       - db
       - elasticsearch
