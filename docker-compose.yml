@@ -17,7 +17,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - RAILS_ENV=staging
+      - RAILS_ENV=development
       - DATABASE_HOST=db
       - DATABASE_USER=hieu123
       - DATABASE_PASSWORD=Ngoc@hieu2019
