@@ -1,3 +1,5 @@
+# for development environment
+
 version: '3'
 services:
   db:
@@ -20,7 +22,7 @@ services:
       - DATABASE_PASSWORD=password
       - DATABASE_NAME=coder_alert_development
       - ELASTICSEARCH_URL=elasticsearch
-      - MASTER_KEY=8e9445d8c00175f14009b3eda769608f
+      - RAILS_MASTER_KEY=8e9445d8c00175f14009b3eda769608f
     depends_on:
       - db
       - elasticsearch

@@ -1,3 +1,5 @@
+# for staging environment
+
 version: '3'
 services:
   db:

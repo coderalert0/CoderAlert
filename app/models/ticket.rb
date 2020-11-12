@@ -7,7 +7,7 @@ class Ticket < ApplicationRecord
 
   belongs_to :project
   belongs_to :user
-  belongs_to :assignee, class_name: 'User', foreign_key: :assignee_id
+  belongs_to :assignee, class_name: 'User', foreign_key: :assignee_id, required: false
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ticket_views
