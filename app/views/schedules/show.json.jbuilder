@@ -1,4 +1,4 @@
-json.array! @schedule.rule.first(90).each do |occurrence|
+json.array! @schedule.rule.first(365).each do |occurrence|
   index = @schedule.occurrence_index(occurrence.start_time.to_datetime)
   user = @schedule.occurrence_user_calendar(index)
 
