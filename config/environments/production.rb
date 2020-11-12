@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "coder_alert_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'staging.coderalert.com' }
+  config.action_mailer.default_url_options = { host: 'app.coderalert.com' }
 
 
   # Ignore bad email addresses and do not raise email delivery errors.
