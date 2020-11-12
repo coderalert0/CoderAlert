@@ -14,10 +14,13 @@ COPY . /coder_alert
 
 RUN rails webpacker:install
 RUN rails action_text:install
+# compile static files
+RUN rake assets:precompile
 RUN cp docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN rm -f /etc/nginx/sites-enabled/default && cp docker/nginx.conf /etc/nginx/sites-enabled/default
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
