@@ -51,7 +51,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -63,7 +63,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "coder_alert_#{Rails.env}"
 
-  config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'app.coderalert.com' }
 
 
@@ -88,6 +87,7 @@ Rails.application.configure do
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
+    logger.level     = :info
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 

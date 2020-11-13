@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 
 module CoderAlert
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
@@ -16,6 +17,23 @@ module CoderAlert
 
     config.assets.paths << Rails.root.join("assets", "fonts")
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
+    config.action_mailer.perform_deliveries = true
+
+    # Don't care if the mailer can't send.
+    config.action_mailer.raise_delivery_errors = true
+
+    config.action_mailer.perform_caching = false
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        port: 587,
+        address: 'email-smtp.us-east-2.amazonaws.com',
+        user_name: Rails.application.credentials.dig(:aws, :ses_username),
+        password: Rails.application.credentials.dig(:aws, :ses_password),
+        authentication: :login,
+        enable_starttls_auto: true
+    }
 
     config.active_job.queue_adapter = :delayed_job
 
