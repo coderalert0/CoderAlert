@@ -2,6 +2,11 @@ class TicketDecorator < ApplicationDecorator
   delegate_all
   decorates_associations :assignee, :user, :comments
 
+  def assignee_display
+    return unless assignee
+    assignee.full_name_link(project).concat(' ').concat(viewed_by_assignee_icon)
+  end
+
   def priority_button
     btn_class = {
       'lowest' => 'btn-outline-dark',
@@ -79,8 +84,8 @@ class TicketDecorator < ApplicationDecorator
         attribute[1][1] = h.t(attribute[1][1].to_sym, scope: [:ticket, attribute[0].pluralize.to_sym])
       elsif attribute[0] == 'assignee_id'
         attribute[0] = 'Assignee'
-        attribute[1][0] = User.find(attribute[1][0].to_i).decorate.full_name
-        attribute[1][1] = User.find(attribute[1][1].to_i).decorate.full_name
+        attribute[1][0] = User.find(attribute[1][0].to_i).decorate.full_name if attribute[1][0]
+        attribute[1][1] = User.find(attribute[1][1].to_i).decorate.full_name if attribute[1][1]
       end
 
       formatted_changes << "#{attribute[0].to_s.capitalize}: "\
