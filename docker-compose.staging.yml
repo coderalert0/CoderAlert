@@ -12,34 +12,12 @@ services:
       POSTGRES_USER: hieu123
       POSTGRES_DB: testdb
   web:
-    build: 
-      context: .
-      dockerfile: env/delayed_job.Dockerfile
+    image: coder_alert:staging
     container_name: web
     volumes:
       - storage:/coder_alert/tmp
     ports:
       - "3000:3000"
-    environment:
-      - RAILS_ENV=staging
-      - DATABASE_HOST=db
-      - DATABASE_USER=hieu123
-      - DATABASE_PASSWORD=Ngoc@hieu2019
-      - DATABASE_NAME=testdb
-      - ELASTICSEARCH_URL=elasticsearch
-      - RAILS_MASTER_KEY=8e9445d8c00175f14009b3eda769608f
-    depends_on:
-      - db
-      - elasticsearch
-    tty: true
-    stdin_open: true
-  delayed_job:
-    build:
-      context: .
-      dockerfile: env/web.Dockerfile
-    container_name: delayed_job
-    volumes:
-      - storage:/coder_alert/tmp
     environment:
       - RAILS_ENV=staging
       - DATABASE_HOST=db
