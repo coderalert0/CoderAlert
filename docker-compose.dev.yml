@@ -7,7 +7,8 @@ services:
     environment:
       POSTGRES_PASSWORD: password
   web:
-    build: .
+    image: code_alert:staging
+    command: tail -f /etc/hosts
     volumes:
       - .:/coder_alert
       - node_modules:/coder_alert/node_modules
