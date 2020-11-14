@@ -11,29 +11,14 @@ services:
   web:
     build:
       context: .
-      dockerfile: env/web.Dockerfile
+      dockerfile: web.Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/coder_alert
+      - /coder_alert/tmp
       - node_modules:/coder_alert/node_modules
     ports:
       - "3000:3000"
-    environment:
-      - RAILS_ENV=development
-      - DATABASE_HOST=db
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=password
-      - DATABASE_NAME=coder_alet_development
-      - ELASTICSEARCH_URL=elasticsearch
-    depends_on:
-      - db
-      - elasticsearch
-    tty: true
-    stdin_open: true
-  delayed_job:
-    build:
-      context: .
-      dockerfile: env/delayed_job.Dockerfile
-    container_name: delayed_job
     environment:
       - RAILS_ENV=development
       - DATABASE_HOST=db
@@ -44,6 +29,25 @@ services:
     depends_on:
       - db
       - elasticsearch
+    tty: true
+    stdin_open: true
+  delayed_job:
+    build:
+      context: .
+      dockerfile: delayed_job.Dockerfile
+    command: bash -c "rake db:migrate && bundle exec rake jobs:work"
+    volumes:
+      - .:/coder_alert
+      - /coder_alert/tmp
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=coder_alert_development
+      - ELASTICSEARCH_URL=elasticsearch
+    depends_on:
+      - db
     tty: true
     stdin_open: true
   elasticsearch:

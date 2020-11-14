@@ -7,5 +7,9 @@ sleep 5
 while [[ $(nc -z $DATABASE_HOST 5432 &> /dev/null; echo $?) -ne 0 ]]; do echo pod is not running;sleep 3; done
 # Migrate the database before running:
 rake db:migrate
-# RUN SUPERVISOR for process
-exec /usr/bin/supervisord
+
+if [ $RAILS_ENV  == "development" ]; then
+  exec "$@"
+else
+  exec /usr/bin/supervisord
+fi

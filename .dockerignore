@@ -1,7 +1,3 @@
 .git
 .cache
 .dockerignore
-docker-compose.yaml
-Dockerfile
-env
-env/*
