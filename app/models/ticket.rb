@@ -33,6 +33,14 @@ class Ticket < ApplicationRecord
     end
   end
 
+  validates_presence_of :title, :status, :priority, :content, :user, :project
+
+  has_rich_text :content
+
+  scope :for_project, ->(project) { Ticket.where(project: project) }
+  scope :unresolved, -> { Ticket.where.not(status: :resolved) }
+  scope :in_progress, -> { Ticket.where(status: :in_progress) }
+
   enum priority: { lowest: 0,
                    low: 1,
                    medium: 2,
@@ -48,14 +56,6 @@ class Ticket < ApplicationRecord
                  closed: 6,
                  reopened: 7,
                  cancelled: 8 }
-
-  validates_presence_of :title, :status, :priority, :content, :user, :project
-
-  has_rich_text :content
-
-  scope :for_project, ->(project) { Ticket.where(project: project) }
-  scope :unresolved, -> { Ticket.where.not(status: :resolved) }
-  scope :in_progress, -> { Ticket.where(status: :in_progress) }
 
   publishes_lifecycle_events
 
