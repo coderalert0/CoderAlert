@@ -15,7 +15,7 @@ COPY . /coder_alert
 RUN rails webpacker:install
 RUN rails action_text:install
 # compile static files
-RUN RAILS_MASTER_KEY=8e9445d8c00175f14009b3eda769608f RAILS_ENV=production rake assets:precompile
+RUN SECRET_KEY_BASE=`rake secret` RAILS_ENV=production rake assets:precompile
 RUN cp docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN rm -f /etc/nginx/sites-enabled/default && cp docker/nginx.conf /etc/nginx/sites-enabled/default
 # Add a script to be executed every time the container starts.

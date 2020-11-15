@@ -207,10 +207,10 @@
               <div class="masonry-item col-12">
                 <div class="<%= 'bgc-white p-20 bd' unless current_page? root_path %>">
                   <% if notice %>
-                    <p class="alert alert-success"><%= notice.html_safe %></p>
+                    <p class="alert alert-success"><%= notice %></p>
                   <% end %>
                   <% if alert %>
-                    <p class="alert alert-danger"><%= alert.html_safe %></p>
+                    <p class="alert alert-danger"><%= alert %></p>
                   <% end %>
                     <%= yield %>
                 </div>
