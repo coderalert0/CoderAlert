@@ -1,5 +1,7 @@
-document.addEventListener('turbolinks:load', function () {
-    eventCalendar();
+$(document).on('turbolinks:load', function() {
+    if ($(".schedules.show").length > 0) {
+        eventCalendar();
+    }
 });
 
 document.addEventListener('turbolinks:before-cache', function () {

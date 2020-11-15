@@ -1,6 +1,8 @@
-document.addEventListener('turbolinks:load', function () {
-    init_user_items();
-    add_user_item();
+$(document).on('turbolinks:load', function() {
+    if ($(".schedules").length > 0) {
+        init_user_items();
+        add_user_item();
+    }
 });
 
 function init_user_items() {
@@ -18,7 +20,8 @@ function add_user_item() {
         var selected_option = $(this).children(":selected");
         var user_id = selected_option.val();
         var full_name = selected_option.html();
-        var action = $("form").attr('id').match(/(?<=new_)(.*?)(?=_schedule_form)/g)
+        var form_id = $("form").attr('id');
+        var action = form_id.split('_')[1];
 
         $('#users').append("<div class='ui-sortable-handle form-control col-md-11'>" +
             "<span class='ui-icon ui-icon-arrowthick-2-n-s'></span>" + full_name +

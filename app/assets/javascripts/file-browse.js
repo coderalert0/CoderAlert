@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function () {
+$(document).on('turbolinks:load', function() {
     $('input[type="file"]').change(function(e){
         var file_names = [];
         for (var i = 0; i < e.target.files.length; ++i) {
