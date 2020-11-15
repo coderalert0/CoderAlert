@@ -39,13 +39,16 @@ class Ticket < ApplicationRecord
 
   scope :for_project, ->(project) { Ticket.where(project: project) }
   scope :unresolved, -> { Ticket.where.not(status: :resolved) }
-  scope :in_progress, -> { Ticket.where(status: :in_progress) }
+  scope :progress, -> { Ticket.where(status: :in_progress) }
 
   enum priority: { lowest: 0,
                    low: 1,
                    medium: 2,
                    high: 3,
                    highest: 4 }
+
+  # suppress warning override Kernel#open method warning
+  class << self; undef_method :open; end
 
   enum status: { draft: 0,
                  open: 1,
