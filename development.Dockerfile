@@ -2,6 +2,8 @@
 
 FROM ruby:2.7
 
+ARG image
+
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /root/yarn-pubkey.gpg && apt-key add /root/yarn-pubkey.gpg
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update -qq && apt-get install -y nodejs yarn postgresql-client vim netcat
@@ -13,6 +15,11 @@ COPY Gemfile /coder_alert/Gemfile
 COPY Gemfile.lock /coder_alert/Gemfile.lock
 RUN bundle install
 COPY . /coder_alert
+
+RUN if [ "$image" = "web" ]; then \
+    rails webpacker:install && \
+    rails action_text:install; \
+  fi
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
