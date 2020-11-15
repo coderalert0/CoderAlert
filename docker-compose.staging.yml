@@ -14,6 +14,12 @@ services:
   web:
     image: coder_alert:staging
     container_name: web
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: us-east-2
+        awslogs-group: stagingLogGroup
+        awslogs-create-group: "true"
     volumes:
       - storage:/coder_alert/tmp
     ports:
@@ -26,6 +32,7 @@ services:
       - DATABASE_NAME=testdb
       - ELASTICSEARCH_URL=elasticsearch
       - RAILS_MASTER_KEY=8e9445d8c00175f14009b3eda769608f
+      - RAILS_LOG_TO_STDOUT=true
     depends_on:
       - db
       - elasticsearch
