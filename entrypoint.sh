@@ -3,7 +3,7 @@ set -e
 # Create SSH folder
 USER_SSH_KEYS_FOLDER=~/.ssh
 [ ! -d "$USER_SSH_KEYS_FOLDER" ] && mkdir -p $USER_SSH_KEYS_FOLDER
-
+env >> /etc/environment
 # Add SSH_KEY
 echo $SSH_PUBLIC_KEY > ~/.ssh/authorized_keys
 # Remove a potentially pre-existing server.pid for Rails.
