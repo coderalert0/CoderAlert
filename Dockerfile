@@ -24,3 +24,6 @@ RUN chmod +x /usr/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
+#ADD SSH option
+RUN apt-get update && apt-get install -y openssh-server
+RUN mkdir -p /run/sshd
