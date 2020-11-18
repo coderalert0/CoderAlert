@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [ $RAILS_ENV  == "production" ]; then
+if [ $RAILS_ENV  == "production" ] || [ $RAILS_ENV  == "staging" ]; then
   # Create SSH folder
   USER_SSH_KEYS_FOLDER=~/.ssh
   [ ! -d "$USER_SSH_KEYS_FOLDER" ] && mkdir -p $USER_SSH_KEYS_FOLDER
