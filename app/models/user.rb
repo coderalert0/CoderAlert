@@ -21,7 +21,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :lockable,
          :validatable
 
-  validates_presence_of :email, :first_name, :last_name
+  validates_presence_of :first_name, :last_name
+  validates :email, presence: true, email: true
 
   validates :profile_image,
             content_type: ['image/bmp', 'image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/tiff'],

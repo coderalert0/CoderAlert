@@ -3,7 +3,8 @@ class InviteUserForm < BaseForm
 
   accessible_attr :first_name, :last_name, :email, project_ids: []
 
-  validates_presence_of :first_name, :last_name, :email, :project_ids
+  validates_presence_of :first_name, :last_name, :project_ids
+  validates :email, presence: true, email: true
 
   def _submit
     ActiveRecord::Base.transaction do

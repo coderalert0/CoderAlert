@@ -4,6 +4,7 @@ class TicketDecorator < ApplicationDecorator
 
   def assignee_display
     return unless assignee
+
     assignee.full_name_link(project).concat(' ').concat(viewed_by_assignee_icon)
   end
 
