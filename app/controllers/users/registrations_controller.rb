@@ -12,7 +12,7 @@ module Users
     def create
       super do
         resource.build_contact_email(value: resource.email)
-        resource.save!
+        resource.save
       end
     end
 
