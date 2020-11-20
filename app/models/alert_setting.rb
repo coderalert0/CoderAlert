@@ -26,7 +26,7 @@ class AlertSetting < ApplicationRecord
 
   scope :sms_alerts_on, lambda { |ticket|
     AlertSetting
-      .where(project: ticket.project, alertable_type: 'Contact')
+      .where(project: ticket.project, alertable_type: 'Phone')
       .all_or_assigned(ticket.assignee)
   }
 
