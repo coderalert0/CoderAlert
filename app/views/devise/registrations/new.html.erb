@@ -1,14 +1,13 @@
 <h2 class="mb-4">Sign up</h2>
 
-<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-6') do |f| %>
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-8') do |f| %>
 
     <%= f.text_field :first_name, autofocus: true %>
 
     <%= f.text_field :last_name, autofocus: true %>
 
     <%= f.fields_for :company do |company_fields| %>
-      <%= company_fields.label :company %>
-      <%= company_fields.text_field :name %>
+      <%= company_fields.text_field :name, label: t(:company) %>
     <% end %>
 
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

@@ -1,5 +1,6 @@
 en:
   attachments: 'Attachments'
+  company: 'Company'
   created: 'Created'
   create_ticket: 'Create Ticket'
   delete: 'Delete'
@@ -35,6 +36,8 @@ en:
       destroy_error: 'The article could not be deleted'
 
   attachment:
+    delete_message: "Are you sure you want to delete this attachment?"
+
     flash:
       destroy: 'The attachment was deleted'
       destroy_error: 'The attachment could not be deleted'
@@ -42,6 +45,8 @@ en:
   comment:
     comment: 'Comment'
     comments: 'Comments'
+    delete_message: "Are you sure you want to delete this comment?"
+
     flash:
       create: 'The comment was added successfully'
       destroy: 'The comment was deleted successfully'

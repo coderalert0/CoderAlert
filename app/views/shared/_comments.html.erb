@@ -5,7 +5,7 @@
     <div>
       <% if can? :destroy, comment %>
         <span class="icon-holder float-right">
-          <%= link_to send("project_#{commentable.object.class.name.snakify}_comment_path", @project, commentable, comment ), :method => 'delete' do %>
+          <%= link_to send("project_#{commentable.object.class.name.snakify}_comment_path", @project, commentable, comment ), :method => 'delete', data: {confirm: t(:delete_message, :scope => :comment)} do %>
             <%=  content_tag(:i, '', class: 'ti-trash') %>
           <% end %>
         </span>

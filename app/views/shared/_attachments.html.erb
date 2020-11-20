@@ -5,7 +5,7 @@
         <div>
             <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
             <% if can? :destroy, attachment %>
-                <%= link_to send("project_#{attachable.object.class.name.snakify}_attachment_path", @project, attachable, attachment ), :method => 'delete' do %>
+                <%= link_to send("project_#{attachable.object.class.name.snakify}_attachment_path", @project, attachable, attachment ), :method => 'delete', data: {confirm: t(:delete_message, :scope => :attachment)} do %>
                   <%=  content_tag(:i, '', class: 'ti-trash') %>
                 <% end %>
             <% end %>
