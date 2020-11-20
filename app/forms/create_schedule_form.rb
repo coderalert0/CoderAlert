@@ -11,11 +11,18 @@ class CreateScheduleForm < BaseForm
 
   validates_presence_of :users
 
+  validate :no_schedule_attribute_errors
+
   def schedule
     @schedule ||= Schedule.new
   end
 
   def schedule_attributes=(value)
+    validate_presence_of_interval_unit(value[:interval_unit])
+    validate_presence_of_start_date(value[:start_date])
+
+    return if @schedule_attribute_errors
+
     case value[:interval_unit]
     when 'day'
       populate_day_week_schedule_attributes(value, 0.days)
@@ -72,5 +79,21 @@ class CreateScheduleForm < BaseForm
     "#{(Time.zone.parse(value[:start_date]) + duration)
       .strftime('%m/%d/%Y %I:%M %p')
       .split(' ')[0]} #{value[:end_time]}"
+  end
+
+  def no_schedule_attribute_errors
+    @schedule_attribute_errors.each do |error|
+      errors.add(:base, error)
+    end
+  end
+
+  %w[interval_unit start_date].each do |method_name|
+    define_method("validate_presence_of_#{method_name}") do |value|
+      @schedule_attribute_errors ||= []
+
+      if value.blank?
+        @schedule_attribute_errors << "#{I18n.t(method_name.to_sym, scope: %i[schedule create])} can\'t be blank"
+      end
+    end
   end
 end

@@ -208,6 +208,8 @@ en:
 
     create:
       title: 'Create a Schedule'
+      interval_unit: 'Rotate Users'
+      start_date: 'Start Date'
 
     edit:
       title: 'Edit Schedule'

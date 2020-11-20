@@ -24,6 +24,7 @@ class SchedulesController < ApplicationController
       redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
+      populate_select_users
       render :new
     end
   end
@@ -40,6 +41,7 @@ class SchedulesController < ApplicationController
       redirect_to project_schedule_path(@project, @schedule)
     else
       flash.alert = @form.display_errors
+      populate_select_users
       render :edit
     end
   end
