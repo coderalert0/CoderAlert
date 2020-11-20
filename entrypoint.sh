@@ -9,6 +9,7 @@ if [ $RAILS_ENV  == "production" ] || [ $RAILS_ENV  == "staging" ]; then
 
   # Add SSH_KEY
   echo $SSH_PUBLIC_KEY > ~/.ssh/authorized_keys
+  echo 'export PATH=$PATH:/usr/local/bundle/bin' > /root/.bashrc
 fi
 
 # Remove a potentially pre-existing server.pid for Rails.
