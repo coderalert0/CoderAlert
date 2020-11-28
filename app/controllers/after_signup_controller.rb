@@ -4,6 +4,7 @@ class AfterSignupController < ApplicationController
   end
 
   include Wicked::Wizard
+  include SlackConcern
 
   skip_before_action :load_context
 
@@ -19,6 +20,7 @@ class AfterSignupController < ApplicationController
   def show
     skip_step if slack_step_complete?
     @form = send("show_#{step}_form") if project_step? || invite_user_step?
+    @slack_redirect_url = slack_redirect_url if slack_step?
     render_wizard
   end
 
@@ -52,6 +54,10 @@ class AfterSignupController < ApplicationController
 
   def invite_user_step?
     step == :invite_user
+  end
+
+  def slack_step?
+    step == :slack
   end
 
   def slack_step_complete?

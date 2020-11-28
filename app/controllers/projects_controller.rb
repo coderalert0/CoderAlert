@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  include SlackConcern
+
   load_and_authorize_resource
 
   def index; end
@@ -23,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @form = EditProjectForm.new project: @project
+    @slack_redirect_url = slack_redirect_url
   end
 
   def update
