@@ -12,6 +12,7 @@ en:
   submit: 'Submit'
   updated: 'Updated'
   user_added_a_comment_on_date: "<span class='text-primary'>%{user}</span> added a comment on %{date_time}"
+  connect_to_slack: 'Connect to Slack'
 
   active_project:
     flash:
@@ -292,7 +293,8 @@ en:
 
     slack:
       title: 'Receive Slack Notifications'
-      info_message: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated. Click the \"Add to Slack\" button below and grant access to CoderAlert"
+      info_message_line_1: "You can connect your Slack workspace with CoderAlert to receive alerts when a ticket is created or updated."
+      info_message_line_2: "Click \"Connect to Slack\" below and grant access to CoderAlert"
 
     invite:
       info_message: "Please invite a team member to your newly created project by entering their information below.<br/>They will be emailed a link to confirm their account - If they don't see it, ask them to check their spam folder<br/><br/>In the interest of keeping the setup process quick you will be able to add additional team members after setup completion"
