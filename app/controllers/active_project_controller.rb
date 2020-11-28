@@ -1,4 +1,6 @@
 class ActiveProjectController < ApplicationController
+  include ProjectConcern
+
   def update
     id = params[:id]
 
@@ -9,12 +11,5 @@ class ActiveProjectController < ApplicationController
 
     flash.notice = t(:update, scope: %i[active_project flash])
     redirect_to root_path
-  end
-
-  private
-
-  def switch_active_project
-    session[:project_id] = @project.id
-    current_user.update(last_accessed_project: @project)
   end
 end

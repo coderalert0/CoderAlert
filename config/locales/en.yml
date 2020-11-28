@@ -167,8 +167,8 @@ en:
       title: 'Edit Project'
 
     flash:
-      create: 'The project was created successfully. You can switch projects by clicking the dropdown above'
-      update: 'The project was edited successfully.'
+      create: 'The project was created successfully'
+      update: 'The project was edited successfully'
       destroy: 'The project was deleted successfully'
       destroy_error: 'The project could not be deleted'
 

@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include ProjectConcern
   include SlackConcern
 
   load_and_authorize_resource
@@ -16,7 +17,8 @@ class ProjectsController < ApplicationController
 
     if @form.submit
       flash.notice = t(:create, scope: %i[project flash])
-      redirect_to projects_path
+      switch_active_project
+      redirect_to root_path
     else
       flash.alert = @form.display_errors
       render :new
