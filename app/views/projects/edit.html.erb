@@ -7,7 +7,7 @@
   </div>
 <% end %>
 
-<%= bootstrap_form_for @form, :url => project_path(@project), :method => :put do |f| %>
+<%= bootstrap_form_for @form, :url => project_path(@project), :method => :put, control_col: 'col-sm-5' do |f| %>
   <%= f.text_field :name, :label_class => 'required' %>
   <%= f.text_field :key, :class => 'col-sm-3', help: t(:key_help, :scope => :project).html_safe, disabled: true %>
 

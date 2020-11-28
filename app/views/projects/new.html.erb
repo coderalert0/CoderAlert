@@ -1,6 +1,6 @@
 <h2 class="mb-4"><%= t(:title, :scope => [:project, :create]) %></h2>
 
-<%= bootstrap_form_for @form, :url => projects_path do |f| %>
+<%= bootstrap_form_for @form, :url => projects_path, label_col: 'col-sm-2', control_col: 'col-sm-5' do |f| %>
   <%= f.text_field :name, :label_class => 'required', :class => 'js-name' %>
   <%= f.text_field :key, :class => 'col-sm-3 js-key', help: t(:key_help, :scope => :project).html_safe %>
   <%= submit_button %>

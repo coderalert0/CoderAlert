@@ -1,0 +1,18 @@
+<%= bootstrap_form_for @form, :url => feedback_path, :remote => true, layout: :vertical do |f| %>
+  <div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel"><%= t(:send_feedback) %></h4>
+    <button type="button" class="close" data-dismiss="modal">x</button>
+  </div>
+
+  <div class="alert alert-info">
+    <%= t(:info_message, :scope => :feedback).html_safe %>
+  </div>
+
+  <div class="modal-body">
+    <%= f.text_area :content, :rows => 6, hide_label: true %>
+  </div>
+
+  <div class="modal-footer">
+    <%= submit_button %>
+  </div>
+<% end %>

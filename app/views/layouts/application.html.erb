@@ -32,6 +32,13 @@
   <!-- @App Content -->
     <!-- =================================================== -->
     <div>
+
+      <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+
       <!-- #Left Sidebar ==================== -->
       <div class="sidebar">
         <div class="sidebar-inner">
@@ -76,7 +83,7 @@
             <li class="nav-item">
               <%= link_to project_tickets_path(@current_project) do %>
                 <span class="icon-holder">
-                  <i class="c-orange-500 ti-ticket"></i>
+                  <i class="c-pink-300 ti-ticket"></i>
                 </span>
                 <span class="title"><%= t(:tickets, :scope => :sidebar) %></span>
               <% end %>
@@ -85,7 +92,7 @@
             <li class="nav-item">
               <%= link_to project_project_users_path(@current_project) do %>
                 <span class="icon-holder">
-                  <i class="c-brown-500 ti-user"></i>
+                  <i class="ti-user"></i>
                 </span>
                 <span class="title"><%= t(:team, :scope => :sidebar) %></span>
               <% end %>
@@ -103,18 +110,18 @@
             <li class="nav-item">
               <%= link_to project_articles_path(@current_project) do %>
                 <span class="icon-holder">
-                  <i class="c-orange-500 ti-book"></i>
+                  <i class="c-purple-500 ti-book"></i>
                 </span>
                 <span class="title"><%= t(:knowledge_base, :scope => :sidebar) %></span>
               <% end %>
             </li>
 
-            <li class="nav-item">
-              <%= link_to '/' do %>
+            <li class="nav-item mt-3">
+              <%= link_to new_feedback_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window' } do %>
                 <span class="icon-holder">
                   <i class="c-red-500 ti-comment font-weight-bold"></i>
                 </span>
-                <span class="title font-weight-bold"><%= t(:send_feedback, :scope => :sidebar) %></span>
+                <span class="title font-weight-bold"><%= t(:send_feedback) %></span>
               <% end %>
             </li>
           </ul>

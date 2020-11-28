@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   resources :after_signup, path: 'welcome'
 
+  resource :feedback, path: 'f'
+
   get '/slack_auth/callback', to: 'slack_authorization#callback'
 
 end

@@ -13,6 +13,7 @@ en:
   updated: 'Updated'
   user_added_a_comment_on_date: "<span class='text-primary'>%{user}</span> added a comment on %{date_time}"
   connect_to_slack: 'Connect to Slack'
+  send_feedback: 'Send Feedback'
 
   active_project:
     flash:
@@ -87,6 +88,11 @@ en:
     title: 'Edit Account Settings'
     password_help_text: '%{minimum_password_length} characters minimum. Leave blank if you dont want to change it'
     current_password_help_text: 'We need your current password to confirm your changes'
+
+  feedback:
+    flash:
+      create: 'Thank you for your feedback!'
+    info_message: 'We genuinely value your feedback and appreciate you<br/>taking valuable time out to help us improve CoderAlert'
 
   footer:
     copyright: 'Copyright © 2020 CoderAlert. All rights reserved.'
