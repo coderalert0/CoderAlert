@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
   load_and_authorize_resource :project
-  load_and_authorize_resource :ticket, find_by: :slug
-  load_and_authorize_resource :article, find_by: :slug
+  load_and_authorize_resource :ticket, through: :project, find_by: :slug
+  load_and_authorize_resource :article, through: :project, find_by: :slug
   load_and_authorize_resource :attachment, through: %i[article ticket], class: ActiveStorage::Attachment
 
   def destroy

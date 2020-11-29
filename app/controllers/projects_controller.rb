@@ -35,7 +35,8 @@ class ProjectsController < ApplicationController
 
     if @form.submit
       flash.notice = t(:update, scope: %i[project flash])
-      redirect_to projects_path
+      switch_active_project
+      redirect_to root_path
     else
       flash.alert = @form.display_errors
       render :edit
