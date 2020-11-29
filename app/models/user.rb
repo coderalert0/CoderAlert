@@ -22,6 +22,8 @@ class User < ApplicationRecord
          :validatable
 
   validates_presence_of :first_name, :last_name
+  validates_length_of :first_name, minimum: 3
+
   validates :email, presence: true, email: true
 
   validates :profile_image,

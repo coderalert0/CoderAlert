@@ -17,10 +17,10 @@ class CreateContactForm < BaseForm
       contact.save!
 
       user.projects.each do |project|
-        alert_setting = AlertSetting.find_or_create_by(alertable: contact.becomes!(type.constantize),
+        alert_setting = AlertSetting.find_or_create_by(alertable: contact,
                                                        user: user,
                                                        project: project)
-        alert_setting.update(alert: alerts)
+        alert_setting.update(alert: alerts, alertable: contact.becomes!(type.constantize))
       end
     end
   end
