@@ -2,10 +2,14 @@ class TicketMailer < ApplicationMailer
   before_action :load_resources
 
   def ticket_created
+    return unless receipient_email_addresses.present?
+
     mail(to: receipient_email_addresses, subject: @ticket.created_subject)
   end
 
   def ticket_updated
+    return unless receipient_email_addresses.present?
+
     mail(to: receipient_email_addresses, subject: @ticket.updated_subject)
   end
 

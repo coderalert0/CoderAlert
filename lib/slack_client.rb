@@ -80,10 +80,11 @@ class SlackClient
   end
 
   def user_list
-    @ticket.project.slack_authorization
+    @ticket.project
            .alert_settings
+           .where(alertable: slack_authorization)
            .slack_alerts_on(@ticket)
-           .pluck(:slack_user_id).join(',')
+    TicketMailer.pluck(:slack_user_id).join(',')
   end
 
   def slack_channel?

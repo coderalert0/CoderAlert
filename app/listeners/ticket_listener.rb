@@ -7,6 +7,10 @@ class TicketListener
   end
 
   def on_ticket_updated(ticket)
-    TicketMailer.with(ticket: ticket, content: ticket.decorate.updated_content).ticket_updated.deliver_later
+    TicketMailer.with(ticket: ticket, content: TicketMailerDecorator
+                                                   .decorate(ticket)
+                                                   .updated_content)
+                .ticket_updated
+                .deliver_later
   end
 end

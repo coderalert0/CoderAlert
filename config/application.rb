@@ -28,7 +28,7 @@ module CoderAlert
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
         port: 587,
-        address: 'email-smtp.us-east-2.amazonaws.com',
+        address: 'email-smtp.us-west-2.amazonaws.com',
         user_name: Rails.application.credentials.dig(:aws, :ses_access_key_id),
         password: Rails.application.credentials.dig(:aws, :ses_secret_access_key),
         authentication: :login,

@@ -118,7 +118,7 @@ en:
 
   mailer:
     ticket:
-      created_subject: '%{title} was created by %{assignee}'
+      created_subject: '%{title} was created and assigned to %{assignee}'
       updated_subject: '%{title} was updated'
     comment:
       created_subject: '[%{title}] Comment was added by %{user}'

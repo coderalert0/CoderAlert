@@ -15,6 +15,27 @@ class SlackTicketDecorator < TicketDecorator
     alert_setting.slack_user_id ? "<@#{alert_setting.slack_user_id}>" : user.full_name
   end
 
+  def updated_content
+    formatted_changes = ''
+    saved_changes.each do |attribute|
+      next if attribute[0] == 'updated_at'
+
+      if %w[status priority].include? attribute[0]
+        attribute[1][0] = h.t(attribute[1][0].to_sym, scope: [:ticket, attribute[0].pluralize.to_sym])
+        attribute[1][1] = h.t(attribute[1][1].to_sym, scope: [:ticket, attribute[0].pluralize.to_sym])
+      elsif attribute[0] == 'assignee_id'
+        attribute[0] = 'Assignee'
+        attribute[1][0] = User.find(attribute[1][0].to_i).decorate.full_name if attribute[1][0]
+        attribute[1][1] = User.find(attribute[1][1].to_i).decorate.full_name if attribute[1][1]
+      end
+
+      formatted_changes << "#{attribute[0].to_s.capitalize}: "\
+                                    "Changed from #{attribute[1][0]}"\
+                                    " to #{attribute[1][1]}\n"
+    end
+    formatted_changes
+  end
+
   def ticket_updated_message
     return unless saved_changes.present?
 
