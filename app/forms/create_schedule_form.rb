@@ -21,7 +21,7 @@ class CreateScheduleForm < BaseForm
     validate_presence_of_interval_unit(value[:interval_unit])
     validate_presence_of_start_date(value[:start_date])
 
-    return if @schedule_attribute_errors
+    return if @schedule_attribute_errors.present?
 
     case value[:interval_unit]
     when 'day'
