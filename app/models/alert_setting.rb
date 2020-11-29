@@ -5,7 +5,7 @@ class AlertSetting < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  validates_presence_of :alertable, :user, :project
+  validates_presence_of :alertable, :user, :project, :alert
 
   scope :for_project_user, ->(project, user) { AlertSetting.where(project: project, user: user) }
 

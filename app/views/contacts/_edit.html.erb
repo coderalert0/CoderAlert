@@ -7,7 +7,7 @@
   <div class="modal-body">
     <%= f.select :type, options_for_select(Contact.descendants.map { |c| [t(c.name.snakify.to_sym, :scope => :contact), c.name]}, :selected => @form.type ), :label_class => 'required' %>
     <%= f.text_field :value, :label_class => 'required', help: t(:phone_help_text, :scope => :contact) %>
-    <%= f.select :alerts, options_for_select(AlertSetting::ALERTS.map { |p| [t(p, :scope => [:notification_settings, :alerts]), p] }), help: t(:alert_help_text, :scope => :contact), :include_blank => true %>
+    <%= f.select :alerts, options_for_select(AlertSetting::ALERTS.map { |p| [t(p, :scope => [:notification_settings, :alerts]), p] }), help: t(:alert_help_text, :scope => :contact), :include_blank => true, :label_class => 'required' %>
   </div>
 
   <div class="modal-footer">
