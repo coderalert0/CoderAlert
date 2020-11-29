@@ -10,11 +10,9 @@ class AlertSetting < ApplicationRecord
   scope :for_project_user, ->(project, user) { AlertSetting.where(project: project, user: user) }
 
   scope :all_or_assigned, lambda { |user|
-    if user.present?
-      AlertSetting
-        .where('alert = ? OR (alert = ? AND user_id = ?)',
-               ALL, ASSIGNED, user.id)
-    end
+    AlertSetting
+      .where('alert = ? OR (alert = ? AND user_id = ?)',
+             ALL, ASSIGNED, user.try(:id))
   }
 
   scope :slack_alerts_on, lambda { |ticket|
