@@ -47,7 +47,7 @@ class Ability
     can :crud, Ticket, user_id: @user.id, project: { id: @project_user_ids }
     can :crud, Article, user_id: @user.id, project: { id: @project_user_ids }
     can :crud, Comment, user_id: @user.id, commentable: { project: { id: @project_user_ids } }
-    can :crud, ActiveStorage::Attachment, record: { user_id: @user.id, project: { id: @project_user_ids } }
+    can :crud, ActiveStorage::Attachment, record: { project: { id: @project_user_ids } }
     can :crud, Contact, user_id: @user.id
     can %i[read update], AlertSetting, user_id: @user.id, project: { id: @project_user_ids }
   end

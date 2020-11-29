@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'dashboard#show'
 
-  resources :projects, path: 'p', except: :destroy do
+  resources :projects, path: 'p', except: [:index, :destroy] do
     resources :schedules, path: 's'
     resources :alert_settings, path: 'as'
 
