@@ -2,7 +2,7 @@ class FeedbackMailer < ApplicationMailer
   before_action :load_resources
 
   def send_feedback
-    mail(to: 'coderalert0@gmail.com', reply_to: @user.email, subject: t(:send_feedback))
+    mail(to: 'hello@coderalert.com', reply_to: @user.email, subject: t(:send_feedback))
   end
 
   private

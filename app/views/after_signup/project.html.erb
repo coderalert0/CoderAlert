@@ -6,8 +6,8 @@
 
 
 <%= bootstrap_form_for @form, :url => wizard_path, :method => :put do |f| %>
-    <%= f.text_field :name, :label_class => 'required', :class => 'js-name' %>
-    <%= f.text_field :key, :class => 'col-sm-3 js-key' %>
+    <%= f.text_field :name, :label_class => 'required', :help => t(:name_help_text, :scope => [:welcome_wizard, :project]), :class => 'js-name' %>
+    <%= f.text_field :key, :class => 'col-sm-3 js-key', :help => t(:key_help_text, :scope => [:welcome_wizard, :project]).html_safe %>
 
   <div class="text-right">
     <%= wizard_next_button %>

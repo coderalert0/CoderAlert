@@ -295,7 +295,9 @@ en:
 
     project:
       title: 'Create a Project'
-      info_message: "Welcome to CoderAlert! Please enter information about your project below<br/><br/>In case you're wondering, key is a prefix for your projects ticket numbers<br/>A key of PROJ will result in your Ticket ID looking like PROJ-1234"
+      info_message: "Welcome to CoderAlert! Please enter information about your project below"
+      name_help_text: 'This could be the name of your application.'
+      key_help_text: 'The project key is a prefix for your projects ticket numbers<br/>A key of PROJ will result in your Ticket ID looking like PROJ-1234'
 
     slack:
       title: 'Receive Slack Notifications'
